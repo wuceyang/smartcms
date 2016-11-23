@@ -1,0 +1,4840 @@
+[2016-11-21 00:00:05], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:00:17], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:00:24], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:00:55], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:01:11], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:01:43], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:02:04], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:02:08], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:02:34], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:02:36], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:02:44], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:03:21], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:04:49], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:05:42], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:05:58], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:07:01], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:07:11], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:07:12], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:07:16], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:11:00], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:11:49], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:12:17], debug -> Exception:array (
+  'code' => 102,
+  'line' => 129,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的处理方法:Admin/Category/editCategory',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:12:17], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:12:19], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:13:28], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:17:33], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:19:17], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:19:41], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:20:09], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:22:23], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:23:00], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:23:35], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:25:29], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:25:38], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:25:56], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:26:11], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:26:27], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:26:38], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:27:24], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:27:37], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:27:47], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:27:52], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:28:21], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:29:00], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 00:29:34], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:38:44], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:40:44], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:43:32], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:46:15], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:46:27], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:46:32], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:46:44], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:52:47], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:52:48], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:52:50], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:52:58], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:53:29], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:53:30], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 08:53:32], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:38:50], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:38:56], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:02], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:17], debug -> Exception:array (
+  'code' => 102,
+  'line' => 129,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的处理方法:Admin/Index/login',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:17], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:34], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:38], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:40], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:42], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:44], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:50], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:53], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:39:56], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:40:00], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:40:33], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:41:06], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:41:26], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:41:48], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:44:09], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:44:35], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:45:11], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:45:22], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:51:15], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:56:54], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:57:09], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:57:25], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:58:23], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:59:07], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 20:59:25], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:21:41], debug -> Exception:array (
+  'code' => 0,
+  'line' => 146,
+  'file' => 'E:\\Dev\\cms\\app\\M\\Category.php',
+  'message' => 'syntax error, unexpected \'}\', expecting \';\'',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\vendor\\composer\\ClassLoader.php',
+      'line' => 301,
+      'function' => 'Composer\\Autoload\\includeFile',
+      'args' => 
+      array (
+        0 => 'E:\\Dev\\cms\\vendor\\composer/../../app\\M\\Category.php',
+      ),
+    ),
+    1 => 
+    array (
+      'function' => 'loadClass',
+      'class' => 'Composer\\Autoload\\ClassLoader',
+      'type' => '->',
+      'args' => 
+      array (
+        0 => 'App\\M\\Category',
+      ),
+    ),
+    2 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\app\\C\\Admin\\Category.php',
+      'line' => 24,
+      'function' => 'spl_autoload_call',
+      'args' => 
+      array (
+        0 => 'App\\M\\Category',
+      ),
+    ),
+    3 => 
+    array (
+      'function' => 'index',
+      'class' => 'App\\C\\Admin\\Category',
+      'type' => '->',
+      'args' => 
+      array (
+        0 => 
+        Library\Request\Request::__set_state(array(
+           '_post' => 
+          array (
+          ),
+           '_get' => 
+          array (
+          ),
+           '_cookie' => 
+          array (
+            'expandid' => '3',
+            'SmartSid' => '1064e04cf7793341c612d09f0885e211',
+          ),
+           '_session' => 
+          array (
+          ),
+           '_server' => 
+          array (
+            '_FCGI_X_PIPE_' => '\\\\.\\pipe\\IISFCGI-baa563bd-0450-4a60-b9d6-caa32732180d',
+            'ALLUSERSPROFILE' => 'C:\\ProgramData',
+            'APPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Roaming',
+            'APP_POOL_CONFIG' => 'C:\\inetpub\\temp\\apppools\\cms\\cms.config',
+            'APP_POOL_ID' => 'cms',
+            'asl_log' => 'Destination=file',
+            'CommonProgramFiles' => 'C:\\Program Files\\Common Files',
+            'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files',
+            'CommonProgramW6432' => 'C:\\Program Files\\Common Files',
+            'COMPUTERNAME' => 'XIONG-PC',
+            'ComSpec' => 'C:\\Windows\\system32\\cmd.exe',
+            'FP_NO_HOST_CHECK' => 'NO',
+            'LOCALAPPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local',
+            'NUMBER_OF_PROCESSORS' => '2',
+            'OS' => 'Windows_NT',
+            'Path' => 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;D:\\Program Files\\Php7.0.1;',
+            'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC',
+            'PROCESSOR_ARCHITECTURE' => 'AMD64',
+            'PROCESSOR_IDENTIFIER' => 'AMD64 Family 16 Model 2 Stepping 3, AuthenticAMD',
+            'PROCESSOR_LEVEL' => '16',
+            'PROCESSOR_REVISION' => '0203',
+            'ProgramData' => 'C:\\ProgramData',
+            'ProgramFiles' => 'C:\\Program Files',
+            'ProgramFiles(x86)' => 'C:\\Program Files (x86)',
+            'ProgramW6432' => 'C:\\Program Files',
+            'PSModulePath' => 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\',
+            'PUBLIC' => 'C:\\Users\\Public',
+            'SystemDrive' => 'C:',
+            'SystemRoot' => 'C:\\Windows',
+            'TEMP' => 'C:\\Windows\\TEMP',
+            'TMP' => 'C:\\Windows\\TEMP',
+            'USERDOMAIN' => 'WORKGROUP',
+            'USERNAME' => 'XIONG-PC$',
+            'USERPROFILE' => 'C:\\Windows\\system32\\config\\systemprofile',
+            'VBOX_MSI_INSTALL_PATH' => 'D:\\Program Files\\Oracle\\VirtualBox\\',
+            'VS140COMNTOOLS' => 'D:\\Program Files\\Microsoft Visual Studio 14.0\\Common7\\Tools\\',
+            'windir' => 'C:\\Windows',
+            'windows_tracing_flags' => '3',
+            'windows_tracing_logfile' => 'C:\\BVTBin\\Tests\\installpackage\\csilogfile.log',
+            'ORIG_PATH_INFO' => '/index.php',
+            'URL' => '/index.php',
+            'SERVER_SOFTWARE' => 'Microsoft-IIS/7.5',
+            'SERVER_PROTOCOL' => 'HTTP/1.1',
+            'SERVER_PORT_SECURE' => '0',
+            'SERVER_PORT' => '80',
+            'SERVER_NAME' => 'cms.dev',
+            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_FILENAME' => 'E:\\Dev\\cms\\public\\index.php',
+            'REQUEST_URI' => '/admin/category',
+            'REQUEST_METHOD' => 'GET',
+            'REMOTE_USER' => '',
+            'REMOTE_PORT' => '59177',
+            'REMOTE_HOST' => '127.0.0.1',
+            'REMOTE_ADDR' => '127.0.0.1',
+            'QUERY_STRING' => '',
+            'PATH_TRANSLATED' => 'E:\\Dev\\cms\\public\\index.php',
+            'LOGON_USER' => '',
+            'LOCAL_ADDR' => '127.0.0.1',
+            'INSTANCE_META_PATH' => '/LM/W3SVC/5',
+            'INSTANCE_NAME' => 'CMS',
+            'INSTANCE_ID' => '5',
+            'HTTPS_SERVER_SUBJECT' => '',
+            'HTTPS_SERVER_ISSUER' => '',
+            'HTTPS_SECRETKEYSIZE' => '',
+            'HTTPS_KEYSIZE' => '',
+            'HTTPS' => 'off',
+            'GATEWAY_INTERFACE' => 'CGI/1.1',
+            'DOCUMENT_ROOT' => 'E:\\Dev\\cms\\public',
+            'CONTENT_TYPE' => '',
+            'CONTENT_LENGTH' => '0',
+            'CERT_SUBJECT' => '',
+            'CERT_SERIALNUMBER' => '',
+            'CERT_ISSUER' => '',
+            'CERT_FLAGS' => '',
+            'CERT_COOKIE' => '',
+            'AUTH_USER' => '',
+            'AUTH_PASSWORD' => '',
+            'AUTH_TYPE' => '',
+            'APPL_PHYSICAL_PATH' => 'E:\\Dev\\cms\\public\\',
+            'APPL_MD_PATH' => '/LM/W3SVC/5/ROOT',
+            'IIS_UrlRewriteModule' => '7.1.1952.0',
+            'UNENCODED_URL' => '/admin/category',
+            'IIS_WasUrlRewritten' => '1',
+            'HTTP_X_ORIGINAL_URL' => '/admin/category',
+            'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+            'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
+            'HTTP_REFERER' => 'http://cms.dev/admin/category/add-category',
+            'HTTP_HOST' => 'cms.dev',
+            'HTTP_COOKIE' => 'expandid=3; SmartSid=1064e04cf7793341c612d09f0885e211',
+            'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
+            'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch',
+            'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'HTTP_CONTENT_LENGTH' => '0',
+            'HTTP_CONNECTION' => 'keep-alive',
+            'HTTP_CACHE_CONTROL' => 'max-age=0',
+            'FCGI_ROLE' => 'RESPONDER',
+            'PHP_SELF' => '/index.php',
+            'REQUEST_TIME_FLOAT' => 1479734501.7107191,
+            'REQUEST_TIME' => 1479734501,
+          ),
+           '_group' => 'Admin',
+           '_controller' => 'Category',
+           '_action' => 'index',
+           '_paramStr' => '',
+           '_seperator' => '/',
+        )),
+        1 => 
+        Library\Response\Response::__set_state(array(
+           'vars' => 
+          array (
+            'request' => 
+            Library\Request\Request::__set_state(array(
+               '_post' => 
+              array (
+              ),
+               '_get' => 
+              array (
+              ),
+               '_cookie' => 
+              array (
+                'expandid' => '3',
+                'SmartSid' => '1064e04cf7793341c612d09f0885e211',
+              ),
+               '_session' => 
+              array (
+              ),
+               '_server' => 
+              array (
+                '_FCGI_X_PIPE_' => '\\\\.\\pipe\\IISFCGI-baa563bd-0450-4a60-b9d6-caa32732180d',
+                'ALLUSERSPROFILE' => 'C:\\ProgramData',
+                'APPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Roaming',
+                'APP_POOL_CONFIG' => 'C:\\inetpub\\temp\\apppools\\cms\\cms.config',
+                'APP_POOL_ID' => 'cms',
+                'asl_log' => 'Destination=file',
+                'CommonProgramFiles' => 'C:\\Program Files\\Common Files',
+                'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files',
+                'CommonProgramW6432' => 'C:\\Program Files\\Common Files',
+                'COMPUTERNAME' => 'XIONG-PC',
+                'ComSpec' => 'C:\\Windows\\system32\\cmd.exe',
+                'FP_NO_HOST_CHECK' => 'NO',
+                'LOCALAPPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local',
+                'NUMBER_OF_PROCESSORS' => '2',
+                'OS' => 'Windows_NT',
+                'Path' => 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;D:\\Program Files\\Php7.0.1;',
+                'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC',
+                'PROCESSOR_ARCHITECTURE' => 'AMD64',
+                'PROCESSOR_IDENTIFIER' => 'AMD64 Family 16 Model 2 Stepping 3, AuthenticAMD',
+                'PROCESSOR_LEVEL' => '16',
+                'PROCESSOR_REVISION' => '0203',
+                'ProgramData' => 'C:\\ProgramData',
+                'ProgramFiles' => 'C:\\Program Files',
+                'ProgramFiles(x86)' => 'C:\\Program Files (x86)',
+                'ProgramW6432' => 'C:\\Program Files',
+                'PSModulePath' => 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\',
+                'PUBLIC' => 'C:\\Users\\Public',
+                'SystemDrive' => 'C:',
+                'SystemRoot' => 'C:\\Windows',
+                'TEMP' => 'C:\\Windows\\TEMP',
+                'TMP' => 'C:\\Windows\\TEMP',
+                'USERDOMAIN' => 'WORKGROUP',
+                'USERNAME' => 'XIONG-PC$',
+                'USERPROFILE' => 'C:\\Windows\\system32\\config\\systemprofile',
+                'VBOX_MSI_INSTALL_PATH' => 'D:\\Program Files\\Oracle\\VirtualBox\\',
+                'VS140COMNTOOLS' => 'D:\\Program Files\\Microsoft Visual Studio 14.0\\Common7\\Tools\\',
+                'windir' => 'C:\\Windows',
+                'windows_tracing_flags' => '3',
+                'windows_tracing_logfile' => 'C:\\BVTBin\\Tests\\installpackage\\csilogfile.log',
+                'ORIG_PATH_INFO' => '/index.php',
+                'URL' => '/index.php',
+                'SERVER_SOFTWARE' => 'Microsoft-IIS/7.5',
+                'SERVER_PROTOCOL' => 'HTTP/1.1',
+                'SERVER_PORT_SECURE' => '0',
+                'SERVER_PORT' => '80',
+                'SERVER_NAME' => 'cms.dev',
+                'SCRIPT_NAME' => '/index.php',
+                'SCRIPT_FILENAME' => 'E:\\Dev\\cms\\public\\index.php',
+                'REQUEST_URI' => '/admin/category',
+                'REQUEST_METHOD' => 'GET',
+                'REMOTE_USER' => '',
+                'REMOTE_PORT' => '59177',
+                'REMOTE_HOST' => '127.0.0.1',
+                'REMOTE_ADDR' => '127.0.0.1',
+                'QUERY_STRING' => '',
+                'PATH_TRANSLATED' => 'E:\\Dev\\cms\\public\\index.php',
+                'LOGON_USER' => '',
+                'LOCAL_ADDR' => '127.0.0.1',
+                'INSTANCE_META_PATH' => '/LM/W3SVC/5',
+                'INSTANCE_NAME' => 'CMS',
+                'INSTANCE_ID' => '5',
+                'HTTPS_SERVER_SUBJECT' => '',
+                'HTTPS_SERVER_ISSUER' => '',
+                'HTTPS_SECRETKEYSIZE' => '',
+                'HTTPS_KEYSIZE' => '',
+                'HTTPS' => 'off',
+                'GATEWAY_INTERFACE' => 'CGI/1.1',
+                'DOCUMENT_ROOT' => 'E:\\Dev\\cms\\public',
+                'CONTENT_TYPE' => '',
+                'CONTENT_LENGTH' => '0',
+                'CERT_SUBJECT' => '',
+                'CERT_SERIALNUMBER' => '',
+                'CERT_ISSUER' => '',
+                'CERT_FLAGS' => '',
+                'CERT_COOKIE' => '',
+                'AUTH_USER' => '',
+                'AUTH_PASSWORD' => '',
+                'AUTH_TYPE' => '',
+                'APPL_PHYSICAL_PATH' => 'E:\\Dev\\cms\\public\\',
+                'APPL_MD_PATH' => '/LM/W3SVC/5/ROOT',
+                'IIS_UrlRewriteModule' => '7.1.1952.0',
+                'UNENCODED_URL' => '/admin/category',
+                'IIS_WasUrlRewritten' => '1',
+                'HTTP_X_ORIGINAL_URL' => '/admin/category',
+                'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+                'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
+                'HTTP_REFERER' => 'http://cms.dev/admin/category/add-category',
+                'HTTP_HOST' => 'cms.dev',
+                'HTTP_COOKIE' => 'expandid=3; SmartSid=1064e04cf7793341c612d09f0885e211',
+                'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
+                'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch',
+                'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'HTTP_CONTENT_LENGTH' => '0',
+                'HTTP_CONNECTION' => 'keep-alive',
+                'HTTP_CACHE_CONTROL' => 'max-age=0',
+                'FCGI_ROLE' => 'RESPONDER',
+                'PHP_SELF' => '/index.php',
+                'REQUEST_TIME_FLOAT' => 1479734501.7107191,
+                'REQUEST_TIME' => 1479734501,
+              ),
+               '_group' => 'Admin',
+               '_controller' => 'Category',
+               '_action' => 'index',
+               '_paramStr' => '',
+               '_seperator' => '/',
+            )),
+            '__THEME_PATH__' => '/theme/default/',
+            'menu' => 
+            array (
+              0 => 
+              array (
+                0 => 
+                array (
+                  'id' => '1',
+                  'name' => '广告位管理',
+                  'url' => '',
+                  'icon' => 'show',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '7',
+                      'name' => '广告位列表',
+                      'url' => '/admin/adv/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '8',
+                      'name' => '新建广告位',
+                      'url' => '/admin/adv/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                1 => 
+                array (
+                  'id' => '2',
+                  'name' => '推荐位管理',
+                  'url' => '',
+                  'icon' => 'nav',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '9',
+                      'name' => '推荐位管理',
+                      'url' => '/admin/recommend/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '10',
+                      'name' => '新建推荐位',
+                      'url' => '/admin/recommend/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                2 => 
+                array (
+                  'id' => '3',
+                  'name' => '栏目管理',
+                  'url' => '',
+                  'icon' => 'product',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '11',
+                      'name' => '栏目列表',
+                      'url' => '/admin/category/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '12',
+                      'name' => '新建栏目',
+                      'url' => '/admin/category/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                3 => 
+                array (
+                  'id' => '4',
+                  'name' => '权限管理',
+                  'url' => '',
+                  'icon' => 'manager',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '13',
+                      'name' => '用户列表',
+                      'url' => '/admin/user/all-user',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '14',
+                      'name' => '用户分组',
+                      'url' => '/admin/user-group/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    2 => 
+                    array (
+                      'id' => '15',
+                      'name' => '后台菜单列表',
+                      'url' => '/admin/menu/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                4 => 
+                array (
+                  'id' => '5',
+                  'name' => '系统设置',
+                  'url' => '',
+                  'icon' => 'system',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '16',
+                      'name' => '模板管理',
+                      'url' => '/admin/template/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                5 => 
+                array (
+                  'id' => '6',
+                  'name' => '内容管理',
+                  'url' => '',
+                  'icon' => 'page',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '17',
+                      'name' => '文章列表',
+                      'url' => '/admin/content/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '18',
+                      'name' => '文章录入',
+                      'url' => '/admin/content/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+              ),
+              1 => 
+              array (
+                0 => 
+                array (
+                  'id' => '7',
+                  'name' => '广告位列表',
+                  'url' => '/admin/adv/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '8',
+                  'name' => '新建广告位',
+                  'url' => '/admin/adv/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              2 => 
+              array (
+                0 => 
+                array (
+                  'id' => '9',
+                  'name' => '推荐位管理',
+                  'url' => '/admin/recommend/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '10',
+                  'name' => '新建推荐位',
+                  'url' => '/admin/recommend/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              3 => 
+              array (
+                0 => 
+                array (
+                  'id' => '11',
+                  'name' => '栏目列表',
+                  'url' => '/admin/category/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '12',
+                  'name' => '新建栏目',
+                  'url' => '/admin/category/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              4 => 
+              array (
+                0 => 
+                array (
+                  'id' => '13',
+                  'name' => '用户列表',
+                  'url' => '/admin/user/all-user',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '14',
+                  'name' => '用户分组',
+                  'url' => '/admin/user-group/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                2 => 
+                array (
+                  'id' => '15',
+                  'name' => '后台菜单列表',
+                  'url' => '/admin/menu/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              5 => 
+              array (
+                0 => 
+                array (
+                  'id' => '16',
+                  'name' => '模板管理',
+                  'url' => '/admin/template/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              6 => 
+              array (
+                0 => 
+                array (
+                  'id' => '17',
+                  'name' => '文章列表',
+                  'url' => '/admin/content/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '18',
+                  'name' => '文章录入',
+                  'url' => '/admin/content/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              7 => NULL,
+              8 => NULL,
+              9 => NULL,
+              10 => NULL,
+              11 => NULL,
+              12 => NULL,
+              13 => NULL,
+              14 => NULL,
+              15 => NULL,
+              16 => NULL,
+              17 => NULL,
+              18 => NULL,
+            ),
+            'userinfo' => 
+            array (
+              'id' => '1',
+              'username' => '张三',
+              'passwd' => '6266d4f13e622e81860359287e990922',
+              'account' => 'admin',
+              'avatar' => 'http://cdn-img.easyicon.net/png/10719/1071999.gif',
+              'reg_time' => '2',
+              'group_id' => '2,1',
+              'status' => '1',
+              'login_times' => '0',
+              'menu' => 
+              array (
+                0 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '1',
+                    'name' => '广告位管理',
+                    'url' => '',
+                    'icon' => 'show',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '7',
+                        'name' => '广告位列表',
+                        'url' => '/admin/adv/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '8',
+                        'name' => '新建广告位',
+                        'url' => '/admin/adv/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  1 => 
+                  array (
+                    'id' => '2',
+                    'name' => '推荐位管理',
+                    'url' => '',
+                    'icon' => 'nav',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '9',
+                        'name' => '推荐位管理',
+                        'url' => '/admin/recommend/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '10',
+                        'name' => '新建推荐位',
+                        'url' => '/admin/recommend/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  2 => 
+                  array (
+                    'id' => '3',
+                    'name' => '栏目管理',
+                    'url' => '',
+                    'icon' => 'product',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '11',
+                        'name' => '栏目列表',
+                        'url' => '/admin/category/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '12',
+                        'name' => '新建栏目',
+                        'url' => '/admin/category/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  3 => 
+                  array (
+                    'id' => '4',
+                    'name' => '权限管理',
+                    'url' => '',
+                    'icon' => 'manager',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '13',
+                        'name' => '用户列表',
+                        'url' => '/admin/user/all-user',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '14',
+                        'name' => '用户分组',
+                        'url' => '/admin/user-group/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      2 => 
+                      array (
+                        'id' => '15',
+                        'name' => '后台菜单列表',
+                        'url' => '/admin/menu/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  4 => 
+                  array (
+                    'id' => '5',
+                    'name' => '系统设置',
+                    'url' => '',
+                    'icon' => 'system',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '16',
+                        'name' => '模板管理',
+                        'url' => '/admin/template/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  5 => 
+                  array (
+                    'id' => '6',
+                    'name' => '内容管理',
+                    'url' => '',
+                    'icon' => 'page',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '17',
+                        'name' => '文章列表',
+                        'url' => '/admin/content/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '18',
+                        'name' => '文章录入',
+                        'url' => '/admin/content/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                ),
+                1 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '7',
+                    'name' => '广告位列表',
+                    'url' => '/admin/adv/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '8',
+                    'name' => '新建广告位',
+                    'url' => '/admin/adv/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                2 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '9',
+                    'name' => '推荐位管理',
+                    'url' => '/admin/recommend/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '10',
+                    'name' => '新建推荐位',
+                    'url' => '/admin/recommend/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                3 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '11',
+                    'name' => '栏目列表',
+                    'url' => '/admin/category/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '12',
+                    'name' => '新建栏目',
+                    'url' => '/admin/category/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                4 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '13',
+                    'name' => '用户列表',
+                    'url' => '/admin/user/all-user',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '14',
+                    'name' => '用户分组',
+                    'url' => '/admin/user-group/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  2 => 
+                  array (
+                    'id' => '15',
+                    'name' => '后台菜单列表',
+                    'url' => '/admin/menu/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                5 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '16',
+                    'name' => '模板管理',
+                    'url' => '/admin/template/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                6 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '17',
+                    'name' => '文章列表',
+                    'url' => '/admin/content/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '18',
+                    'name' => '文章录入',
+                    'url' => '/admin/content/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                7 => NULL,
+                8 => NULL,
+                9 => NULL,
+                10 => NULL,
+                11 => NULL,
+                12 => NULL,
+                13 => NULL,
+                14 => NULL,
+                15 => NULL,
+                16 => NULL,
+                17 => NULL,
+                18 => NULL,
+              ),
+            ),
+          ),
+           'retstr' => '',
+           'debug' => true,
+        )),
+      ),
+    ),
+    4 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+      'line' => 150,
+      'function' => 'call_user_func',
+      'args' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          App\C\Admin\Category::__set_state(array(
+             '_sesskey' => 'userinfo',
+             '_retAjax' => false,
+             'userinfo' => 
+            array (
+              'id' => '1',
+              'username' => '张三',
+              'passwd' => '6266d4f13e622e81860359287e990922',
+              'account' => 'admin',
+              'avatar' => 'http://cdn-img.easyicon.net/png/10719/1071999.gif',
+              'reg_time' => '2',
+              'group_id' => '2,1',
+              'status' => '1',
+              'login_times' => '0',
+              'menu' => 
+              array (
+                0 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '1',
+                    'name' => '广告位管理',
+                    'url' => '',
+                    'icon' => 'show',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '7',
+                        'name' => '广告位列表',
+                        'url' => '/admin/adv/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '8',
+                        'name' => '新建广告位',
+                        'url' => '/admin/adv/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  1 => 
+                  array (
+                    'id' => '2',
+                    'name' => '推荐位管理',
+                    'url' => '',
+                    'icon' => 'nav',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '9',
+                        'name' => '推荐位管理',
+                        'url' => '/admin/recommend/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '10',
+                        'name' => '新建推荐位',
+                        'url' => '/admin/recommend/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  2 => 
+                  array (
+                    'id' => '3',
+                    'name' => '栏目管理',
+                    'url' => '',
+                    'icon' => 'product',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '11',
+                        'name' => '栏目列表',
+                        'url' => '/admin/category/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '12',
+                        'name' => '新建栏目',
+                        'url' => '/admin/category/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  3 => 
+                  array (
+                    'id' => '4',
+                    'name' => '权限管理',
+                    'url' => '',
+                    'icon' => 'manager',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '13',
+                        'name' => '用户列表',
+                        'url' => '/admin/user/all-user',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '14',
+                        'name' => '用户分组',
+                        'url' => '/admin/user-group/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      2 => 
+                      array (
+                        'id' => '15',
+                        'name' => '后台菜单列表',
+                        'url' => '/admin/menu/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  4 => 
+                  array (
+                    'id' => '5',
+                    'name' => '系统设置',
+                    'url' => '',
+                    'icon' => 'system',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '16',
+                        'name' => '模板管理',
+                        'url' => '/admin/template/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  5 => 
+                  array (
+                    'id' => '6',
+                    'name' => '内容管理',
+                    'url' => '',
+                    'icon' => 'page',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '17',
+                        'name' => '文章列表',
+                        'url' => '/admin/content/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '18',
+                        'name' => '文章录入',
+                        'url' => '/admin/content/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                ),
+                1 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '7',
+                    'name' => '广告位列表',
+                    'url' => '/admin/adv/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '8',
+                    'name' => '新建广告位',
+                    'url' => '/admin/adv/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                2 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '9',
+                    'name' => '推荐位管理',
+                    'url' => '/admin/recommend/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '10',
+                    'name' => '新建推荐位',
+                    'url' => '/admin/recommend/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                3 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '11',
+                    'name' => '栏目列表',
+                    'url' => '/admin/category/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '12',
+                    'name' => '新建栏目',
+                    'url' => '/admin/category/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                4 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '13',
+                    'name' => '用户列表',
+                    'url' => '/admin/user/all-user',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '14',
+                    'name' => '用户分组',
+                    'url' => '/admin/user-group/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  2 => 
+                  array (
+                    'id' => '15',
+                    'name' => '后台菜单列表',
+                    'url' => '/admin/menu/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                5 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '16',
+                    'name' => '模板管理',
+                    'url' => '/admin/template/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                6 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '17',
+                    'name' => '文章列表',
+                    'url' => '/admin/content/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '18',
+                    'name' => '文章录入',
+                    'url' => '/admin/content/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                7 => NULL,
+                8 => NULL,
+                9 => NULL,
+                10 => NULL,
+                11 => NULL,
+                12 => NULL,
+                13 => NULL,
+                14 => NULL,
+                15 => NULL,
+                16 => NULL,
+                17 => NULL,
+                18 => NULL,
+              ),
+            ),
+          )),
+          1 => 'index',
+        ),
+        1 => 
+        Library\Request\Request::__set_state(array(
+           '_post' => 
+          array (
+          ),
+           '_get' => 
+          array (
+          ),
+           '_cookie' => 
+          array (
+            'expandid' => '3',
+            'SmartSid' => '1064e04cf7793341c612d09f0885e211',
+          ),
+           '_session' => 
+          array (
+          ),
+           '_server' => 
+          array (
+            '_FCGI_X_PIPE_' => '\\\\.\\pipe\\IISFCGI-baa563bd-0450-4a60-b9d6-caa32732180d',
+            'ALLUSERSPROFILE' => 'C:\\ProgramData',
+            'APPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Roaming',
+            'APP_POOL_CONFIG' => 'C:\\inetpub\\temp\\apppools\\cms\\cms.config',
+            'APP_POOL_ID' => 'cms',
+            'asl_log' => 'Destination=file',
+            'CommonProgramFiles' => 'C:\\Program Files\\Common Files',
+            'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files',
+            'CommonProgramW6432' => 'C:\\Program Files\\Common Files',
+            'COMPUTERNAME' => 'XIONG-PC',
+            'ComSpec' => 'C:\\Windows\\system32\\cmd.exe',
+            'FP_NO_HOST_CHECK' => 'NO',
+            'LOCALAPPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local',
+            'NUMBER_OF_PROCESSORS' => '2',
+            'OS' => 'Windows_NT',
+            'Path' => 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;D:\\Program Files\\Php7.0.1;',
+            'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC',
+            'PROCESSOR_ARCHITECTURE' => 'AMD64',
+            'PROCESSOR_IDENTIFIER' => 'AMD64 Family 16 Model 2 Stepping 3, AuthenticAMD',
+            'PROCESSOR_LEVEL' => '16',
+            'PROCESSOR_REVISION' => '0203',
+            'ProgramData' => 'C:\\ProgramData',
+            'ProgramFiles' => 'C:\\Program Files',
+            'ProgramFiles(x86)' => 'C:\\Program Files (x86)',
+            'ProgramW6432' => 'C:\\Program Files',
+            'PSModulePath' => 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\',
+            'PUBLIC' => 'C:\\Users\\Public',
+            'SystemDrive' => 'C:',
+            'SystemRoot' => 'C:\\Windows',
+            'TEMP' => 'C:\\Windows\\TEMP',
+            'TMP' => 'C:\\Windows\\TEMP',
+            'USERDOMAIN' => 'WORKGROUP',
+            'USERNAME' => 'XIONG-PC$',
+            'USERPROFILE' => 'C:\\Windows\\system32\\config\\systemprofile',
+            'VBOX_MSI_INSTALL_PATH' => 'D:\\Program Files\\Oracle\\VirtualBox\\',
+            'VS140COMNTOOLS' => 'D:\\Program Files\\Microsoft Visual Studio 14.0\\Common7\\Tools\\',
+            'windir' => 'C:\\Windows',
+            'windows_tracing_flags' => '3',
+            'windows_tracing_logfile' => 'C:\\BVTBin\\Tests\\installpackage\\csilogfile.log',
+            'ORIG_PATH_INFO' => '/index.php',
+            'URL' => '/index.php',
+            'SERVER_SOFTWARE' => 'Microsoft-IIS/7.5',
+            'SERVER_PROTOCOL' => 'HTTP/1.1',
+            'SERVER_PORT_SECURE' => '0',
+            'SERVER_PORT' => '80',
+            'SERVER_NAME' => 'cms.dev',
+            'SCRIPT_NAME' => '/index.php',
+            'SCRIPT_FILENAME' => 'E:\\Dev\\cms\\public\\index.php',
+            'REQUEST_URI' => '/admin/category',
+            'REQUEST_METHOD' => 'GET',
+            'REMOTE_USER' => '',
+            'REMOTE_PORT' => '59177',
+            'REMOTE_HOST' => '127.0.0.1',
+            'REMOTE_ADDR' => '127.0.0.1',
+            'QUERY_STRING' => '',
+            'PATH_TRANSLATED' => 'E:\\Dev\\cms\\public\\index.php',
+            'LOGON_USER' => '',
+            'LOCAL_ADDR' => '127.0.0.1',
+            'INSTANCE_META_PATH' => '/LM/W3SVC/5',
+            'INSTANCE_NAME' => 'CMS',
+            'INSTANCE_ID' => '5',
+            'HTTPS_SERVER_SUBJECT' => '',
+            'HTTPS_SERVER_ISSUER' => '',
+            'HTTPS_SECRETKEYSIZE' => '',
+            'HTTPS_KEYSIZE' => '',
+            'HTTPS' => 'off',
+            'GATEWAY_INTERFACE' => 'CGI/1.1',
+            'DOCUMENT_ROOT' => 'E:\\Dev\\cms\\public',
+            'CONTENT_TYPE' => '',
+            'CONTENT_LENGTH' => '0',
+            'CERT_SUBJECT' => '',
+            'CERT_SERIALNUMBER' => '',
+            'CERT_ISSUER' => '',
+            'CERT_FLAGS' => '',
+            'CERT_COOKIE' => '',
+            'AUTH_USER' => '',
+            'AUTH_PASSWORD' => '',
+            'AUTH_TYPE' => '',
+            'APPL_PHYSICAL_PATH' => 'E:\\Dev\\cms\\public\\',
+            'APPL_MD_PATH' => '/LM/W3SVC/5/ROOT',
+            'IIS_UrlRewriteModule' => '7.1.1952.0',
+            'UNENCODED_URL' => '/admin/category',
+            'IIS_WasUrlRewritten' => '1',
+            'HTTP_X_ORIGINAL_URL' => '/admin/category',
+            'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+            'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
+            'HTTP_REFERER' => 'http://cms.dev/admin/category/add-category',
+            'HTTP_HOST' => 'cms.dev',
+            'HTTP_COOKIE' => 'expandid=3; SmartSid=1064e04cf7793341c612d09f0885e211',
+            'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
+            'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch',
+            'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'HTTP_CONTENT_LENGTH' => '0',
+            'HTTP_CONNECTION' => 'keep-alive',
+            'HTTP_CACHE_CONTROL' => 'max-age=0',
+            'FCGI_ROLE' => 'RESPONDER',
+            'PHP_SELF' => '/index.php',
+            'REQUEST_TIME_FLOAT' => 1479734501.7107191,
+            'REQUEST_TIME' => 1479734501,
+          ),
+           '_group' => 'Admin',
+           '_controller' => 'Category',
+           '_action' => 'index',
+           '_paramStr' => '',
+           '_seperator' => '/',
+        )),
+        2 => 
+        Library\Response\Response::__set_state(array(
+           'vars' => 
+          array (
+            'request' => 
+            Library\Request\Request::__set_state(array(
+               '_post' => 
+              array (
+              ),
+               '_get' => 
+              array (
+              ),
+               '_cookie' => 
+              array (
+                'expandid' => '3',
+                'SmartSid' => '1064e04cf7793341c612d09f0885e211',
+              ),
+               '_session' => 
+              array (
+              ),
+               '_server' => 
+              array (
+                '_FCGI_X_PIPE_' => '\\\\.\\pipe\\IISFCGI-baa563bd-0450-4a60-b9d6-caa32732180d',
+                'ALLUSERSPROFILE' => 'C:\\ProgramData',
+                'APPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Roaming',
+                'APP_POOL_CONFIG' => 'C:\\inetpub\\temp\\apppools\\cms\\cms.config',
+                'APP_POOL_ID' => 'cms',
+                'asl_log' => 'Destination=file',
+                'CommonProgramFiles' => 'C:\\Program Files\\Common Files',
+                'CommonProgramFiles(x86)' => 'C:\\Program Files (x86)\\Common Files',
+                'CommonProgramW6432' => 'C:\\Program Files\\Common Files',
+                'COMPUTERNAME' => 'XIONG-PC',
+                'ComSpec' => 'C:\\Windows\\system32\\cmd.exe',
+                'FP_NO_HOST_CHECK' => 'NO',
+                'LOCALAPPDATA' => 'C:\\Windows\\system32\\config\\systemprofile\\AppData\\Local',
+                'NUMBER_OF_PROCESSORS' => '2',
+                'OS' => 'Windows_NT',
+                'Path' => 'C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;D:\\Program Files\\Php7.0.1;',
+                'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC',
+                'PROCESSOR_ARCHITECTURE' => 'AMD64',
+                'PROCESSOR_IDENTIFIER' => 'AMD64 Family 16 Model 2 Stepping 3, AuthenticAMD',
+                'PROCESSOR_LEVEL' => '16',
+                'PROCESSOR_REVISION' => '0203',
+                'ProgramData' => 'C:\\ProgramData',
+                'ProgramFiles' => 'C:\\Program Files',
+                'ProgramFiles(x86)' => 'C:\\Program Files (x86)',
+                'ProgramW6432' => 'C:\\Program Files',
+                'PSModulePath' => 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules\\',
+                'PUBLIC' => 'C:\\Users\\Public',
+                'SystemDrive' => 'C:',
+                'SystemRoot' => 'C:\\Windows',
+                'TEMP' => 'C:\\Windows\\TEMP',
+                'TMP' => 'C:\\Windows\\TEMP',
+                'USERDOMAIN' => 'WORKGROUP',
+                'USERNAME' => 'XIONG-PC$',
+                'USERPROFILE' => 'C:\\Windows\\system32\\config\\systemprofile',
+                'VBOX_MSI_INSTALL_PATH' => 'D:\\Program Files\\Oracle\\VirtualBox\\',
+                'VS140COMNTOOLS' => 'D:\\Program Files\\Microsoft Visual Studio 14.0\\Common7\\Tools\\',
+                'windir' => 'C:\\Windows',
+                'windows_tracing_flags' => '3',
+                'windows_tracing_logfile' => 'C:\\BVTBin\\Tests\\installpackage\\csilogfile.log',
+                'ORIG_PATH_INFO' => '/index.php',
+                'URL' => '/index.php',
+                'SERVER_SOFTWARE' => 'Microsoft-IIS/7.5',
+                'SERVER_PROTOCOL' => 'HTTP/1.1',
+                'SERVER_PORT_SECURE' => '0',
+                'SERVER_PORT' => '80',
+                'SERVER_NAME' => 'cms.dev',
+                'SCRIPT_NAME' => '/index.php',
+                'SCRIPT_FILENAME' => 'E:\\Dev\\cms\\public\\index.php',
+                'REQUEST_URI' => '/admin/category',
+                'REQUEST_METHOD' => 'GET',
+                'REMOTE_USER' => '',
+                'REMOTE_PORT' => '59177',
+                'REMOTE_HOST' => '127.0.0.1',
+                'REMOTE_ADDR' => '127.0.0.1',
+                'QUERY_STRING' => '',
+                'PATH_TRANSLATED' => 'E:\\Dev\\cms\\public\\index.php',
+                'LOGON_USER' => '',
+                'LOCAL_ADDR' => '127.0.0.1',
+                'INSTANCE_META_PATH' => '/LM/W3SVC/5',
+                'INSTANCE_NAME' => 'CMS',
+                'INSTANCE_ID' => '5',
+                'HTTPS_SERVER_SUBJECT' => '',
+                'HTTPS_SERVER_ISSUER' => '',
+                'HTTPS_SECRETKEYSIZE' => '',
+                'HTTPS_KEYSIZE' => '',
+                'HTTPS' => 'off',
+                'GATEWAY_INTERFACE' => 'CGI/1.1',
+                'DOCUMENT_ROOT' => 'E:\\Dev\\cms\\public',
+                'CONTENT_TYPE' => '',
+                'CONTENT_LENGTH' => '0',
+                'CERT_SUBJECT' => '',
+                'CERT_SERIALNUMBER' => '',
+                'CERT_ISSUER' => '',
+                'CERT_FLAGS' => '',
+                'CERT_COOKIE' => '',
+                'AUTH_USER' => '',
+                'AUTH_PASSWORD' => '',
+                'AUTH_TYPE' => '',
+                'APPL_PHYSICAL_PATH' => 'E:\\Dev\\cms\\public\\',
+                'APPL_MD_PATH' => '/LM/W3SVC/5/ROOT',
+                'IIS_UrlRewriteModule' => '7.1.1952.0',
+                'UNENCODED_URL' => '/admin/category',
+                'IIS_WasUrlRewritten' => '1',
+                'HTTP_X_ORIGINAL_URL' => '/admin/category',
+                'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+                'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36',
+                'HTTP_REFERER' => 'http://cms.dev/admin/category/add-category',
+                'HTTP_HOST' => 'cms.dev',
+                'HTTP_COOKIE' => 'expandid=3; SmartSid=1064e04cf7793341c612d09f0885e211',
+                'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8',
+                'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch',
+                'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'HTTP_CONTENT_LENGTH' => '0',
+                'HTTP_CONNECTION' => 'keep-alive',
+                'HTTP_CACHE_CONTROL' => 'max-age=0',
+                'FCGI_ROLE' => 'RESPONDER',
+                'PHP_SELF' => '/index.php',
+                'REQUEST_TIME_FLOAT' => 1479734501.7107191,
+                'REQUEST_TIME' => 1479734501,
+              ),
+               '_group' => 'Admin',
+               '_controller' => 'Category',
+               '_action' => 'index',
+               '_paramStr' => '',
+               '_seperator' => '/',
+            )),
+            '__THEME_PATH__' => '/theme/default/',
+            'menu' => 
+            array (
+              0 => 
+              array (
+                0 => 
+                array (
+                  'id' => '1',
+                  'name' => '广告位管理',
+                  'url' => '',
+                  'icon' => 'show',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '7',
+                      'name' => '广告位列表',
+                      'url' => '/admin/adv/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '8',
+                      'name' => '新建广告位',
+                      'url' => '/admin/adv/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                1 => 
+                array (
+                  'id' => '2',
+                  'name' => '推荐位管理',
+                  'url' => '',
+                  'icon' => 'nav',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '9',
+                      'name' => '推荐位管理',
+                      'url' => '/admin/recommend/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '10',
+                      'name' => '新建推荐位',
+                      'url' => '/admin/recommend/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                2 => 
+                array (
+                  'id' => '3',
+                  'name' => '栏目管理',
+                  'url' => '',
+                  'icon' => 'product',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '11',
+                      'name' => '栏目列表',
+                      'url' => '/admin/category/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '12',
+                      'name' => '新建栏目',
+                      'url' => '/admin/category/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                3 => 
+                array (
+                  'id' => '4',
+                  'name' => '权限管理',
+                  'url' => '',
+                  'icon' => 'manager',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '13',
+                      'name' => '用户列表',
+                      'url' => '/admin/user/all-user',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '14',
+                      'name' => '用户分组',
+                      'url' => '/admin/user-group/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    2 => 
+                    array (
+                      'id' => '15',
+                      'name' => '后台菜单列表',
+                      'url' => '/admin/menu/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                4 => 
+                array (
+                  'id' => '5',
+                  'name' => '系统设置',
+                  'url' => '',
+                  'icon' => 'system',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '16',
+                      'name' => '模板管理',
+                      'url' => '/admin/template/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+                5 => 
+                array (
+                  'id' => '6',
+                  'name' => '内容管理',
+                  'url' => '',
+                  'icon' => 'page',
+                  'sub' => 
+                  array (
+                    0 => 
+                    array (
+                      'id' => '17',
+                      'name' => '文章列表',
+                      'url' => '/admin/content/index',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                    1 => 
+                    array (
+                      'id' => '18',
+                      'name' => '文章录入',
+                      'url' => '/admin/content/add-new',
+                      'icon' => '',
+                      'sub' => NULL,
+                    ),
+                  ),
+                ),
+              ),
+              1 => 
+              array (
+                0 => 
+                array (
+                  'id' => '7',
+                  'name' => '广告位列表',
+                  'url' => '/admin/adv/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '8',
+                  'name' => '新建广告位',
+                  'url' => '/admin/adv/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              2 => 
+              array (
+                0 => 
+                array (
+                  'id' => '9',
+                  'name' => '推荐位管理',
+                  'url' => '/admin/recommend/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '10',
+                  'name' => '新建推荐位',
+                  'url' => '/admin/recommend/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              3 => 
+              array (
+                0 => 
+                array (
+                  'id' => '11',
+                  'name' => '栏目列表',
+                  'url' => '/admin/category/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '12',
+                  'name' => '新建栏目',
+                  'url' => '/admin/category/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              4 => 
+              array (
+                0 => 
+                array (
+                  'id' => '13',
+                  'name' => '用户列表',
+                  'url' => '/admin/user/all-user',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '14',
+                  'name' => '用户分组',
+                  'url' => '/admin/user-group/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                2 => 
+                array (
+                  'id' => '15',
+                  'name' => '后台菜单列表',
+                  'url' => '/admin/menu/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              5 => 
+              array (
+                0 => 
+                array (
+                  'id' => '16',
+                  'name' => '模板管理',
+                  'url' => '/admin/template/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              6 => 
+              array (
+                0 => 
+                array (
+                  'id' => '17',
+                  'name' => '文章列表',
+                  'url' => '/admin/content/index',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+                1 => 
+                array (
+                  'id' => '18',
+                  'name' => '文章录入',
+                  'url' => '/admin/content/add-new',
+                  'icon' => '',
+                  'sub' => NULL,
+                ),
+              ),
+              7 => NULL,
+              8 => NULL,
+              9 => NULL,
+              10 => NULL,
+              11 => NULL,
+              12 => NULL,
+              13 => NULL,
+              14 => NULL,
+              15 => NULL,
+              16 => NULL,
+              17 => NULL,
+              18 => NULL,
+            ),
+            'userinfo' => 
+            array (
+              'id' => '1',
+              'username' => '张三',
+              'passwd' => '6266d4f13e622e81860359287e990922',
+              'account' => 'admin',
+              'avatar' => 'http://cdn-img.easyicon.net/png/10719/1071999.gif',
+              'reg_time' => '2',
+              'group_id' => '2,1',
+              'status' => '1',
+              'login_times' => '0',
+              'menu' => 
+              array (
+                0 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '1',
+                    'name' => '广告位管理',
+                    'url' => '',
+                    'icon' => 'show',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '7',
+                        'name' => '广告位列表',
+                        'url' => '/admin/adv/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '8',
+                        'name' => '新建广告位',
+                        'url' => '/admin/adv/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  1 => 
+                  array (
+                    'id' => '2',
+                    'name' => '推荐位管理',
+                    'url' => '',
+                    'icon' => 'nav',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '9',
+                        'name' => '推荐位管理',
+                        'url' => '/admin/recommend/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '10',
+                        'name' => '新建推荐位',
+                        'url' => '/admin/recommend/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  2 => 
+                  array (
+                    'id' => '3',
+                    'name' => '栏目管理',
+                    'url' => '',
+                    'icon' => 'product',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '11',
+                        'name' => '栏目列表',
+                        'url' => '/admin/category/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '12',
+                        'name' => '新建栏目',
+                        'url' => '/admin/category/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  3 => 
+                  array (
+                    'id' => '4',
+                    'name' => '权限管理',
+                    'url' => '',
+                    'icon' => 'manager',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '13',
+                        'name' => '用户列表',
+                        'url' => '/admin/user/all-user',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '14',
+                        'name' => '用户分组',
+                        'url' => '/admin/user-group/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      2 => 
+                      array (
+                        'id' => '15',
+                        'name' => '后台菜单列表',
+                        'url' => '/admin/menu/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  4 => 
+                  array (
+                    'id' => '5',
+                    'name' => '系统设置',
+                    'url' => '',
+                    'icon' => 'system',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '16',
+                        'name' => '模板管理',
+                        'url' => '/admin/template/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                  5 => 
+                  array (
+                    'id' => '6',
+                    'name' => '内容管理',
+                    'url' => '',
+                    'icon' => 'page',
+                    'sub' => 
+                    array (
+                      0 => 
+                      array (
+                        'id' => '17',
+                        'name' => '文章列表',
+                        'url' => '/admin/content/index',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                      1 => 
+                      array (
+                        'id' => '18',
+                        'name' => '文章录入',
+                        'url' => '/admin/content/add-new',
+                        'icon' => '',
+                        'sub' => NULL,
+                      ),
+                    ),
+                  ),
+                ),
+                1 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '7',
+                    'name' => '广告位列表',
+                    'url' => '/admin/adv/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '8',
+                    'name' => '新建广告位',
+                    'url' => '/admin/adv/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                2 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '9',
+                    'name' => '推荐位管理',
+                    'url' => '/admin/recommend/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '10',
+                    'name' => '新建推荐位',
+                    'url' => '/admin/recommend/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                3 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '11',
+                    'name' => '栏目列表',
+                    'url' => '/admin/category/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '12',
+                    'name' => '新建栏目',
+                    'url' => '/admin/category/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                4 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '13',
+                    'name' => '用户列表',
+                    'url' => '/admin/user/all-user',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '14',
+                    'name' => '用户分组',
+                    'url' => '/admin/user-group/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  2 => 
+                  array (
+                    'id' => '15',
+                    'name' => '后台菜单列表',
+                    'url' => '/admin/menu/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                5 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '16',
+                    'name' => '模板管理',
+                    'url' => '/admin/template/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                6 => 
+                array (
+                  0 => 
+                  array (
+                    'id' => '17',
+                    'name' => '文章列表',
+                    'url' => '/admin/content/index',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                  1 => 
+                  array (
+                    'id' => '18',
+                    'name' => '文章录入',
+                    'url' => '/admin/content/add-new',
+                    'icon' => '',
+                    'sub' => NULL,
+                  ),
+                ),
+                7 => NULL,
+                8 => NULL,
+                9 => NULL,
+                10 => NULL,
+                11 => NULL,
+                12 => NULL,
+                13 => NULL,
+                14 => NULL,
+                15 => NULL,
+                16 => NULL,
+                17 => NULL,
+                18 => NULL,
+              ),
+            ),
+          ),
+           'retstr' => '',
+           'debug' => true,
+        )),
+      ),
+    ),
+    5 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:21:41], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:21:54], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:22:04], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:25:44], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:27:52], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:29:36], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:29:49], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:30:21], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:30:58], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:31:37], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:32:08], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:32:30], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:32:38], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:38:20], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:39:01], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:39:37], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:40:02], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:40:40], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:41:14], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:41:54], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:42:03], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:43:03], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:43:43], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:43:46], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:44:22], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:44:45], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:45:12], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:45:49], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:46:13], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:46:31], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:46:54], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:47:18], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:47:58], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:48:34], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:49:24], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:50:01], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:50:20], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:50:36], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:50:51], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:51:36], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:52:07], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:52:46], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:53:36], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)
+[2016-11-21 21:57:46], debug -> Exception:array (
+  'code' => 101,
+  'line' => 121,
+  'file' => 'E:\\Dev\\cms\\library\\Router\\Router.php',
+  'message' => '找不到指定的控制器:Index/Index',
+  'trace' => 
+  array (
+    0 => 
+    array (
+      'file' => 'E:\\Dev\\cms\\public\\index.php',
+      'line' => 13,
+      'function' => 'dispatch',
+      'class' => 'Library\\Router\\router',
+      'type' => '->',
+      'args' => 
+      array (
+      ),
+    ),
+  ),
+  'type' => 'Error',
+)

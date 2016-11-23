@@ -1,0 +1,49 @@
+<extend from="admin/base.html"/>
+
+<define name="content"/>
+    <div style="maring-left:0px;background-color:#FFF;padding-top:40px; zoom:1;">
+        <div id="urHere">信息提示</div>
+        <div id="index" class="mainBox" style="padding-top:18px;height:auto!important;height:550px;min-height:550px;">
+            <div class="warning" style="line-height: 30px;">
+                <p><=$message/></p>
+                </p>系统会在<label id="timer">3</label>秒后自动跳转，如果页面没有自动跳转，请<a href="<=$uri/>">点击这里</a></p>
+            </div>
+        </div>
+    </div>
+</define/>
+
+<define name="js"/>
+    var timer = document.getElementById('timer');
+
+    var _timer = setInterval(function(){
+        autoRedirect(timer);
+    }, 1000);
+
+    function autoRedirect(timer){
+
+        var seconds = parseInt(timer.innerHTML, 10);
+
+        if(seconds <= 0){
+
+            clearInterval(_timer);
+
+            var pNode = timer.parentNode;
+
+            uri = '<=$uri/>';
+
+            if(uri){
+
+                <if substr($uri, 0, 11) == 'javascript:'/>
+                <=$uri/>;
+                <else/>
+                location.href = uri;
+                </if/>
+                return;
+            }
+
+            return;
+        }
+
+        timer.innerHTML = seconds - 1;
+    }
+</define/>

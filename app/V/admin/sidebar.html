@@ -1,0 +1,18 @@
+<div id="dcLeft">
+    <div id="menu" style="background-color: #EEEEEE;">
+        <ul>
+            <loop $menu.0 $k $v/>
+            <li>
+                <i class="<=$v.icon/>"></i><em><=$v.name/></em>
+                <if $v.sub/>
+                <ul class="collapse">
+                <loop $v.sub $sk $sv/>
+                <li><a target="mainbox" href="<=$sv.url/>"><=$sv.name/></a></li>
+                </loop/>
+                </ul>
+                </if/>
+            </li>
+            </loop/>
+        </ul>
+    </div>
+</div>
