@@ -180,8 +180,6 @@ $('.editbtn').on('click', function(){
 
             pWin.doRequest(url, $('form', this).serialize(), function(ret){
 
-                console.log(ret.message);
-
                 if(ret.code == 200){
 
                     location.reload();
