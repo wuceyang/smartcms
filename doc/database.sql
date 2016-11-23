@@ -1,6 +1,6 @@
 /*
-SQLyog Ultimate v11.27 (32 bit)
-MySQL - 5.7.15-log : Database - smart_cms
+SQLyog 企业版 - MySQL GUI v8.14 
+MySQL - 5.6.26 : Database - smart_cms
 *********************************************************************
 */
 
@@ -64,7 +64,7 @@ CREATE TABLE `cms_content` (
   `create_uid` int(11) NOT NULL COMMENT '创建的管理员ID',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '录入日期',
   `modify_uid` int(11) NOT NULL COMMENT '最后修改的管理员ID',
-  `modify_time` datetime NOT NULL COMMENT '最后修改时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '文章状态,1:正常,2:删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -83,6 +83,7 @@ CREATE TABLE `cms_content_category` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `create_uid` int(11) NOT NULL COMMENT '创建者用户ID',
   `content_num` int(11) NOT NULL DEFAULT '0' COMMENT '分类下的文章总数',
+  `tplid` int(11) NOT NULL DEFAULT '0' COMMENT '本分类默认状态下使用的模板',
   `show_order` tinyint(4) NOT NULL DEFAULT '1' COMMENT '排序顺序',
   `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '分类状态,1:正常,2:禁用',
   PRIMARY KEY (`id`)
@@ -90,7 +91,7 @@ CREATE TABLE `cms_content_category` (
 
 /*Data for the table `cms_content_category` */
 
-insert  into `cms_content_category`(`id`,`category_name`,`parent_id`,`parent_path`,`create_time`,`create_uid`,`content_num`,`show_order`,`status`) values (1,'科技新闻',0,',0,','2016-11-20 23:39:27',1,0,2,1),(2,'太空探索',1,',0,1,','2016-11-20 23:49:40',1,0,1,1),(3,'历史考古',1,',0,1,','2016-11-20 23:49:57',1,0,2,1),(4,'娱乐新闻',0,',0,','2016-11-20 23:50:09',1,0,1,1),(5,'影视周边',4,',0,4,','2016-11-20 23:50:39',1,0,1,1),(6,'网络游戏',4,',0,4,','2016-11-20 23:51:10',1,0,2,1),(7,'互联网技术',1,',0,1,','2016-11-21 08:43:32',1,0,3,1),(8,'明星八卦',4,',0,4,','2016-11-21 08:46:27',1,0,3,1),(9,'社会万象',0,',0,','2016-11-21 21:22:03',1,0,3,1);
+insert  into `cms_content_category`(`id`,`category_name`,`parent_id`,`parent_path`,`create_time`,`create_uid`,`content_num`,`tplid`,`show_order`,`status`) values (1,'科技新闻',0,',0,','2016-11-20 23:39:27',1,0,0,2,1),(2,'太空探索',1,',0,1,','2016-11-20 23:49:40',1,0,0,1,1),(3,'历史考古',1,',0,1,','2016-11-20 23:49:57',1,0,0,2,1),(4,'娱乐新闻',0,',0,','2016-11-20 23:50:09',1,0,0,1,1),(5,'影视周边',4,',0,4,','2016-11-20 23:50:39',1,0,0,1,1),(6,'网络游戏',4,',0,4,','2016-11-20 23:51:10',1,0,0,2,1),(7,'互联网技术',1,',0,1,','2016-11-21 08:43:32',1,0,0,3,1),(8,'明星八卦',4,',0,4,','2016-11-21 08:46:27',1,0,0,3,1),(9,'社会万象',0,',0,','2016-11-21 21:22:03',1,0,0,3,1);
 
 /*Table structure for table `cms_content_type` */
 
@@ -99,6 +100,7 @@ DROP TABLE IF EXISTS `cms_content_type`;
 CREATE TABLE `cms_content_type` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `type_name` varchar(32) NOT NULL COMMENT '类型名称，如:套图，视频，普通文本等',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '类型状态，1:正常,2:禁用',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -181,7 +183,7 @@ CREATE TABLE `cms_template` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '模板状态，1:正常,2:删除',
   `create_uid` int(11) NOT NULL COMMENT '上传者用户ID',
   `modify_uid` int(11) NOT NULL DEFAULT '0' COMMENT '更改的用户ID',
-  `modify_time` datetime NOT NULL COMMENT '最后修改时间',
+  `modify_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
