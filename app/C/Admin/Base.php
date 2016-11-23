@@ -29,9 +29,6 @@
 				'user' => [
 					'login',
 				],
-				'index' => [
-					'index',
-				]
 			];
 
 			$controller = strtolower($req->getController());

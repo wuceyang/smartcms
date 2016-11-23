@@ -3,6 +3,7 @@
 
     use \Request;
     use \Response;
+    use \App\Helper\Enum;
     use \App\M\Category AS mCategory;
 
     class Category extends Base{
@@ -65,7 +66,7 @@
 
         public function addCategory(Request $req, Response $resp){
 
-            $catname    = trim($req->post('name'));
+            $catname    = htmlspecialchars(trim($req->post('name')));
 
             if(!$catname){
 
@@ -124,7 +125,7 @@
 
         public function editCategory(Request $req, Response $resp){
 
-            $catname   = trim($req->post('name'));
+            $catname   = htmlspecialchars(trim($req->post('name')));
             
             // $parentid  = intval($req->post('parent'));
             
@@ -213,13 +214,39 @@
                 return $this->error("更新栏目信息失败:" . $msg, 102, "/admin/category");
             }
 
-            return $this->success("栏目信息更新成功" . var_export($category->getSqls(), true), "/admin/category");
+            return $this->success("栏目信息更新成功", "/admin/category");
         }
 
         public function switchCategory(Request $req, Response $resp){
 
-            $catid = intval($req->get('id'));
+            $catid = intval($req->post('id'));
 
-            $status = intval($req->get('status'));
+            $status = intval($req->post('status'));
+
+            if(!in_array($status, [Enum::STATUS_NORMAL, Enum::STATUS_DISABLED])){
+
+                return $this->error("请求状态不正确", 101, '/admin/category');
+            }
+
+            $category = new mCategory();
+
+            $catInfo = $category->getInfoById($catid);
+
+            if(!$catInfo){
+
+                return $this->error("找不到指定的栏目信息", 101, '/admin/category');
+            }
+
+            if($catInfo['status'] == $status){
+
+                return $this->success("栏目状态更新成功", '/admin/category');
+            }
+
+            if(!$category->setCategoryInfo($catid, ['status' => $status])){
+
+                return $this->error("栏目状态更新失败", 102, '/admin/category');
+            }
+
+            return $this->success("栏目状态更新成功", '/admin/category');
         }
     }

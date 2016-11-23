@@ -164,7 +164,6 @@
             foreach ($parts as $k => $v) {
 
                 $retstr .= ($k == 0 && $isAction) ? strtolower($v) : ucfirst(strtolower($v));
-
             }
 
             return $retstr;

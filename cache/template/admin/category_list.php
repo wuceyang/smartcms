@@ -23,7 +23,7 @@
                 <td align="center"><?php echo $v["content_num"];?></td>
                 <td align="center"><?php echo $v["show_order"];?></td>
                 <td align="center"><?php echo $v["create_time"];?></td>
-                <td align="center"><a class="editbtn" data-id="<?php echo $v["id"];?>" data-pid="<?php echo $v["parent_id"];?>" data-parentpath="<?php echo $v["parent_path"];?>" href="/admin/category/edit-category">编辑</a> | <a class="delbtn" data-id="<?php echo $v["id"];?>" data-status="<?php echo $v["status"];?>" href="/admin/category/disable-category"><?php echo $v["status"] == 1 ? '禁用' : '启用';?></a></td>
+                <td align="center"><a class="editbtn" data-id="<?php echo $v["id"];?>" data-pid="<?php echo $v["parent_id"];?>" data-parentpath="<?php echo $v["parent_path"];?>" href="/admin/category/edit-category">编辑</a> | <a class="delbtn" data-id="<?php echo $v["id"];?>" data-status="<?php echo $v["status"];?>" href="/admin/category/switch-category"><?php echo $v["status"] == 1 ? '禁用' : '启用';?></a></td>
             </tr>
             <?php if(isset($sublist[$v["id"]]) && is_array($sublist[$v["id"]])){  foreach($sublist[$v["id"]] as $sk =>  $sv){ ?>
             <tr data-pid="<?php echo $v["id"];?>" class="hide">
@@ -33,7 +33,7 @@
                 <td align="center"><?php echo $sv["content_num"];?></td>
                 <td align="center"><?php echo $sv["show_order"];?></td>
                 <td align="center"><?php echo $sv["create_time"];?></td>
-                <td align="center"><a class="editbtn" data-id="<?php echo $sv["id"];?>" data-pid="<?php echo $sv["parent_id"];?>" data-parentpath="<?php echo $sv["parent_path"];?>" href="/admin/category/edit-category">编辑</a> | <a class="delbtn" data-id="<?php echo $sv["id"];?>" data-status="<?php echo $sv["status"];?>" href="/admin/category/disable-category"><?php echo $sv["status"] == 1 ? '禁用' : '启用';?></a></td>
+                <td align="center"><a class="editbtn" data-id="<?php echo $sv["id"];?>" data-pid="<?php echo $sv["parent_id"];?>" data-parentpath="<?php echo $sv["parent_path"];?>" href="/admin/category/edit-category">编辑</a> | <a class="delbtn" data-id="<?php echo $sv["id"];?>" data-status="<?php echo $sv["status"];?>" href="/admin/category/switch-category"><?php echo $sv["status"] == 1 ? '禁用' : '启用';?></a></td>
             </tr>
             <?php }}  }}  if($pageStr){ ?>
             <tr>
@@ -125,26 +125,30 @@ $('.delbtn').on('click', function(){
 
     var action  = data.status == 1 ? "禁用" : "启用";
 
-    var content = "确定要" + action + "当前分类吗？";
+    var content = "确定要" + action + "当前栏目吗？";
 
     var url     = $(this).attr('href');
 
     var status  = <?php echo \App\Helper\Enum::STATUS_NORMAL + \App\Helper\Enum::STATUS_DISABLED;?> - data.status;
 
-    pWin.showConfirm(content, "分类" + action, function(){
+    var options = {
+        onOk:function(){
 
-        pWin.doRequest(url, {id: data.id, status: status}, function(ret){
+                pWin.doRequest(url, {id: data.id, status: status}, function(ret){
 
-            if(ret.code == 200){
+                    if(ret.code == 200){
 
-                location.reload();
+                        location.reload();
 
-                return;
+                        return;
+                    }
+
+                    pWin.showMsg(ret.message || "切换分类状态出错");
+                });
             }
+    }
 
-            pWin.showMsg(ret.message || "切换分类状态出错");
-        });
-    });
+    pWin.showConfirm(content, "分类" + action, options);
 
     return false;
 })
