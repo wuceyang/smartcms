@@ -21,7 +21,7 @@
 
         public function switchTemplate(Request $req, Response $resp){
 
-            $tplid        = intval($req->post('tplid'));
+            $tplid        = intval($req->post('id'));
 
             $status       = intval($req->post('status'));
 
@@ -113,7 +113,7 @@
 
                 $this->setFormToken($req, $resp);
 
-                return $reqp->withVars(['info' => $templateInfo])->withView('admin/template_edit.html')->display();
+                return $resp->withVars(['info' => $templateInfo])->withView('admin/template_edit.html')->display();
             }
 
             if(!$this->formTokenValidate($req, $resp)){
@@ -127,6 +127,8 @@
 
             $tplContent = trim($req->post('tplContent'));
 
+            $status = intval($req->post('status'));
+
             $template     = new mTemplate();
 
             $templateInfo = $template->getInfoById($tplid);
@@ -136,14 +138,15 @@
                 return $this->error("找不到指定的模板信息", 101, "/admin/template");
             }
 
-            if($templateInfo['template_name'] == $tplName && $templateInfo['template_content'] == $tplContent && $templateInfo['status'] == $status){
+            if($templateInfo['template_name'] == $tplName && $templateInfo['template_html'] == $tplContent && $templateInfo['status'] == $status){
 
                 return $this->success("模板信息编辑成功", "/admin/template");
             }
 
             $tplInfo = [
                 'template_name'    => $tplName,
-                'template_content' => $tplContent,
+                'template_html'    => $tplContent,
+                'status'           => $status,
                 'modify_time'      => date('Y-m-d H:i:s'),
                 'modify_uid'       => $this->userinfo['id'], 
             ];

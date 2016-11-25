@@ -53,7 +53,7 @@
          */
         public function setTemplateInfo($tplid, $tplInfo){
 
-            return $this->update('id = ?', [intval($tplid)], $tplInfo);
+            return $this->update($tplInfo, 'id = ?', [intval($tplid)]);
         }
 
         /**
