@@ -13,6 +13,8 @@
 
         public function index(Request $req, Response $resp){
 
+            $pagesize     = 20;
+
             $page         = max(1, intval($req->get('page')));
 
             $kw           = trim($req->get('kw'));

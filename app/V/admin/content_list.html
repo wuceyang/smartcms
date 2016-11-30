@@ -4,7 +4,7 @@
     <!-- 当前位置 -->
     <div id="urHere">内容管理<b>»</b><strong>文章列表</strong> </div>
     <div class="mainBox">
-        <h3><a href="/admin/content/add-content" class="actionBtn add">添加模板</a> &nbsp; </h3>
+        <h3><a href="/admin/content/add-content" class="actionBtn add">添加文章</a> &nbsp; </h3>
         <table border="0" align="center" cellpadding="8" cellspacing="0" class="tableBasic w90">
             <tr>
                 <th width="50" align="center">ID</th>
@@ -40,7 +40,7 @@ $('.delbtn').on('click', function(){
 
     var action  = data.status == 1 ? "禁用" : "启用";
 
-    var content = "确定要" + action + "当前模板吗？";
+    var content = "确定要" + action + "当前文章吗？";
 
     var url     = $(this).attr('href');
 
