@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1be621978afc8d54c7cbc2066a89b1a7",
-    "content-hash": "61b47c914aa9b36225a47f2e7bedd423",
+    "hash": "2918e75ff6453a0e2ac1b53f84b04f0b",
+    "content-hash": "261786cea46a9744aff430e37c1627f0",
     "packages": [
         {
             "name": "qiniu/php-sdk",
-            "version": "v7.0.8",
+            "version": "v7.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/qiniu/php-sdk.git",
-                "reference": "d1bca450b56d85beb7ba21f374a47bfeb59c288b"
+                "reference": "b91653485e36b4797d7a302cc86c49695e47a642"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qiniu/php-sdk/zipball/d1bca450b56d85beb7ba21f374a47bfeb59c288b",
-                "reference": "d1bca450b56d85beb7ba21f374a47bfeb59c288b",
+                "url": "https://api.github.com/repos/qiniu/php-sdk/zipball/b91653485e36b4797d7a302cc86c49695e47a642",
+                "reference": "b91653485e36b4797d7a302cc86c49695e47a642",
                 "shasum": ""
             },
             "require": {
@@ -56,61 +56,10 @@
                 "sdk",
                 "storage"
             ],
-            "time": "2016-07-19 06:18:08"
+            "time": "2016-11-18 02:57:31"
         }
     ],
-    "packages-dev": [
-        {
-            "name": "predis/predis",
-            "version": "v1.1.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nrk/predis.git",
-                "reference": "6ab10b2b705ea5121f2c1ea87a290f6871c32ebd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/6ab10b2b705ea5121f2c1ea87a290f6871c32ebd",
-                "reference": "6ab10b2b705ea5121f2c1ea87a290f6871c32ebd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.8"
-            },
-            "suggest": {
-                "ext-curl": "Allows access to Webdis when paired with phpiredis",
-                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Predis\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net"
-                }
-            ],
-            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
-            "homepage": "http://github.com/nrk/predis",
-            "keywords": [
-                "nosql",
-                "predis",
-                "redis"
-            ],
-            "time": "2016-06-18 19:51:10"
-        }
-    ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": [],

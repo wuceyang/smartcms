@@ -23,7 +23,12 @@
                 $param[] = intval($status);
             }
 
-            return $this->getRows($where, $param);
+            if($page && $pagesize){
+
+                $this->page($page)->pagesize($pagesize);
+            }
+
+            return $this->getRows(implode(' AND ', $where), $param);
         }
 
         /**

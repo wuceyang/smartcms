@@ -5,6 +5,7 @@
     use \Response;
     use \App\Helper\Enum;
     use \App\M\Category AS mCategory;
+    use \App\M\Template;
 
     class Category extends Base{
 
@@ -51,9 +52,21 @@
                 $param['pid'] = $parentId;
             }
 
+            $tplid                = array_unique(array_column($categoryList, "tplid") + array_column($subCategoryList, "tplid"));
+
+            $template             = new Template();
+
+            $tpllist              = $template->getTemplateList(Enum::STATUS_NORMAL);
+
+            $tplInfo              = $template->getInfoById($tplid);
+
             $pageInfo             = $this->getPageInfo("/admin/category", $page, $categoryTotal, $param, $pagesize);
 
             $param['list']        = $categoryList;
+
+            $param['tpllist']     = $tpllist;
+
+            $param['tplinfo']     = $tplInfo;
 
             $param['sublist']     = $subCategoryList;
 
@@ -74,6 +87,8 @@
             }
 
             $parentid   = intval($req->post('parent'));
+
+            $tplid      = intval($req->post('tplid'));
             
             $category   = new mCategory();
             
@@ -108,9 +123,26 @@
                 $resetOrder = true;
             }
 
+            if($tplid){
+
+                $template = new Template();
+
+                $tplInfo = $template->getInfoById($tplid);
+
+                if(!$tplInfo){
+
+                    return $this->error("找不到指定的模板", 101, "/admin/category");
+                }
+
+                if($tplInfo['status'] != Enum::STATUS_NORMAL){
+
+                    return $this->error("指定的模板已被禁用", 101, "/admin/category");
+                }
+            }
+
             $order = $order < $maxOrder ? $order : $maxOrder + 1;
 
-            if(!$category->addCategory($catname, $parentid, $parentpath, $order, $this->userinfo['id'])){
+            if(!$category->addCategory($catname, $parentid, $parentpath, $order, $tplid, $this->userinfo['id'])){
                 //重新排序
                 if($resetOrder){
 
@@ -135,6 +167,8 @@
 
             $catid     = intval($req->post('catid'));
 
+            $tplid     = intval($req->post('tplid'));
+
             if(!$catid){
 
                 return $this->error("请指定要编辑的栏目", 101);
@@ -155,6 +189,23 @@
                 return $this->error("栏目排序必须填写", 101);
             }
 
+            if($tplid){
+
+                $template = new Template();
+
+                $tplInfo = $template->getInfoById($tplid);
+
+                if(!$tplInfo){
+
+                    return $this->error("找不到指定的模板", 101, "/admin/category");
+                }
+
+                if($tplInfo['status'] != Enum::STATUS_NORMAL){
+
+                    return $this->error("指定的模板已被禁用", 101, "/admin/category");
+                }
+            }
+
             $category = new mCategory();
 
             $catInfo = $category->getInfoById($catid);
@@ -164,14 +215,15 @@
                 return $this->error("找不到指定的栏目信息", 101);
             }
 
-            if($catname == $catInfo['category_name'] && $status == $catInfo['status'] && $showOrder == $catInfo['show_order'] && $status == $catInfo['status']){
+            if($tplid == $catInfo['tplid'] && $catname == $catInfo['category_name'] && $status == $catInfo['status'] && $showOrder == $catInfo['show_order'] && $status == $catInfo['status']){
 
-                return $this->success("栏目信息编辑成功");
+                return $this->success("栏目信息编辑成功1");
             }
 
             $catParam = [
                         'category_name' => $catname,
                         'status'        => $status,
+                        'tplid'         => $tplid,
                         'show_order'    => $showOrder,
                         ];
 
@@ -185,9 +237,7 @@
 
                 unset($catParam['show_order']);
 
-                $infoUpdate = $catParam['category_name'] != $catInfo['category_name'] || $catParam['status'] != $catInfo['status'];
-
-                if($infoUpdate && !$category->setCategoryInfo($catInfo['id'], $catParam)){
+                if(!$category->setCategoryInfo($catInfo['id'], $catParam)){
 
                     $msg = "更新栏目信息发生错误" . var_export($category->getError(), true);
 
@@ -211,7 +261,7 @@
 
             if(!$flag){
 
-                return $this->error("更新栏目信息失败:" . $msg, 102, "/admin/category");
+                return $this->error("更新栏目信息失败", 102, "/admin/category");
             }
 
             return $this->success("栏目信息更新成功", "/admin/category");

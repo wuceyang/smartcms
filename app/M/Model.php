@@ -111,7 +111,12 @@
                 $retInfo[$v[$idxField]] = $v;
             }
 
-            return $isMulti ? $retInfo : $retInfo[current($id)];
+            if(!$retInfo){
+
+                return [];
+            }
+
+            return $isMulti ? $retInfo : ($retInfo[current($id)]);
         }
 
         /**

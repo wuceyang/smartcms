@@ -93,13 +93,14 @@
          * @param int    $createUid  创建者用户ID
          * @return int
          */
-        public function addCategory($name, $parentId, $parentPath, $showOrder, $createUid){
+        public function addCategory($name, $parentId, $parentPath, $showOrder, $tplId, $createUid){
 
             $param = [
                         'category_name' => $name, 
                         'create_uid'    => $createUid, 
                         'parent_id'     => intval($parentId), 
                         'parent_path'   => $parentPath,
+                        'tplid'         => intval($tplId),
                         'show_order'    => intval($showOrder),
                      ];
 

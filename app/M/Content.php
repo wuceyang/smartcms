@@ -80,7 +80,7 @@
             return $this->getCount(implode(' AND ', $where), $param);
         }
 
-        public function addContent($title, $catid, $summary, $content, $keyword, $author, $source, $templateid, $typeid, $createuid){
+        public function addContent($title, $catid, $summary, $content, $keyword, $author, $source, $templateid, $tplid, $data,$createuid){
 
             $params = [
                 'title'       => $title,
@@ -90,7 +90,8 @@
                 'keyword'     => $keyword,
                 'template_id' => intval($templateid),
                 'content'     => $content,
-                'type_id'     => $typeid,
+                'tplid'       => $tplid,
+                'data'        => $data ? json_encode($data) : '',
                 'create_uid'  => intval($createuid),
             ];
 

@@ -1,0 +1,113 @@
+<extend from="admin/base.html"/>
+
+<define name="content"/>
+    <!-- 当前位置 -->
+    <div id="urHere">内容管理<b>»</b><strong>添加内容</strong> </div>
+    <div class="mainBox">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tbody>
+                <tr>
+                    <th width="131"></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td align="right">文章标题</td>
+                    <td><input type="text" name="title" value="" size="80" class="inpMain"> *</td>
+                </tr>
+                <tr>
+                    <td align="right">关键字</td>
+                    <td>
+                        <input type="text" name="kw" value="" size="80" class="inpMain">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">摘要</td>
+                    <td>
+                        <input type="text" name="site_keywords" value="" size="80" class="inpMain">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">作者</td>
+                    <td>
+                        <input type="text" name="author" value="<=$authorinfo.username/>" size="80" class="inpMain">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">来源</td>
+                    <td>
+                        <input type="text" name="author" value="" size="80" class="inpMain">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">所属栏目</td>
+                    <td>
+                        <select name="catid">
+                        <loop $catlist.0 $k $v/>
+                        <if isset($catlist[$v.info.id])/>
+                            <optgroup label="<=$v.info.category_name/>"/>
+                                <loop $catlist[$v.info.id] $sk $sv />
+                                    <option name="<=$sv.info.id/>"><=$sv.info.category_name/></option>
+                                </loop/>
+                            <optgroup/>
+                        <else/>
+                            <option name="<=$v.info.id/>"><=$v.info.category_name/></option>
+                        </if/>
+                        </loop/>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">文章模板</td>
+                    <td>
+                        <select name="tplid">
+                            <loop $tpllist $k $v />
+                            <option value="<=$v.id/>"<if $catinfo.tplid == $v.id/> selected</if/>><=$v.template_name/></option>
+                            </loop/>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">内容正文</td>
+                    <td id="contentbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">附加内容</td>
+                    <td>
+                        <label for="none">
+                            <input type="radio" name="datatype" id="none" value="images" checked /> 无
+                        </label>
+                        <label for="imagegroup">
+                            <input type="radio" name="datatype" id="imagegroup" value="images" /> 套图
+                        </label>
+                        <label for="video">
+                            <input type="radio" name="datatype" value="video" id="video" /> 视频
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"></td>
+                    <td>
+                      <input type="text" name="fax" value="" size="80" class="inpMain">
+                    </td>
+                </tr>
+                 </tbody></table>
+    </div>
+</define/>
+
+<define name="css"/>
+
+<link rel="stylesheet" type="text/css" href="/wangeditor/css/wangEditor.min.css">
+
+</define/>
+
+<define name="js"/>
+<script type="text/javascript" src="/wangeditor/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+
+var pWin = window;
+
+var editor = new wangEditor('contentbox');
+
+</script>
+</define/>

@@ -1,6 +1,6 @@
-<extend from="admin/base.html"/>
+<?php include $__tplbasedir__ . "admin/base.php";?>
 
-<define name="content"/>
+<?php function __content__($params){ extract($params);?>
     <!-- 当前位置 -->
     <div id="urHere">栏目管理<b>»</b><strong>栏目列表</strong> </div>
     <div class="mainBox">
@@ -16,55 +16,53 @@
                 <th width="120" align="center">创建日期</th>
                 <th width="120" align="center">操作</th>
             </tr>
-            <loop $list $k $v/>
+            <?php if(isset($list) && is_array($list)){  foreach($list as $k =>  $v){ ?>
             <tr>
-                <td align="center"><=$v.id/></td>
-                <td align="left"><=$v.category_name/> <a href="javascript:;" data-id="<=$v.id/>" name="showsub" title="点击查看子分类" style="font-size:1.2em;">+</a> </td>
-                <td align="center"><=$v.status == 1 ? '正常' : '禁用'/></td>
-                <td align="center"><=$v.content_num/></td>
-                <td align="center"><=isset($tplinfo[$v.tplid]) ? $tplinfo[$v.tplid].template_name : '暂未指定'/></td>
-                <td align="center"><=$v.show_order/></td>
-                <td align="center"><=$v.create_time/></td>
+                <td align="center"><?php echo $v["id"];?></td>
+                <td align="left"><?php echo $v["category_name"];?> <a href="javascript:;" data-id="<?php echo $v["id"];?>" name="showsub" title="点击查看子分类" style="font-size:1.2em;">+</a> </td>
+                <td align="center"><?php echo $v["status"] == 1 ? '正常' : '禁用';?></td>
+                <td align="center"><?php echo $v["content_num"];?></td>
+                <td align="center"><?php echo isset($tplinfo[$v["tplid"]]) ? $tplinfo[$v["tplid"]]["template_name"] : '暂未指定';?></td>
+                <td align="center"><?php echo $v["show_order"];?></td>
+                <td align="center"><?php echo $v["create_time"];?></td>
                 <td align="center">
-                    <a class="editbtn" data-id="<=$v.id/>" data-pid="<=$v.parent_id/>" data-parentpath="<=$v.parent_path/>" href="/admin/category/edit-category">编辑</a> | 
-                    <a class="delbtn" data-id="<=$v.id/>" data-status="<=$v.status/>" href="/admin/category/switch-category"><=$v.status == 1 ? '禁用' : '启用'/></a> | 
-                    <a href="/admin/content/add-content?catid=<=$v.id/>">文章录入</a>
+                    <a class="editbtn" data-id="<?php echo $v["id"];?>" data-pid="<?php echo $v["parent_id"];?>" data-parentpath="<?php echo $v["parent_path"];?>" href="/admin/category/edit-category">编辑</a> | 
+                    <a class="delbtn" data-id="<?php echo $v["id"];?>" data-status="<?php echo $v["status"];?>" href="/admin/category/switch-category"><?php echo $v["status"] == 1 ? '禁用' : '启用';?></a> | 
+                    <a href="/admin/content/add-content?catid=<?php echo $v["id"];?>">文章录入</a>
                 </td>
             </tr>
-            <loop $sublist[$v.id] $sk $sv/>
-            <tr data-pid="<=$v.id/>" class="hide">
+            <?php if(isset($sublist[$v["id"]]) && is_array($sublist[$v["id"]])){  foreach($sublist[$v["id"]] as $sk =>  $sv){ ?>
+            <tr data-pid="<?php echo $v["id"];?>" class="hide">
                 <td align="center"></td>
-                <td align="left"> -> <=$sv.category_name/></td>
-                <td align="center"><=$sv.status == 1 ? '正常' : '禁用'/></td>
-                <td align="center"><=$sv.content_num/></td>
-                <td align="center"><=isset($tplinfo[$sv.tplid]) ? $tplinfo[$sv.tplid].template_name : '暂未指定'/></td>
-                <td align="center"><=$sv.show_order/></td>
-                <td align="center"><=$sv.create_time/></td>
+                <td align="left"> -> <?php echo $sv["category_name"];?></td>
+                <td align="center"><?php echo $sv["status"] == 1 ? '正常' : '禁用';?></td>
+                <td align="center"><?php echo $sv["content_num"];?></td>
+                <td align="center"><?php echo isset($tplinfo[$sv["tplid"]]) ? $tplinfo[$sv["tplid"]]["template_name"] : '暂未指定';?></td>
+                <td align="center"><?php echo $sv["show_order"];?></td>
+                <td align="center"><?php echo $sv["create_time"];?></td>
                 <td align="center">
-                    <a class="editbtn" data-id="<=$sv.id/>" data-pid="<=$sv.parent_id/>" data-parentpath="<=$sv.parent_path/>" href="/admin/category/edit-category">编辑</a> | 
-                    <a class="delbtn" data-id="<=$sv.id/>" data-status="<=$sv.status/>" href="/admin/category/switch-category"><=$sv.status == 1 ? '禁用' : '启用'/></a> | 
-                    <a href="/admin/content/add-content?catid=<=$sv.id/>">文章录入</a>
+                    <a class="editbtn" data-id="<?php echo $sv["id"];?>" data-pid="<?php echo $sv["parent_id"];?>" data-parentpath="<?php echo $sv["parent_path"];?>" href="/admin/category/edit-category">编辑</a> | 
+                    <a class="delbtn" data-id="<?php echo $sv["id"];?>" data-status="<?php echo $sv["status"];?>" href="/admin/category/switch-category"><?php echo $sv["status"] == 1 ? '禁用' : '启用';?></a> | 
+                    <a href="/admin/content/add-content?catid=<?php echo $sv["id"];?>">文章录入</a>
             </td>
             </tr>
-            </loop/>
-            </loop/>
-            <if $pageStr/>
+            <?php }}  }}  if($pageStr){ ?>
             <tr>
                 <td colspan="7">
                     <div class="row">
                         <div class="col-lg-4 adv-table">
-                            <div class="dataTables_info">当前第<=$curPage/>/<=$totalPage/>页，共<=$totalRecord/> 条记录
+                            <div class="dataTables_info">当前第<?php echo $curPage;?>/<?php echo $totalPage;?>页，共<?php echo $totalRecord;?> 条记录
                             </div>
                         </div>
                         <div class="col-lg-8">
                             <ul class="dataTables_paginate paging_bootstrap pagination">
-                                <=$pageStr/>
+                                <?php echo $pageStr;?>
                             </ul>
                         </div>
                     </div>
                 </td>
             </tr>
-            </if/>
+            <?php } ?>
         </table>
     </div>
     <div class="hide">
@@ -85,9 +83,9 @@
                         <label class="label">栏目模板:</label>
                         <select name="tplid">
                             <option value="0">暂不指定</option>
-                            <loop $tpllist $k $v/>
-                            <option value="<=$v.id/>"><=$v.template_name/></option>
-                            </loop/>
+                            <?php if(isset($tpllist) && is_array($tpllist)){  foreach($tpllist as $k =>  $v){ ?>
+                            <option value="<?php echo $v["id"];?>"><?php echo $v["template_name"];?></option>
+                            <?php }} ?>
                         </select>
                         <label class="tips"> *选择栏目模板</label>
                     </li>
@@ -119,9 +117,9 @@
                         <label class="label">栏目模板:</label>
                         <select name="tplid">
                             <option value="0">暂不指定</option>
-                            <loop $tpllist $k $v/>
-                            <option value="<=$v.id/>"><=$v.template_name/></option>
-                            </loop/>
+                            <?php if(isset($tpllist) && is_array($tpllist)){  foreach($tpllist as $k =>  $v){ ?>
+                            <option value="<?php echo $v["id"];?>"><?php echo $v["template_name"];?></option>
+                            <?php }} ?>
                         </select>
                         <label class="tips"> *选择栏目模板</label>
                     </li>
@@ -132,13 +130,13 @@
             </form>
         </div>
     </div>
-</define/>
+<?php } ?>
 
-<define name="js"/>
+<?php function __js__($params){ extract($params);?>
 
 var pWin = window;
 
-var categories = <=json_encode($allCategory ? $allCategory : [])/>;
+var categories = <?php echo json_encode($allCategory ? $allCategory : []);?>;
 
 $('a[name=showsub]').on('click', function(){
 
@@ -171,7 +169,7 @@ $('.delbtn').on('click', function(){
 
     var url     = $(this).attr('href');
 
-    var status  = <=\App\Helper\Enum::STATUS_NORMAL + \App\Helper\Enum::STATUS_DISABLED/> - data.status;
+    var status  = <?php echo \App\Helper\Enum::STATUS_NORMAL + \App\Helper\Enum::STATUS_DISABLED;?> - data.status;
 
     var options = {
         onOk:function(){
@@ -419,4 +417,4 @@ function createSelect(parentId, optionList, selectedVal, editable){
 
     return sel;
 }
-</define/>
+<?php } ?>

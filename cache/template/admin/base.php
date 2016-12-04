@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>后台管理中心</title>
     <meta name="Copyright" content="Douco Design." />
-    <link href="<=$__THEME_PATH__/>css/public.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $__THEME_PATH__;?>css/public.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/popup/xcconfirm/css/xcConfirm.css"/>
-    <block name="css" />
+    <?php function_exists("__css__") && __css__($params); ?>
 </head>
 
 <body style="height:100%">
@@ -16,20 +16,20 @@
         <div id="dcHead">
             <div id="head">
                 <div class="logo">
-                    <a href="index.html"><img src="<=$__THEME_PATH__/>images/dclogo.gif" alt="logo"></a>
+                    <a href="index.html"><img src="<?php echo $__THEME_PATH__;?>images/dclogo.gif" alt="logo"></a>
                 </div>
                 <div class="nav">
                     <ul class="navRight">
-                        <if isset($userinfo)/>
+                        <?php if(isset($userinfo)){ ?>
                         <li class="M noLeft">
-                            <div>欢迎回来，<=$userinfo.username/>
+                            <div>欢迎回来，<?php echo $userinfo["username"];?>
                                 <div class="drop mUser">
                                     <a target="mainbox" href="/admin/user/reset-pwd">修改密码</a>
                                 </div>
                             </div>
                         </li>
                         <li class="noRight"><a href="/admin/user/logout">退出登录</a></li>
-                        </if/>
+                        <?php } ?>
                     </ul>
                 </div>
                 <div class="clear"/>
@@ -38,29 +38,29 @@
         <!-- 头部导航结束 -->
         <div>
             <!-- 侧面导航开始 -->
-            <if isset($userinfo) && isset($menu)/>
+            <?php if(isset($userinfo) && isset($menu)){ ?>
             <div id="dcLeft">
                 <div id="menu" style="background-color: #EEEEEE;">
                     <ul>
-                        <loop $menu.0 $k $v/>
-                        <li data-id="<=$v.id/>">
-                            <i class="<=$v.icon/>"></i><em><=$v.name/></em>
-                            <if $v.sub/>
+                        <?php if(isset($menu["0"]) && is_array($menu["0"])){  foreach($menu["0"] as $k =>  $v){ ?>
+                        <li data-id="<?php echo $v["id"];?>">
+                            <i class="<?php echo $v["icon"];?>"></i><em><?php echo $v["name"];?></em>
+                            <?php if($v["sub"]){ ?>
                             <ul class="collapse">
-                            <loop $v.sub $sk $sv/>
-                            <li><a href="<=$sv.url/>"><=$sv.name/></a></li>
-                            </loop/>
+                            <?php if(isset($v["sub"]) && is_array($v["sub"])){  foreach($v["sub"] as $sk =>  $sv){ ?>
+                            <li><a href="<?php echo $sv["url"];?>"><?php echo $sv["name"];?></a></li>
+                            <?php }} ?>
                             </ul>
-                            </if/>
+                            <?php } ?>
                         </li>
-                        </loop/>
+                        <?php }} ?>
                     </ul>
                 </div>
             </div>
-            </if/>
+            <?php } ?>
             <!-- 侧面导航结束 -->
             <div id="dcMain">
-               <block name="content"/>
+               <?php function_exists("__content__") && __content__($params); ?>
             </div>
             <div class="clear"/>
         </div>
@@ -80,7 +80,7 @@
         </div>
     </div>
 </body>
-<script type="text/javascript" src="<=$__THEME_PATH__/>js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $__THEME_PATH__;?>js/jquery.min.js"></script>
 <script type="text/javascript" src="/popup/xcconfirm/js/xcConfirm.js"></script>
 <script type="text/javascript" src="/jqplugin/jquery.nicescroll.js"></script>
 <script type="text/javascript">
@@ -251,6 +251,6 @@
     })
 </script>
 
-<block name="js" />
+<?php function_exists("__js__") && __js__($params); ?>
 
 </html>
