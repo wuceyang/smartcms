@@ -1391,3 +1391,57 @@ select {
     width: 90%;
 }
 /*----------------公共样式结束-----------------*/
+.imageAdd{
+    margin: 10px 20px 20px 0px;
+    width: 500px;
+}
+.row{
+    height:40px;
+    line-height: 40px;
+}
+
+.row .rowLabel{
+    display: inline-block;
+    *display: inline;
+    width: 60px;
+    text-align: right;
+    *zoom: 1,
+}
+
+.row .rowEle{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: left;
+    width: 300px;
+}
+
+.upBtn{
+    position: relative;
+    height: 35px;
+    line-height: 35px;
+}
+
+.upBtn>.virtualBtn{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    background-color: #369;
+    color: #FFF;
+    height: 100%;
+    width: 100px;
+    text-align: center;
+    width: 100px;
+}
+
+.upBtn>.fileIpt{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 100;
+    opacity: 0;
+    width: 100px;
+    height: 30px;
+    filter: alpha(opacity = 0);
+}

@@ -81,7 +81,6 @@
         //输出模板运行后的html
         public function display(){
             echo $this->runCode();
-            exit;
         }
 
         //获取模板运行后的html

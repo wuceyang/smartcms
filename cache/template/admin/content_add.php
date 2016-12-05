@@ -66,36 +66,68 @@
                 </tr>
                 <tr>
                     <td align="right">内容正文</td>
-                    <td id="contentbox">
+                    <td>
+                        <div id="contentbox"></div>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">附加内容</td>
                     <td>
                         <label for="none">
-                            <input type="radio" name="datatype" id="none" value="images" checked /> 无
+                            <input type="radio" name="datatype" id="none" value="0" checked /> 无
                         </label>
                         <label for="imagegroup">
-                            <input type="radio" name="datatype" id="imagegroup" value="images" /> 套图
+                            <input type="radio" name="datatype" id="imagegroup" value="1" /> 套图
                         </label>
                         <label for="video">
-                            <input type="radio" name="datatype" value="video" id="video" /> 视频
+                            <input type="radio" name="datatype" value="video" id="2" /> 视频
                         </label>
+                    </td>
+                </tr>
+                <tr id="addonRow" class="hide">
+                    <td align="right"></td>
+                    <td>
+                        <div id="addon"></div>
+                        <div><button type="button" class="btn">上传</button></div>
                     </td>
                 </tr>
                 <tr>
                     <td align="right"></td>
                     <td>
-                      <input type="text" name="fax" value="" size="80" class="inpMain">
+                      <button type="submit" class="btnPayment">确定</button>
                     </td>
                 </tr>
-                 </tbody></table>
+                 </tbody>
+            </table>
+            <div class="hide" id="popContainer">
+                <div class="imageAdd">
+                    <div class="row">
+                        <label class="rowLabel">选择图片:</label>
+                        <div class="rowEle upBtn">
+                            <div class="virtualBtn"/>选择文件</div>
+                            <input type="file" class="fileIpt" name="file" id="fileIpt" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="rowLabel">描述文字:</label>
+                        <div class="rowEle">
+                            <input size="60" type="text" name="brief" value="" class="inpMain"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 <?php } ?>
 
 <?php function __css__($params){ extract($params);?>
 
 <link rel="stylesheet" type="text/css" href="/wangeditor/css/wangEditor.min.css">
+<style type="text/css">
+    #contentbox{
+        height:400px;
+        width:100%;
+    }
+</style>
 
 <?php } ?>
 
@@ -106,6 +138,48 @@
 var pWin = window;
 
 var editor = new wangEditor('contentbox');
+
+    editor.create();
+
+$(':radio[name=datatype]').on('click', function(){
+    
+    var dataType = $(this).val();
+
+    $('#addonRow').addClass('hide');
+
+    if(dataType == 0) return;
+
+    $('#addonRow').removeClass('hide');
+})
+
+$('#addonRow button').on('click', function(){
+    var upParams = {
+        runtimes: 'html5,flash,html4',      // 上传模式,依次退化
+        browse_button: 'pickfiles',
+        uptoken_url: '/admin/upload/token',
+        get_new_uptoken: true,
+        unique_names: true,
+        domain: '',
+        container: '',
+        max_file_size: '100mb',
+        flash_swf_url: '/flash/moxie.swf',
+        max_retries: 3,
+        dragdrop: true,
+        drop_element: '',
+        chunk_size: '1mb',
+        auto_start: true,
+        init:{
+            FileUploaded: function(){
+
+            },
+            UploadComplete: function(){
+
+            }
+        }
+    };
+
+    pWin.showConfirm($('#popContainer').html(), '添加图片', {});
+})
 
 </script>
 <?php } ?>

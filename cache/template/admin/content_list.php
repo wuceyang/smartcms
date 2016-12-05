@@ -31,7 +31,7 @@
 <?php } ?>
 
 <?php function __js__($params){ extract($params);?>
-<script type="text/javascript">
+
 var pWin = window;
 
 $('.delbtn').on('click', function(){
@@ -67,5 +67,4 @@ $('.delbtn').on('click', function(){
 
     return false;
 })
-</script>
 <?php } ?>
