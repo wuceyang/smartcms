@@ -5,9 +5,13 @@
 
 	class Qiniu{
 
-		const ACCESSKEY = 'ZGyOtBv9cJXL8FS7XuHqdpVxz-9RgnHIZ5YB69Re';
+		const ACCESSKEY = 'BTSnm515J0wVluBgLoQHGfiYfPOnQtnQf2DeCAAX';
 
-		const SECRETKEY = 'v2AmKoF3G2RPy9Z2P22p1hGzpn4aqhH1Lc1W11re';
+		const SECRETKEY = 'AvOFWFwm7t8-boPOJ4apEp5cVKhevmdmFX2Ug9tt';
+
+		const DOMAIN_IMAGE = 'http://oh0w1vops.bkt.clouddn.com';
+		const DOMAIN_VIDEO = 'http://oh0xnhx0h.bkt.clouddn.com';
+		const DOMAIN_OTHER = 'http://oh0x57g5y.bkt.clouddn.com';
 
 		public function getToken($bucket){
 

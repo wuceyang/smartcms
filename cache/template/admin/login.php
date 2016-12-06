@@ -67,6 +67,7 @@
     <?php } ?>
 
     <?php function __js__($params){ extract($params);?>
+    <script type="text/javascript">
         $('form').on('submit', function(){
             $.ajax({
                     url: $(this).attr('action'), 
@@ -92,4 +93,5 @@
             var cap = document.getElementById('vcode');
             cap.src = cap.src + '?' + Math.random(); 
         }
+    </script>
     <?php } ?>

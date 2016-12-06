@@ -13,6 +13,7 @@
 <?php } ?>
 
 <?php function __js__($params){ extract($params);?>
+<script type="text/javascript">
     var timer = document.getElementById('timer');
 
     var _timer = setInterval(function(){
@@ -45,4 +46,5 @@
 
         timer.innerHTML = seconds - 1;
     }
+</script>
 <?php } ?>

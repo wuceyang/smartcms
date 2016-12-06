@@ -74,13 +74,13 @@
                     <td align="right">附加内容</td>
                     <td>
                         <label for="none">
-                            <input type="radio" name="datatype" id="none" value="0" checked /> 无
+                            <input type="radio" name="datatype" id="none" value="0" checked data-bucket="none" /> 无
                         </label>
                         <label for="imagegroup">
-                            <input type="radio" name="datatype" id="imagegroup" value="1" /> 套图
+                            <input type="radio" name="datatype" id="imagegroup" value="1" data-bucket="image" /> 套图
                         </label>
                         <label for="video">
-                            <input type="radio" name="datatype" value="video" id="2" /> 视频
+                            <input type="radio" name="datatype" value="video" id="2" data-bucket="video" /> 视频
                         </label>
                     </td>
                 </tr>
@@ -104,8 +104,10 @@
                     <div class="row">
                         <label class="rowLabel">选择图片:</label>
                         <div class="rowEle upBtn">
-                            <div class="virtualBtn"/>选择文件</div>
-                            <input type="file" class="fileIpt" name="file" id="fileIpt" />
+                            <div class="virtualBtn">选择文件</div>
+                            <div class="progressbox hide">
+                                <div class="progressbar"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -133,9 +135,18 @@
 
 <?php function __js__($params){ extract($params);?>
 <script type="text/javascript" src="/wangeditor/js/wangEditor.min.js"></script>
+<script type="text/javascript" src="/jqplugin/qiniu.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/moxie.js"></script>
 <script type="text/javascript">
 
 var pWin = window;
+
+var buckets = {
+                image: '<?php echo \App\Helper\Storage\Qiniu::DOMAIN_IMAGE;?>',
+                video: '<?php echo \App\Helper\Storage\Qiniu::DOMAIN_VIDEO;?>',
+                other: '<?php echo \App\Helper\Storage\Qiniu::DOMAIN_OTHER;?>',
+              };
 
 var editor = new wangEditor('contentbox');
 
@@ -150,35 +161,65 @@ $(':radio[name=datatype]').on('click', function(){
     if(dataType == 0) return;
 
     $('#addonRow').removeClass('hide');
+
+    $('#addonRow button').data('bucket', $(this).data('bucket'));
 })
 
 $('#addonRow button').on('click', function(){
+
+    var bucket   = $(this).data('bucket');
+
     var upParams = {
         runtimes: 'html5,flash,html4',      // 上传模式,依次退化
-        browse_button: 'pickfiles',
-        uptoken_url: '/admin/upload/token',
+        uptoken_url: '/admin/upload/token?bucket=' + bucket,
+        url: '/admin/upload/do-upload',
         get_new_uptoken: true,
+        up_host: 'http://up-z2.qiniu.com',
         unique_names: true,
-        domain: '',
-        container: '',
+        domain: buckets[bucket],
         max_file_size: '100mb',
-        flash_swf_url: '/flash/moxie.swf',
+        flash_swf_url: '/jqplugin/pupload/moxie.swf',
+        silverlight_xap_url : '/jqplugin/pupload/moxie.xap',
         max_retries: 3,
-        dragdrop: true,
-        drop_element: '',
-        chunk_size: '1mb',
+        chunk_size: '4mb',
         auto_start: true,
         init:{
             FileUploaded: function(){
 
             },
+            BeforeUpload: function(){
+                $('.progressbox .progressbar').css({'width': '0%'});
+                $('.progressbox').removeClass('hide');
+            },
             UploadComplete: function(){
-
+                
+            },
+            UploadProgress: function(uploader, info){
+                $('.progressbox .progressbar').css({'width': info.percent + '%'});
+            },
+            Error: function(){
+                console.log(arguments);
             }
         }
     };
 
-    pWin.showConfirm($('#popContainer').html(), '添加图片', {});
+    var params = {
+        onCreate: function(){
+
+            upParams['browse_button'] = $('.virtualBtn', this)[0];
+
+            var _this = this;
+
+            $('.progressbox', this).addClass('hide');
+
+            setTimeout(function(){
+
+                Qiniu.uploader.call(_this, upParams);
+            }, 300);
+        }
+    };
+
+    pWin.showConfirm($('#popContainer').html(), '添加图片', params);
 })
 
 </script>

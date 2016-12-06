@@ -147,7 +147,7 @@ function QiniuJsSDK() {
     if (window.location.protocol === 'https:') {
         qiniuUploadUrl = 'https://up.qbox.me';
     } else {
-        qiniuUploadUrl = 'http://upload.qiniu.com';
+        qiniuUploadUrl = 'http://up-z2.qiniu.com';
     }
 
     /**
@@ -156,13 +156,13 @@ function QiniuJsSDK() {
      * @type {Array}
      */
     var qiniuUploadUrls = [
-        "http://upload.qiniu.com",
+        "http://up-z2.qiniu.com",
         "http://up.qiniu.com"
     ];
 
     var qiniuUpHosts = {
        "http": [
-           "http://upload.qiniu.com",
+           "http://up-z2.qiniu.com",
            "http://up.qiniu.com"
        ],
        "https": [
@@ -470,7 +470,7 @@ function QiniuJsSDK() {
             });
         }
 
-        // todo 浣跨敤涓€涓嬪垽鏂�,澧炲姞瀹夊叏鎬�
+        // todo 使用一下判断,增加安全性
         //if (
         //    rx_one.test(
         //        text
@@ -554,9 +554,9 @@ function QiniuJsSDK() {
         var reset_chunk_size = function() {
             var ie = that.detectIEVersion();
             var BLOCK_BITS, MAX_CHUNK_SIZE, chunk_size;
-            // case Safari 5銆乄indows 7銆乮OS 7 set isSpecialSafari to true
+            // case Safari 5、Windows 7、iOS 7 set isSpecialSafari to true
             var isSpecialSafari = (mOxie.Env.browser === "Safari" && mOxie.Env.version <= 5 && mOxie.Env.os === "Windows" && mOxie.Env.osVersion === "7") || (mOxie.Env.browser === "Safari" && mOxie.Env.os === "iOS" && mOxie.Env.osVersion === "7");
-            // case IE 9-锛宑hunk_size is not empty and flash is included in runtimes
+            // case IE 9-，chunk_size is not empty and flash is included in runtimes
             // set op.chunk_size to zero
             //if (ie && ie < 9 && op.chunk_size && op.runtimes.indexOf('flash') >= 0) {
             if (ie && ie < 9 && op.chunk_size && op.runtimes.indexOf('flash') >= 0) {
@@ -660,7 +660,7 @@ function QiniuJsSDK() {
         };
 
         var getUptoken = function(file) {
-            if (!that.token || that.tokenInfo.isExpired()) {
+            if (!that.token || (op.uptoken_url && that.tokenInfo.isExpired())) {
                 return getNewUpToken(file);
             } else {
                 return that.token;
@@ -1132,20 +1132,20 @@ function QiniuJsSDK() {
                 if (file) {
                     switch (err.code) {
                         case plupload.FAILED:
-                            errTip = '涓婁紶澶辫触銆傝绋嶅悗鍐嶈瘯銆�';
+                            errTip = '上传失败。请稍后再试。';
                             break;
                         case plupload.FILE_SIZE_ERROR:
                             var max_file_size = up.getOption && up.getOption('max_file_size');
                             max_file_size = max_file_size || (up.settings && up.settings.max_file_size);
-                            errTip = '娴忚鍣ㄦ渶澶у彲涓婁紶' + max_file_size + '銆傛洿澶ф枃浠惰浣跨敤鍛戒护琛屽伐鍏枫€�';
+                            errTip = '浏览器最大可上传' + max_file_size + '。更大文件请使用命令行工具。';
                             break;
                         case plupload.FILE_EXTENSION_ERROR:
-                            errTip = '鏂囦欢楠岃瘉澶辫触銆傝绋嶅悗閲嶈瘯銆�';
+                            errTip = '文件验证失败。请稍后重试。';
                             break;
                         case plupload.HTTP_ERROR:
                             if (err.response === '') {
                                 // Fix parseJSON error ,when http error is like net::ERR_ADDRESS_UNREACHABLE
-                                errTip = err.message || '鏈煡缃戠粶閿欒銆�';
+                                errTip = err.message || '未知网络错误。';
                                 if (!unknow_error_retry(file)) {
                                     return;
                                 }
@@ -1155,25 +1155,25 @@ function QiniuJsSDK() {
                             var errorText = errorObj.error;
                             switch (err.status) {
                                 case 400:
-                                    errTip = "璇锋眰鎶ユ枃鏍煎紡閿欒銆�";
+                                    errTip = "请求报文格式错误。";
                                     break;
                                 case 401:
-                                    errTip = "瀹㈡埛绔璇佹巿鏉冨け璐ャ€傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "客户端认证授权失败。请重试或提交反馈。";
                                     break;
                                 case 405:
-                                    errTip = "瀹㈡埛绔姹傞敊璇€傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "客户端请求错误。请重试或提交反馈。";
                                     break;
                                 case 579:
-                                    errTip = "璧勬簮涓婁紶鎴愬姛锛屼絾鍥炶皟澶辫触銆�";
+                                    errTip = "资源上传成功，但回调失败。";
                                     break;
                                 case 599:
-                                    errTip = "缃戠粶杩炴帴寮傚父銆傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "网络连接异常。请重试或提交反馈。";
                                     if (!unknow_error_retry(file)) {
                                         return;
                                     }
                                     break;
                                 case 614:
-                                    errTip = "鏂囦欢宸插瓨鍦ㄣ€�";
+                                    errTip = "文件已存在。";
                                     try {
                                         errorObj = that.parseJSON(errorObj.error);
                                         errorText = errorObj.error || 'file exists';
@@ -1182,31 +1182,31 @@ function QiniuJsSDK() {
                                     }
                                     break;
                                 case 631:
-                                    errTip = "鎸囧畾绌洪棿涓嶅瓨鍦ㄣ€�";
+                                    errTip = "指定空间不存在。";
                                     break;
                                 case 701:
-                                    errTip = "涓婁紶鏁版嵁鍧楁牎楠屽嚭閿欍€傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "上传数据块校验出错。请重试或提交反馈。";
                                     break;
                                 default:
-                                    errTip = "鏈煡閿欒銆�";
+                                    errTip = "未知错误。";
                                     if (!unknow_error_retry(file)) {
                                         return;
                                     }
                                     break;
                             }
-                            errTip = errTip + '(' + err.status + '锛�' + errorText + ')';
+                            errTip = errTip + '(' + err.status + '：' + errorText + ')';
                             break;
                         case plupload.SECURITY_ERROR:
-                            errTip = '瀹夊叏閰嶇疆閿欒銆傝鑱旂郴缃戠珯绠＄悊鍛樸€�';
+                            errTip = '安全配置错误。请联系网站管理员。';
                             break;
                         case plupload.GENERIC_ERROR:
-                            errTip = '涓婁紶澶辫触銆傝绋嶅悗鍐嶈瘯銆�';
+                            errTip = '上传失败。请稍后再试。';
                             break;
                         case plupload.IO_ERROR:
-                            errTip = '涓婁紶澶辫触銆傝绋嶅悗鍐嶈瘯銆�';
+                            errTip = '上传失败。请稍后再试。';
                             break;
                         case plupload.INIT_ERROR:
-                            errTip = '缃戠珯閰嶇疆閿欒銆傝鑱旂郴缃戠珯绠＄悊鍛樸€�';
+                            errTip = '网站配置错误。请联系网站管理员。';
                             uploader.destroy();
                             break;
                         default:
@@ -1335,7 +1335,8 @@ function QiniuJsSDK() {
                                     status: ajax.status,
                                     response: ajax.responseText,
                                     file: file,
-                                    code: -200
+                                    code: -200,
+                                    responseHeaders: ajax.getAllResponseHeaders()
                                 };
                                 logger.debug("mkfile is error: ", info);
                                 uploader.trigger('Error', info);

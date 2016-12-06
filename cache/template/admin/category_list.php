@@ -133,7 +133,7 @@
 <?php } ?>
 
 <?php function __js__($params){ extract($params);?>
-
+<script type="text/javascript">
 var pWin = window;
 
 var categories = <?php echo json_encode($allCategory ? $allCategory : []);?>;
@@ -417,4 +417,5 @@ function createSelect(parentId, optionList, selectedVal, editable){
 
     return sel;
 }
+</script>
 <?php } ?>
