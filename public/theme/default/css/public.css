@@ -1452,3 +1452,43 @@ select {
     width: 0%;
     background-color: #049dff;
 }
+
+.imagebox{
+    margin: 10px;
+    height: 140px;
+    width: 100px;
+    position: relative;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.imagebox .mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgba(255, 255, 255, 0.6);
+    text-align: center;
+    display: table;
+}
+
+.imagebox .imagecontainer{
+    height:100px;
+    width: 100%;
+    text-align: center;
+}
+
+.imagebox .imagetext{
+    height: 40px;
+    width: 100%;
+    overflow: hidden;
+    word-wrap:break-word;
+    word-break: break-all;
+}
+
+.imagebox .mask .edit, .imagebox .mask .del{
+    vertical-align: middle;
+    display: table-cell;
+}
