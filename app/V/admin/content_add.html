@@ -90,7 +90,7 @@
                     <td align="right"></td>
                     <td>
                         <div id="addon"></div>
-                        <div><button type="button" class="btn">上传</button></div>
+                        <div><div id="previewbox"></div><button type="button" class="btn">上传</button></div>
                     </td>
                 </tr>
                 <tr>
@@ -144,6 +144,10 @@
 
 var pWin = window;
 
+var data = {};
+
+var url = '';
+
 var buckets = {
                 image: '<=\App\Helper\Storage\Qiniu::DOMAIN_IMAGE/>',
                 video: '<=\App\Helper\Storage\Qiniu::DOMAIN_VIDEO/>',
@@ -186,15 +190,15 @@ $('#addonRow button').on('click', function(){
         chunk_size: '4mb',
         auto_start: true,
         init:{
-            FileUploaded: function(){
-
+            FileUploaded: function(uploader, fileinfo){
+                url = buckets[bucket] + '/' + fileinfo.target_name;
             },
             BeforeUpload: function(){
                 $('.progressbox .progressbar').css({'width': '0%'});
                 $('.progressbox').removeClass('hide');
             },
-            UploadComplete: function(){
-                
+            UploadComplete: function(uploader, fileinfo){
+
             },
             UploadProgress: function(uploader, info){
                 $('.progressbox .progressbar').css({'width': info.percent + '%'});
@@ -212,17 +216,89 @@ $('#addonRow button').on('click', function(){
 
             var _this = this;
 
+            url     = '';
+
             $('.progressbox', this).addClass('hide');
 
             setTimeout(function(){
 
                 Qiniu.uploader.call(_this, upParams);
             }, 300);
+        },
+        onOk:function(){
+
+            if(!url){
+
+                return;
+            }
+
+            var txt = $.trim($('input[name=brief]', this).val());
+
+            var listitem = null;
+
+            var idx = (new Date()).getTime();
+
+            if(bucket == 'image'){
+
+                listitem = createImagePreview(idx, url, txt);
+            }
+
+            if(bucket == 'video'){
+
+                listitem = createVideoPreview(idx, url);
+            }
+
+            if(listitem){
+
+                $(listitem).appendTo($('#previewbox'));
+
+                data[idx] = {idx: {type: bucket, url: url, txt: txt}};
+            }
         }
     };
 
     pWin.showConfirm($('#popContainer').html(), '添加图片', params);
 })
+
+$('#previewbox').delegate('.imagebox', 'mouseenter', function(){
+
+    $('.mask', this).fadeIn('fast');
+})
+
+$('#previewbox').delegate('.imagebox', 'mouseleave', function(){
+
+    $('.mask', this).fadeOut('fast');
+})
+
+$('#previewbox').delegate('.edit', 'click', function(){
+
+    var idx    = $(this).data('id');
+
+    var item   = data[idx];
+
+    var params = {
+        onCreate:function(){
+
+            $('input[name=brief]').val(item.txt);
+        },
+        onOk:function(){
+
+            data[idx].txt = $('input[name=brief]').val();
+        }
+    };
+
+    pWin.showConfirm($('#popContainer').html(), '编辑' + data[idx].type == 'image' ? '图片' : '视频', params);
+});
+
+function createImagePreview(idx, imageUrl, imageDesc){
+
+    return $('<div class="imagebox" data-id="'+ idx +'"><div class="imagecontainer"><img src="' + imageUrl + '" width="100%" height="100%"/></div><div class="imagetext" title="' + imageDesc + '">' + imageDesc + '</div><div class="mask hide"><a class="edit" data-id="' + idx + '" href="javascript:;">编辑</a> <a class="del" data-id="' + idx + '" href="javascript:;">删除</a></div></div>');
+}
+
+function createVideoPreview(idx, videoUrl){
+
+    return $('<div class="videobox" data-id="'+ idx +'"></div>');
+}
 
 </script>
 </define/>
