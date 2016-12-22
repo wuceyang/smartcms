@@ -107,12 +107,17 @@
 
                 $params = [
                             'typeList'      => $contentType->getTypeList(Enum::STATUS_NORMAL),
-                            'recommentList' => $recommend->getRecommendList(Enum::STATUS_NORMAL),
+                            'recommendList' => $recommend->getRecommendList(Enum::STATUS_NORMAL),
                             'catinfo'       => $catInfo, 
                             'catlist'       => $cats,
                             'tpllist'       => $template->getTemplateList(Enum::STATUS_NORMAL),
                             'authorinfo'    => $this->userinfo,
-                          ]; 
+                          ];
+
+                $params['tags'] = [
+                                    ['id' => 1, 'tagName' => '精华'],
+                                    ['id' => 2, 'tagName' => '置顶'],
+                                  ];
 
                 return $resp->withVars($params)->withView('admin/content_add.html')->display();
             }

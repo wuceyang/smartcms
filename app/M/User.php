@@ -15,7 +15,7 @@
             return $this->where('account = ? AND passwd = ?', [$account, $this->passwdEncrypt($account, $passwd)])->getRow();
         }
 
-        public function addUser($username, $account, $passwd){
+        public function addUser($username, $account, $passwd, $groupid){
 
             $params = [
 
@@ -23,7 +23,11 @@
 
                 'username'  => $username,
 
-                'passwd'    => $this->passwdEncrypt($account, $passwd)
+                'passwd'    => $this->passwdEncrypt($account, $passwd),
+
+                'group_id'  => ',' . implode(',', $groupid) . ',',
+
+                'reg_time'  => time(),
             ];
 
             return $this->insert($params);
@@ -34,34 +38,60 @@
          *@param int $groupId 用户所在分组
          *@return array
          */ 
-        public function userList($groupId, $page, $pagesize){
+        public function userList($groupId, $status = null, $page = 0, $pagesize = 20){
 
             $where = $param = [];
+
+            if($status){
+
+                $where = ['status = ' . intval($status)];
+            }
 
             if($groupId){
 
                 $where[] = 'group_id LIKE ?';
 
-                $param[] = '%' . caddslahshes($groupId, '%-') . '%';
+                $param[] = '%,' . caddslahshes($groupId, '%-') . ',%';
             }
 
-            $queryBuilder = $this->orderBy(['id DESC']);
+            $this->orderBy(['id DESC']);
 
-            if($where && $param){
+            if($where){
 
-                $queryBuilder = $queryBuilder->where(implode(' AND ', $where), $param);
+                $this->where(implode(' AND ', $where), $param);
             }
 
             if($page && $pagesize){
 
-                $queryBuilder = $queryBuilder->page($page)->pagesize($pagesize);
+                $this->page($page)->pagesize($pagesize);
             }
 
-            return $queryBuilder->getRows();
+            return $this->getRows();
         }
 
         public function updateUserInfo($userId, $updateInfo){
 
             return $this->where('id = ?', [intval($userId)])->update($updateInfo);
+        }
+
+        public function getTotalUser($groupId){
+
+            $where = $param = [];
+
+            $where = ['status = 1'];
+
+            if($groupId){
+
+                $where[] = 'group_id LIKE ?';
+
+                $param[] = '%,' . caddslahshes($groupId, '%-') . ',%';
+            }
+
+            if($where){
+
+                $this->where(implode(' AND ', $where), $param);
+            }
+
+            return $this->getCount();
         }
     }

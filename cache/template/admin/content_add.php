@@ -1,6 +1,6 @@
-<extend from="admin/base.html"/>
+<?php include $__tplbasedir__ . "admin/base.php";?>
 
-<define name="content"/>
+<?php function __content__($params){ extract($params);?>
     <!-- 当前位置 -->
     <div id="urHere">内容管理<b>»</b><strong>添加内容</strong> </div>
     <div class="mainBox">
@@ -46,23 +46,23 @@
                 <tr>
                     <td align="right">作者</td>
                     <td>
-                        <input type="text" name="author" value="<=$authorinfo.username/>" size="80" class="inpMain">
+                        <input type="text" name="author" value="<?php echo $authorinfo["username"];?>" size="80" class="inpMain">
                     </td>
                 </tr>
                 <tr>
                     <td align="right">标签</td>
                     <td>
-                        <loop $tags $k $v />
-                        <label for="tag<=$v.id/>"><input type="checkbox" name="tag[]" id="tag<=$v.id/>" value="<=$v.tagName/>" /> <=$v.tagName/></label>
-                        </loop/>
+                        <?php if(isset($tags) && is_array($tags)){  foreach($tags as $k =>  $v){ ?>
+                        <label for="tag<?php echo $v["id"];?>"><input type="checkbox" name="tag[]" id="tag<?php echo $v["id"];?>" value="<?php echo $v["tagName"];?>" /> <?php echo $v["tagName"];?></label>
+                        <?php }} ?>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">推荐位</td>
                     <td>
-                        <loop $recommendList $k $v />
-                        <label for="recommend_<=$v.id/>"><input type="checkbox" name="recommend[]" id="recommend_<=$v.id/>" value="<=$v.id/>" /> <=$v.name/></label>
-                        </loop/>
+                        <?php if(isset($recommendList) && is_array($recommendList)){  foreach($recommendList as $k =>  $v){ ?>
+                        <label for="recommend_<?php echo $v["id"];?>"><input type="checkbox" name="recommend[]" id="recommend_<?php echo $v["id"];?>" value="<?php echo $v["id"];?>" /> <?php echo $v["name"];?></label>
+                        <?php }} ?>
                     </td>
                 </tr>
                 <tr>
@@ -75,17 +75,15 @@
                     <td align="right">所属栏目</td>
                     <td>
                         <select name="catid">
-                        <loop $catlist.0 $k $v/>
-                        <if isset($catlist[$v.info.id])/>
-                            <optgroup label="<=$v.info.category_name/>"/>
-                                <loop $catlist[$v.info.id] $sk $sv />
-                                    <option name="<=$sv.info.id/>"><=$sv.info.category_name/></option>
-                                </loop/>
+                        <?php if(isset($catlist["0"]) && is_array($catlist["0"])){  foreach($catlist["0"] as $k =>  $v){  if(isset($catlist[$v["info"]["id"]])){ ?>
+                            <optgroup label="<?php echo $v["info"]["category_name"];?>"/>
+                                <?php if(isset($catlist[$v["info"]["id"]]) && is_array($catlist[$v["info"]["id"]])){  foreach($catlist[$v["info"]["id"]] as $sk =>  $sv){ ?>
+                                    <option name="<?php echo $sv["info"]["id"];?>"><?php echo $sv["info"]["category_name"];?></option>
+                                <?php }} ?>
                             <optgroup/>
-                        <else/>
-                            <option name="<=$v.info.id/>"><=$v.info.category_name/></option>
-                        </if/>
-                        </loop/>
+                        <?php }else{ ?>
+                            <option name="<?php echo $v["info"]["id"];?>"><?php echo $v["info"]["category_name"];?></option>
+                        <?php }  }} ?>
                         </select>
                     </td>
                 </tr>
@@ -93,9 +91,9 @@
                     <td align="right">文章模板</td>
                     <td>
                         <select name="tplid">
-                            <loop $tpllist $k $v />
-                            <option value="<=$v.id/>"<if $catinfo.tplid == $v.id/> selected</if/>><=$v.template_name/></option>
-                            </loop/>
+                            <?php if(isset($tpllist) && is_array($tpllist)){  foreach($tpllist as $k =>  $v){ ?>
+                            <option value="<?php echo $v["id"];?>"<?php if($catinfo["tplid"] == $v["id"]){ ?> selected<?php } ?>><?php echo $v["template_name"];?></option>
+                            <?php }} ?>
                         </select>
                     </td>
                 </tr>
@@ -154,9 +152,9 @@
                 </div>
             </div>
     </div>
-</define/>
+<?php } ?>
 
-<define name="css"/>
+<?php function __css__($params){ extract($params);?>
 
 <link rel="stylesheet" type="text/css" href="/wangeditor/css/wangEditor.min.css">
 <style type="text/css">
@@ -166,9 +164,9 @@
     }
 </style>
 
-</define/>
+<?php } ?>
 
-<define name="js"/>
+<?php function __js__($params){ extract($params);?>
 <script type="text/javascript" src="/wangeditor/js/wangEditor.min.js"></script>
 <script type="text/javascript" src="/jqplugin/qiniu.js"></script>
 <script type="text/javascript" src="/jqplugin/pupload/plupload.full.min.js"></script>
@@ -182,9 +180,9 @@ var data = {};
 var url = '';
 
 var buckets = {
-                image: '<=\App\Helper\Storage\Qiniu::DOMAIN_IMAGE/>',
-                video: '<=\App\Helper\Storage\Qiniu::DOMAIN_VIDEO/>',
-                other: '<=\App\Helper\Storage\Qiniu::DOMAIN_OTHER/>',
+                image: '<?php echo \App\Helper\Storage\Qiniu::DOMAIN_IMAGE;?>',
+                video: '<?php echo \App\Helper\Storage\Qiniu::DOMAIN_VIDEO;?>',
+                other: '<?php echo \App\Helper\Storage\Qiniu::DOMAIN_OTHER;?>',
               };
 
 var editor = new wangEditor('contentbox');
@@ -355,4 +353,4 @@ function createVideoPreview(idx, videoUrl){
 }
 
 </script>
-</define/>
+<?php } ?>

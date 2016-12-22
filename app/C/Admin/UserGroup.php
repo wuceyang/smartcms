@@ -7,15 +7,15 @@
 
     class UserGroup extends Base{
 
-        public function groupList(Request $req, Response $resp){
+        public function index(Request $req, Response $resp){
 
-            $group = new UGroup();
-
+            $group     = new UGroup();
+            
             $groupList = $group->getAllGroups();
+            
+            $param     = ['list' => $groupList];
 
-            $param = ['list' => $groupList];
-
-            return $resp->withView('admin/grouplist.html')->withVars($param)->display();
+            return $resp->withView('admin/group_list.html')->withVars($param)->display();
         }
 
         public function addGroup(Request $req, Response $resp){

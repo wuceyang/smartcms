@@ -17,7 +17,7 @@
 
             if(!$userGroups){
 
-                return $this->error("您暂无任务权限，请等待管理员分配权限", 103);
+                return $this->error("您暂无任何权限，请等待管理员分配权限", 103);
             }
 
             $privilege   = new GroupPrivilege();

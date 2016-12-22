@@ -1420,6 +1420,10 @@ select {
 .upBtn{
     height: 40px;
     line-height: 40px;
+    /*width: 300px;*/
+    display: inline-block;;
+    *display: inline;
+    *zoom: 1;
 }
 
 .upBtn>.virtualBtn{
@@ -1491,4 +1495,13 @@ select {
 .imagebox .mask .edit, .imagebox .mask .del{
     vertical-align: middle;
     display: table-cell;
+}
+
+.imagepath{
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 5px;
+    border: 1px dashed #CCC;
+    width: 300px;
+    display: inline-block;
 }

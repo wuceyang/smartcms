@@ -75,7 +75,7 @@
          * @param string    $allowurl   顶级菜单下面包含的子菜单的路径，如:/admin/(menu|privilege)
          * @param string    $icon       顶级菜单前面的图标样式
          */
-        public function updateMenuInfo($mid, $title, $url, $enabled, $order, $parentId, $icon = '', $allowedurl){
+        public function updateMenuInfo($mid, $title, $url, $enabled, $order, $parentId, $icon = ''){
 
             $info = [];
 
@@ -94,11 +94,6 @@
             if($icon){
 
                 $info['icon']       = trim($icon);
-            }
-
-            if($allowedurl){
-
-                $info['allowed_url'] = trim($allowedurl);
             }
 
             if($parentId){
@@ -132,21 +127,18 @@
          * 添加新菜单信息
          * @param string    $title      菜单文字
          * @param string    $url        菜单链接地址
-         * @param int       $level      菜单的级别
          * @param int       $show_order 菜单排序顺序
          * @param int       $parentId   父菜单id
          * @param string    $icon       顶级菜单前面的图标样式
-         * @param string    $allow_url  控制顶级菜单的展开以及闭合的控制器集合
          */
-        public function addMenu($title, $url, $parentId, $icon, $allow_url, $show_order, $level){
+        public function addMenu($title, $url, $parentId, $icon, $show_order){
 
             $params = [
                 "title"       => $title,
                 "url"         => $url,
                 "parent_id"   => $parentId,
                 "icon"        => $icon,
-                "allowed_url" => $allow_url,
-                'level'       => $level,
+                'level'       => $parentId = 0 ? 1 : 2,
                 'show_order'  => $show_order,
             ];
 

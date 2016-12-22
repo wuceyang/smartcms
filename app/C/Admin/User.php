@@ -3,6 +3,8 @@
 
     use \Request;
     use \Response;
+    use \App\Helper\Enum;
+    use \App\M\UserGroup;
     use \App\M\User as mUser;
 
     class User extends Base{
@@ -102,13 +104,190 @@
             return $this->success("密码更新成功", "/admin/user/index");
         }
 
+        public function allUser(Request $req, Response $resp){
+
+            $page       = intval($req->get('page'));
+
+            $page       = max(1, $page);
+
+            $pagesize   = 20;
+
+            $user       = new mUser();
+
+            $groupId    = [];
+
+            $userList   = $user->userList(null, null, $page, $pagesize);
+
+            foreach ($userList as $k => $v) {
+
+                $gid                        = explode(',', trim($v['group_id'], ','));
+                
+                $userList[$k]['groupid']   = $gid;
+
+                $groupId                    = array_merge($groupId, $gid);
+            }
+
+            $userGroup  = new UserGroup();
+
+            $groups     = $userGroup->getGroupsById($groupId);
+
+            foreach ($groups as $k => $v) {
+                
+                $groupMap[$v['id']] = $v['group_name'];
+            }
+
+            foreach ($userList as $k => $v) {
+                
+                $v['groups'] = [];
+
+                foreach ($v['groupid'] as $sk => $sv) {
+                    
+                    if(isset($groupMap[$sv])){
+
+                        $v['groups'][] = $groupMap[$sv];
+                    }
+                }
+
+                $userList[$k] = $v;
+            }
+
+            $totalUser  = $user->getTotalUser(null);
+
+            $pageInfo   = $this->getPageInfo("/admin/user/all-user", $page, $totalUser, [], $pagesize);
+
+            $allGroups  = $userGroup->getAllGroups();
+
+            $params = [
+                        'list'   => $userList,
+
+                        'groups' => $allGroups
+                      ];
+
+            $params = $params + $pageInfo;
+
+            return $resp->withVars($params)->withView("admin/user_list.html")->display();
+
+        }
+
         public function addUser(Request $req, Response $resp){
 
+            $username = trim($req->post('username'));
+            
+            $account  = trim($req->post('account'));
 
+            $passwd   = trim($req->post('passwd'));
+            
+            $groupid  = $req->post('groupid');
+
+            if(!$username){
+
+                return $this->error('用户姓名不能为空', 101, 'javascript:history.back();');
+            }
+
+            if(!$account){
+
+                return $this->error('登录帐号不能为空', 101, 'javascript:history.back();');
+            }
+
+            if(!$groupid){
+
+                return $this->error('请给帐号设置分组', 101, 'javascript:history.back();');
+            }
+
+            $groupid = array_map('intval', $groupid);
+
+            $groupid = array_unique($groupid);
+
+            $user    = new mUser();
+
+            $passwd  = $user->passwdEncrypt($account, $passwd);
+
+            if(!$user->addUser($username, $account, $passwd, $groupid)){
+
+                return $this->error('帐号添加失败', 101, 'javascript:history.back();');
+            }
+
+            return $this->success('帐号添加成功', '/admin/user/all-user');
         }
 
         public function editUser(Request $req, Response $resp){
 
+            $userid   = intval($req->post('userid'));
 
+            $username = trim($req->post('username'));
+            
+            $account  = trim($req->post('account'));
+
+            $passwd   = trim($req->post('passwd'));
+            
+            $groupid  = $req->post('groupid');
+            
+            $status   = intval($req->post('status'));
+
+            if(!$username){
+
+                return $this->error('用户姓名不能为空', 101, 'javascript:history.back();');
+            }
+
+            if(!$account){
+
+                return $this->error('登录帐号不能为空', 101, 'javascript:history.back();');
+            }
+
+            if(!$groupid){
+
+                return $this->error('请给帐号设置分组', 101, 'javascript:history.back();');
+            }
+
+            $groupid = array_map('intval', $groupid);
+
+            $groupid = array_unique($groupid);
+
+            if(!in_array($status, [Enum::STATUS_NORMAL, Enum::STATUS_DISABLED])){
+
+                return $this->error('帐号状态不正确', 101, 'javascript:history.back();');
+            }
+
+            $user = new mUser();
+
+            $updateInfo = [
+                            'account'  => $account,
+                            'username' => $username,
+                            'status'   => $status,
+                            'group_id' => ',' . implode(',', $groupid) . ',',
+                          ];
+
+            if($passwd){
+
+                $updateInfo['passwd'] = $user->passwdEncrypt($account, $passwd);
+            }
+
+            if(!$user->updateUserInfo($userid, $updateInfo)){
+
+                return $this->error('帐号信息更新失败', 101, 'javascript:history.back();');
+            }
+
+            return $this->success('帐号信息更新成功', 'javascript:history.back();');
+        }
+
+        public function switchUser(Request $req, Response $resp){
+
+            $userid   = intval($req->post('id'));
+            
+            $status   = intval($req->post('status'));
+
+            $user     = new mUser();
+
+            if(!in_array($status, [Enum::STATUS_NORMAL, Enum::STATUS_DISABLED])){
+
+                return $this->error('帐号目标状态不正确', 101, 'javascript:history.back();');
+            }
+
+            if(!$user->updateUserInfo($userid, ['status' => $status])){
+
+                return $this->error('帐号状态更新失败', 101, 'javascript:history.back();');
+            }
+
+            return $this->success('帐号状态更新成功', 'javascript:history.back();');
         }
     }
