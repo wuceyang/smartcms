@@ -89,6 +89,8 @@
 		private function response($retdata){
 
 			$this->_retAjax ? $this->retAjax($retdata) : $this->retHtml($retdata);
+
+			exit;
 		}
 		//返回json
 		private function retAjax($data){

@@ -68,22 +68,22 @@
 
     <?php function __js__($params){ extract($params);?>
     <script type="text/javascript">
-        $('form').on('submit', function(){
+        $('form').on('submit', function() {
             $.ajax({
-                    url: $(this).attr('action'), 
-                    data: $(this).serialize(), 
-                    dataType: 'json',
-                    method: 'post',
-                    success: function(ret){
-                        if(ret.code == 200){
-                            top.location.href="/admin";
-                            return;
-                        }
-                        showMsg("登录提示", ret.message || "登录失败，请检查输入");
-                        }, 
-                    error: function(){
-                        showMsg("登录提示", "登录时发生错误，请联系管理员");
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                dataType: 'json',
+                method: 'post',
+                success: function(ret) {
+                    if (ret.code == 200) {
+                        top.location.href = "/admin";
+                        return;
                     }
+                    showMsg(ret.message || "登录失败，请检查输入", "登录提示");
+                },
+                error: function() {
+                    showMsg("登录时发生错误，请联系管理员", "登录提示");
+                }
             });
 
             return false;
@@ -91,7 +91,7 @@
 
         function refreshimage() {
             var cap = document.getElementById('vcode');
-            cap.src = cap.src + '?' + Math.random(); 
+            cap.src = cap.src + '?' + Math.random();
         }
     </script>
     <?php } ?>

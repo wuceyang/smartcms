@@ -6,7 +6,7 @@
 
 	class GroupPrivilege extends Model{
 
-		public static $table = 'group_privileges';
+		public static $table = 'cms_group_privileges';
 
 		/**
 		 * 添加分组以及对应的权限

@@ -3,7 +3,7 @@
 
     class Recommend extends Model{
 
-        public static $table = 'recommend';
+        public static $table = 'cms_recommend';
 
         /**
          * 获取指定状态的推荐位列表

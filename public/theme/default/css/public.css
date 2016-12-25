@@ -169,7 +169,8 @@ p.cue {
  padding: 0px 5px;
  color: #999;
  font-size: 12x;
- line-height: 20px;
+ height: 30px;
+ line-height: 30px;
  -webkit-appearance: none;
 }
 .inpFlie {
@@ -1434,7 +1435,7 @@ select {
     line-height: 30px;
     text-align: center;
     width: 100px;
-    margin-top: 5px; 
+    margin: 5px; 
     cursor:pointer;
 }
 
@@ -1443,10 +1444,9 @@ select {
 }
 
 .progressbox{
-    width: 100px;
-    height: 3px;
-    border: 1px dotted #666;
-    margin: 10px 0px 10px 0px;
+    width: 100%;
+    height: 100%;
+    border: 0px dotted #666;
     background: hsk(0, 0%, 97%);
     box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.1) inset;
 }
@@ -1457,51 +1457,72 @@ select {
     background-color: #049dff;
 }
 
-.imagebox{
-    margin: 10px;
-    height: 140px;
-    width: 100px;
-    position: relative;
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-}
-
-.imagebox .mask{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    background: rgba(255, 255, 255, 0.6);
-    text-align: center;
-    display: table;
-}
-
-.imagebox .imagecontainer{
-    height:100px;
-    width: 100%;
-    text-align: center;
-}
-
-.imagebox .imagetext{
-    height: 40px;
-    width: 100%;
-    overflow: hidden;
-    word-wrap:break-word;
-    word-break: break-all;
-}
-
-.imagebox .mask .edit, .imagebox .mask .del{
-    vertical-align: middle;
-    display: table-cell;
-}
-
 .imagepath{
-    height: 40px;
+    height: 55px;
     line-height: 40px;
     padding: 0px 5px;
     border: 1px dashed #CCC;
-    width: 300px;
     display: inline-block;
+}
+
+.imagepath > .imgpreview{
+    width: 74px;
+    height: 55px;
+    float: left;
+}
+
+.imagepath > .imgpreview > img{
+    height: 55px;
+    width: 72px;
+}
+
+.fleft{
+    float: left;
+}
+
+.fright:{
+    float: right;
+}
+
+.calendar{
+    width: 160px;
+    height: 30px;
+    border: 1px solid #CCC;
+}
+
+.calendar>input{
+    border: 0px;
+    width: 120px;
+    height: 30px;
+    float: left;
+    padding: 0px 3px;
+}
+
+.calendar > .clicker{
+    float: left;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+ .uploadbox .uploader, .uploadbox{
+    height:40px;
+    margin: 5px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    display: block;
+    cursor: pointer;
+}
+
+.dashed{
+    border: 1px dashed #DDD;
+}
+
+.w75{
+    width: 75px;
+}
+
+.w670{
+    width: 670px;
 }

@@ -3,7 +3,7 @@
 
     class Menu extends \App\M\Model{
 
-        public static $table = 'menu';
+        public static $table = 'cms_menu';
 
         /**
          * 获取列表

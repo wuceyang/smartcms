@@ -3,7 +3,7 @@
 
 	class UserGroup extends Model{
 
-		public static $table = 'user_group';
+		public static $table = 'cms_user_group';
 
 		/**
 		 * 创建分组

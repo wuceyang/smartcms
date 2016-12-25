@@ -44,7 +44,7 @@
                 $param['status'] = $status;
             }
 
-            if($typeid){
+            if($tplid){
 
                 $param['tplid']   = $tplid;
             }

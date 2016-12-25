@@ -11,7 +11,7 @@
         'fetchMode' => \PDO::FETCH_ASSOC,
 
         //表前缀
-        'tablePrefix' => 'cms_',
+        'tablePrefix' => '',
 
         'mysql' => [
             //只读连接设置，设置此项时，default设置无效

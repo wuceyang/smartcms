@@ -3,7 +3,7 @@
 
     class Category extends Model{
 
-        public static $table = 'content_category';
+        public static $table = 'cms_content_category';
 
         /**
          * 获取指定状态的文章分类列表

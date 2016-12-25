@@ -118,7 +118,7 @@
 
                 $prefixGroup = $this->_group . ($this->_group?'/':'');
 
-                throw new Exception("找不到指定的控制器:" . $prefixGroup . $this->_controller . '[' . $_SERVER['REQUES_URI'] . ']', 101);
+                throw new Exception("找不到指定的控制器:" . $prefixGroup . $this->_controller . '[' . $_SERVER['REQUEST_URI'] . ']', 101);
 
             }
 

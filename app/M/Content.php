@@ -3,7 +3,7 @@
 
     class Content extends Model{
 
-        public static $table = 'content';
+        public static $table = 'cms_content';
 
         public function getContentList($kw, $catid, $contentType, $status, $page = 0, $pagesize = 20){
 

@@ -3,7 +3,7 @@
 
     class RecommendContent extends Model{
 
-        public static $table = 'recommend_content';
+        public static $table = 'cms_recommend_content';
 
         /**
          * 获取指定状态的推荐位与文章映射关系列表

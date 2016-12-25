@@ -3,7 +3,7 @@
 
     class Template extends Model{
 
-        public static $table = 'template';
+        public static $table = 'cms_template';
 
         /**
          *查询模板列表

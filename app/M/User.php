@@ -3,7 +3,7 @@
 
     class User extends Model{
 
-        public static $table = 'user';
+        public static $table = 'cms_user';
 
         public function passwdEncrypt($account, $passwd){
 

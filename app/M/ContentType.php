@@ -5,7 +5,7 @@
 
     class ContentType extends Model{
 
-        public static $table = 'content_type';
+        public static $table = 'cms_content_type';
 
         public function addContentType($typeName){
 
