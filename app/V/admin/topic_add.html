@@ -193,6 +193,7 @@ function createUploader(_this){
         silverlight_xap_url : '/jqplugin/pupload/moxie.xap',
         max_retries: 3,
         chunk_size: '4mb',
+        unique_names: true,
         auto_start: true,
         browse_button: thisId,
         init:{
@@ -210,7 +211,8 @@ function createUploader(_this){
                 for(var i in fileinfo){
                     if(deletefile[fileinfo[i].id]) continue;
                     var url = buckets[bucket] + '/' + fileinfo[i].target_name;
-                    preview.push('<div class="imgpreview" data-id="' + fileinfo[i].id + '"><input type="hidden" name="' + fieldName + '" value="' + url + '"><img title="点击删除当前图片" src="' + url + '" height="100%"/></div>');
+                    var previewhtml = createPreview(url, bucket);
+                    preview.push('<div class="imgpreview" data-id="' + fileinfo[i].id + '"><input type="hidden" name="' + fieldName + '" value="' + url + '">' + previewhtml + '</div>');
                 }
                 $('.imagepath', td).html($(preview.join('')));
                 $('.imagepath', td).removeClass('hide');
@@ -234,6 +236,24 @@ function createUploader(_this){
     var qiniu = new QiniuJsSDK();
 
     qiniu.uploader(upParams);
+}
+
+function createPreview(url, bucket){
+
+    if(bucket == 'image'){
+
+        return '<img title="点击删除当前图片" src="' + url + '" height="100%"/>';
+    }
+
+    if(bucket == 'video'){
+
+        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持视频预览</video>';
+    }
+
+    if(bucket == 'audio'){
+
+        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持音频预览</video>';
+    }
 }
 
 $('.imagepath').delegate('.imgpreview', 'click', function(){

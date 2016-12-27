@@ -1,0 +1,96 @@
+<extend from="admin/base.html"/>
+
+<define name="content"/>
+    <!-- 当前位置 -->
+    <div id="urHere">内容管理<b>»</b><strong>话题列表</strong> </div>
+    <div class="mainBox">
+        <h3><a href="/admin/topic/do-post" class="actionBtn add">发布话题</a> &nbsp; </h3>
+        <table border="0" align="center" cellpadding="8" cellspacing="0" class="tableBasic w90">
+            <tr>
+                <th width="50" align="center">ID</th>
+                <th align="center">标题</th>
+                <th align="center">主播</th>
+                <th align="center">分类</th>
+                <th align="center">打开方式</th>
+                <th align="center">标签</th>
+                <th width="100" align="center">图片数量</th>
+                <th width="100" align="center">视频数量</th>
+                <th width="100" align="center">音频数量</th>
+                <th width="120" align="center">操作</th>
+            </tr>
+            <loop $list $k $v/>
+            <tr>
+                <td align="center"><=$v.id/></td>
+                <td align="left"><=$v.title/></td>
+                <td align="center"><=isset($actors[$v.catid]) ? $actors[$v.catid].nickname : ''/></td>
+                <td align="center"><=isset($contentType[$v.content_type]) ? $contentType[$v.content_type] : ''/></td>
+                <td align="center"><=$v.tags/></td>
+                <td align="center"><=$v.img_count/></td>
+                <td align="center"><=$v.video_url ? 1 : 0/></td>
+                <td align="center"><=$v.audio_url ? 1 : 0/></td>
+                <td align="center">
+                <a href="/admin/template/edit-template?id=<=$v.id/>">编辑</a> | 
+                <a class="delbtn" data-id="<=$v.id/>" data-status="<=$v.status/>" href="/admin/template/switch-template"><=$v.status == 1 ? '禁用' : '启用'/></a>
+                </td>
+            </tr>
+            </loop/>
+            <if $pageStr/>
+            <tr>
+                <td colspan="10">
+                    <div class="row">
+                        <div class="col-lg-4 adv-table">
+                            <div class="dataTables_info">当前第<=$curPage/>/<=$totalPage/>页，共<=$totalRecord/> 条记录
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <ul class="dataTables_paginate paging_bootstrap pagination">
+                                <=$pageStr/>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </if/>
+        </table>
+    </div>
+</define/>
+
+<define name="js"/>
+<script type="text/javascript">
+var pWin = window;
+
+$('.delbtn').on('click', function(){
+
+    var data    = $(this).data();
+
+    var action  = data.status == 1 ? "禁用" : "启用";
+
+    var content = "确定要" + action + "当前文章吗？";
+
+    var url     = $(this).attr('href');
+
+    var status  = <=\App\Helper\Enum::STATUS_NORMAL + \App\Helper\Enum::STATUS_DISABLED/> - data.status;
+
+    var options = {
+        onOk:function(){
+
+                pWin.doRequest(url, {id: data.id, status: status}, function(ret){
+
+                    if(ret.code == 200){
+
+                        location.reload();
+
+                        return;
+                    }
+
+                    pWin.showMsg(ret.message || "切换分类状态出错");
+                });
+            }
+    }
+
+    pWin.showConfirm(content, "分类" + action, options);
+
+    return false;
+})
+</script>
+</define/>

@@ -1485,14 +1485,14 @@ select {
 }
 
 .calendar{
-    width: 160px;
+    width: 180px;
     height: 30px;
     border: 1px solid #CCC;
 }
 
 .calendar>input{
     border: 0px;
-    width: 120px;
+    width: 140px;
     height: 30px;
     float: left;
     padding: 0px 3px;
