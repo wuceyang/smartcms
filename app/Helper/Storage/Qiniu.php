@@ -13,6 +13,7 @@
 		const DOMAIN_VIDEO = 'http://oh0xnhx0h.bkt.clouddn.com';
 		const DOMAIN_AUDIO = 'http://oistx3ss2.bkt.clouddn.com';
 		const DOMAIN_OTHER = 'http://oh0x57g5y.bkt.clouddn.com';
+		const DOMAIN_AUDIO = 'http://oistx3ss2.bkt.clouddn.com';
 
 		public function getToken($bucket){
 
