@@ -1458,17 +1458,17 @@ select {
 }
 
 .imagepath{
-    height: 55px;
-    line-height: 40px;
-    padding: 0px 5px;
+    /*height: 55px;*/
+    /*line-height: 40px;*/
     border: 1px dashed #CCC;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .imagepath > .imgpreview{
     width: 74px;
     height: 55px;
     float: left;
+    margin: 2px 2px;
 }
 
 .imagepath > .imgpreview > img{

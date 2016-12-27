@@ -586,9 +586,12 @@ function QiniuJsSDK() {
             var result = [];
             for (var i = 0; i < hosts.length; i++) {
                 var host = hosts[i];
-                if (host.indexOf('-H') === 0) {
-                    result.push(host.split(' ')[2]);
-                } else {
+                // if (host.indexOf('-H') === 0) {
+                //     result.push(host.split(' ')[2]);
+                // } else {
+                //     result.push(host);
+                // }
+                if(host.substring(0, 4) == 'http'){
                     result.push(host);
                 }
             }

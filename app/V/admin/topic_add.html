@@ -18,10 +18,10 @@
                 <tr>
                     <td align="right">缩略图</td>
                     <td>
-                        <div class="imagepath fleft w75">
+                        <div class="imagepath fleft hide">
                         </div>
                         <div class="uploadbox fleft">
-                            <div data-bucket="image" data-field="thumb" class="uploader icon-plus icon-large dashed"></div>
+                            <div data-bucket="image" data-max="1" id="imagethumb-uploader" data-field="thumb" class="uploader icon-plus icon-large dashed"></div>
                         </div>
                         <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 标题列表中的图片</div>
                         <div class="clear"></div>
@@ -43,10 +43,10 @@
                 <tr id="image_area" class="area hide">
                     <td></td>
                     <td>
-                        <div class="imagepath fleft w670">
+                        <div class="imagepath fleft  hide">
                         </div>
                         <div class="uploadbox fleft">
-                            <div data-bucket="image" data-field="image" class="uploader icon-plus icon-large dashed"></div>
+                            <div data-bucket="image" data-max="9" id="imagelist-uploader" data-field="image" class="uploader icon-plus icon-large dashed"></div>
                         </div>
                         <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 最多上传9张图片</div>
                         <div class="clear"></div>
@@ -55,10 +55,10 @@
                 <tr id="video_area" class="area hide">
                     <td></td>
                     <td>
-                        <div class="imagepath fleft w75">
+                        <div class="imagepath fleft hide">
                         </div>
                         <div class="uploadbox fleft">
-                            <div data-bucket="video" data-max="9" data-field="video" class="uploader icon-plus icon-large dashed"></div>
+                            <div data-bucket="video" id="video-uploader" data-max="1" data-field="video" class="uploader icon-plus icon-large dashed"></div>
                         </div>
                         <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 选择要上传的视频</div>
                         <div class="clear"></div>
@@ -67,10 +67,10 @@
                 <tr id="audio_area" class="area hide">
                     <td></td>
                     <td>
-                        <div class="imagepath fleft w75">
+                        <div class="imagepath fleft hide">
                         </div>
                         <div class="uploadbox fleft">
-                            <div data-bucket="audio" data-field="audio" class="uploader icon-plus icon-large dashed"></div>
+                            <div data-bucket="audio" id="audio-uploader" data-max="1" data-field="audio" class="uploader icon-plus icon-large dashed"></div>
                         </div>
                         <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 选择要上传的音频</div>
                         <div class="clear"></div>
@@ -131,7 +131,6 @@
         width:100%;
     }
 </style>
-
 </define/>
 
 <define name="js"/>
@@ -155,6 +154,7 @@ var url = '';
 var buckets = {
                 image: '<=\App\Helper\Storage\Qiniu::DOMAIN_IMAGE/>',
                 video: '<=\App\Helper\Storage\Qiniu::DOMAIN_VIDEO/>',
+                audio: '<=\App\Helper\Storage\Qiniu::DOMAIN_AUDIO/>',
                 other: '<=\App\Helper\Storage\Qiniu::DOMAIN_OTHER/>',
               };
 
@@ -175,17 +175,17 @@ $(':radio[name=datatype]').on('click', function(){
     $('#addonRow button').data('bucket', $(this).data('bucket'));
 })
 
-function createUploader(){
-    $('.uploader').each(function(){
-        var _this    = this;
-        var bucket   = $(this).data('bucket');
-        var field    = $(this).data('field');
+var deletefile = {};
+
+function createUploader(_this){
+        var bucket   = $(_this).data('bucket');
+        var field    = $(_this).data('field');
+        var thisId   = $(_this).attr('id');
         var upParams = {
             runtimes: 'html5,flash,html4',      // 上传模式,依次退化
             uptoken_url: '/admin/upload/token?bucket=' + bucket,
             get_new_uptoken: true,
             multi_selection: false,
-            up_host: 'http://up-z2.qiniu.com',
             unique_names: true,
             domain: buckets[bucket],
             max_file_size: '100mb',
@@ -194,32 +194,30 @@ function createUploader(){
             max_retries: 3,
             chunk_size: '4mb',
             auto_start: true,
-            browse_button: this,
+            browse_button: thisId,
             init:{
                 FileUploaded: function(uploader, fileinfo){
-                    var td = $(_this).parent('div').parent('td');
-                    var url = buckets[bucket] + '/' + fileinfo.target_name;
-                    var fieldName = field == 'image' ? 'image[]' : field;
-                    var formEle = '<input type="hidden" name="' + fieldName + '" value="' + url + '">';
-                    var preview = '<img src="' + url + '" height="100%"/>';
-                    if(bucket == 'video'){
-                        //视频预览
-                    }
-                    $('.progressbox', td).replaceWith(formEle + preview);
+                    
                 },
                 BeforeUpload: function(){
                     var td = $(_this).parent('div').parent('td');
                     $('<div class="imgpreview"><div class="progressbox"><div class="progressbar"></div></div></div>').appendTo($('.imagepath',td));
                 },
                 UploadComplete: function(uploader, fileinfo){
-                    $('.moxie-shim').remove();
-                    if(bucket == 'image'){
-                        createUploader();
+                    var preview = [];
+                    var td = $(_this).parent('div').parent('td');
+                    var fieldName = field == 'image' ? 'image[]' : field;
+                    for(var i in fileinfo){
+                        if(deletefile[fileinfo[i].id]) continue;
+                        var url = buckets[bucket] + '/' + fileinfo[i].target_name;
+                        preview.push('<div class="imgpreview" data-id="' + fileinfo[i].id + '"><input type="hidden" name="' + fieldName + '" value="' + url + '"><img title="点击删除当前图片" src="' + url + '" height="100%"/></div>');
                     }
+                    $('.imagepath', td).html($(preview.join('')));
+                    $('.imagepath', td).removeClass('hide');
                     var max = $(_this).data('max');
-                    //达到最大值，移除上传按钮
+                    //达到最大值，隐藏上传按钮
                     if(max > 0 && $('.imgpreview', $(_this).parent('div').parent('td')).size() >= max){
-                        $(_this).parent('div').remove();
+                        $(_this).parent('div').hide();
                         return;
                     }
                 },
@@ -228,16 +226,41 @@ function createUploader(){
                     $('.progressbar', td).css({'width': info.percent + '%'});
                 },
                 Error: function(){
-                    
+                    pWin.showMsg("文件上传失败", "错误提示");
                 }
             }
         };
 
-        Qiniu.uploader(upParams);
-    })
+        var qiniu = new QiniuJsSDK();
+
+        qiniu.uploader(upParams);
 }
 
-createUploader();
+$('.imagepath').delegate('.imgpreview', 'click', function(){
+    var _this = this;
+    pWin.showConfirm("确定要删除当前图片吗?", "删除确认", {onOk: function(){
+        var thisId = $(_this).data('id');
+        deletefile[thisId] = thisId;
+        var currentNum = $(_this).siblings('.imgpreview').size();
+        var uploader   = $(_this).parent('div').parent('td').find('.uploader');
+        var max        = $(uploader).data('max');
+        if(currentNum <= max){
+            uploader.parent('.uploadbox').show();
+        }
+        if(currentNum == 0){
+            $(_this).parent('div').addClass('hide');
+        }
+        _this.remove();
+    }});
+})
+
+$(function(){
+
+    $('.uploader').each(function(){
+
+        createUploader(this);
+    });
+});
 
 $('.topic_type label').on('click', function(){
 
