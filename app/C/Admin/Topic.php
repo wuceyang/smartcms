@@ -52,22 +52,22 @@
                 
                 $tags = [];
 
-                if($topicList[$i]['tag'] & 1 == 1){
+                if(($topicList[$i]['tag'] & 1) == 1){
 
                     $tags[] = '官方';
                 }
 
-                if($topicList[$i]['tag'] & 2 == 2){
+                if(($topicList[$i]['tag'] & 2) == 2){
 
                     $tags[] = '推广';
                 }
 
-                if($topicList[$i]['tag'] & 4 == 4){
+                if(($topicList[$i]['tag'] & 4) == 4){
 
                     $tags[] = '置顶';
                 }
 
-                if($topicList[$i]['tag'] & 8 == 8){
+                if(($topicList[$i]['tag'] & 8) == 8){
 
                     $tags[] = '加精';
                 }
@@ -110,9 +110,9 @@
 
             $aid        = intval($req->post('actorId'));
 
-            $title      = trim($req->post('title'));
+            // $title      = trim($req->post('title'));
 
-            $content    = trim($req->post('content'));
+            $content    = trim($req->post('content_text'));
 
             $type       = intval($req->post('type'));
 
@@ -122,9 +122,16 @@
 
             $action     = intval($req->post('action'));
 
+            $template   = trim($req->post('template'));
+
             $uid        = 1;
 
-            $tag        = intval($req->post('tag'));
+            $tag        = $req->post('tag');
+
+            // if(!$title){
+
+            //     return $this->error("参数错误，话题标题不能为空", 101, "");
+            // }
 
             $hotExpireAfter = $tag ? trim($req->post('hot_expire_after')) : null;
 
@@ -136,43 +143,93 @@
             if($type == 1){
 
                 $content = strip_tags($content);
+            }else{
+
+                $tplpath = APP_ROOT . 'app/V/' . $template;
+
+                if(!file_exists($tplpath) || !is_file($tplpath)){
+
+                    return $this->error('模板不存在，请检查模板', 101, '');
+                }
             }
 
             $audio = '';
 
             $topic = new mTopic();
 
-            $tag   = 1 << $tag;
+            $tagsum   = 0;
 
-            if(!$topicId = $topic->doTopic($title, $content, $type, $action, $video, $audio, $image, $aid, $uid, $tag, $hotExpireAfter)){
+            if(is_array($tag)){
+
+                foreach ($tag as $k => $v) {
+                    
+                    $tagsum += 1 << $v;
+                }
+            }
+
+            if(!$topicId = $topic->doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter)){
 
                 return $this->error('话题发表失败' . var_export($topic->getError(), true), 201, '');
             }
             //非文字话题，则需要生成html文件，并存储到七牛
             if($type != 1){
-
-                $param = [
-                            'title' => $title,
-                            'content' => $content,
-                            'video' => $video,
-                            'audio' => $audio,
-                            'image' => $image,
-                         ];
-
-                $html  = $resp->withVars($param)->withView('admin/topic_info.html')->toString();
-
-                $qiniu = new Qiniu();
-
-                $targetName = "topic_{$topicId}.html";
-
-                $url   = Qiniu::DOMAIN_OTHER . '/' . $targetName;
-
-                if($qiniu->doUpload(Qiniu::BUCKET_OTHER, '', $html, $targetName) && $topic->setInfo('tid = ?', [intval($topicId)], ['page_url' => $url])){
-
-                    return $this->error('话题发表成功，上传文件失败' . var_export($topic->getError(), true), 201, '');
-                }
+                //生成并上传html文件
+                $this->uploadHtml($req, $resp, $topicId, $template);
             }
 
             return $this->success('话题发表成功','');
+        }
+
+        public function reupload(Request $req, Response $resp){
+
+            $topicId    = intval($req->get('id'));
+
+            $this->uploadHtml($req, $resp, $topicId);
+
+            return $this->success('话题文件重新生成并上传成功','');
+            
+        }
+
+        protected function uploadHtml($req, $resp, $topicId, $template = ''){
+
+            $topic      = new mTopic();
+
+            $topicInfo  = $topic->getInfoById($topicId, 'tid');
+
+            if(!$topicInfo){
+
+                return $this->error('找不到指定的话题信息', 201, '');
+            }
+
+            if($topicInfo['is_del']){
+
+                return $this->error('指定的话题已被删除', 201, '');
+            }
+
+            $template = $template ? $template : 'admin/topic_info.html';
+
+            $param = [
+                        'topic' => $topicInfo,
+                     ];
+
+            $html  = $resp->withVars($param)->withView($template)->toString();
+
+            $qiniu = new Qiniu();
+
+            $targetName = "topic_{$topicId}.html";
+
+            $url   = Qiniu::DOMAIN_OTHER . '/' . $targetName;
+
+            if(!$qiniu->doUpload(Qiniu::BUCKET_OTHER, '', $html, $targetName)){
+
+                return $this->error('上传文件到7牛发生错误', 201, '');
+            }
+
+            if(!$topic->setInfo('tid = ?', [intval($topicId)], ['page_url' => $url])){
+
+                return $this->error('更新页面地址失败，请在列表中，重新尝试生成', 201, '');
+            }
+
+            return true;
         }
     }

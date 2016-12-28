@@ -146,7 +146,7 @@
 
         $.ajax({
             url: url,
-            method: 'post',
+            method: data ? 'post' : 'get',
             data: data,
             dataType: 'json',
             success: function(ret){

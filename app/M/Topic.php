@@ -49,7 +49,7 @@
             return $this->getCount();
         }
 
-        public function doTopic($title, $content, $type, $action, $video, $audio, $image, $aid, $uid, $tag, $hot_available_datetime){
+        public function doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tag, $hot_available_datetime){
 
 
             $data = [

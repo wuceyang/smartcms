@@ -1036,6 +1036,7 @@ function QiniuJsSDK() {
                     }
                     // TODO: to support bput
                     // http://developer.qiniu.com/docs/v6/api/reference/up/bput.html
+                    console.log(qiniuUploadUrl + '/mkblk/' + blockSize);
                     up.setOption({
                         'url': qiniuUploadUrl + '/mkblk/' + blockSize,
                         'multipart': false,
@@ -1084,6 +1085,7 @@ function QiniuJsSDK() {
             var leftSize = info.total - info.offset;
             var chunk_size = up.getOption && up.getOption('chunk_size');
             chunk_size = chunk_size || (up.settings && up.settings.chunk_size);
+            console.log(chunk_size);
             if (leftSize < chunk_size) {
                 up.setOption({
                     'url': qiniuUploadUrl + '/mkblk/' + leftSize
@@ -1311,7 +1313,11 @@ function QiniuJsSDK() {
                         }
                     }
 
+                    console.log(file);
+
                     var url = qiniuUploadUrl + '/mkfile/' + file.size + key + fname + x_vars_url;
+
+                    console.log(url);
 
                     var ie = that.detectIEVersion();
                     var ajax;

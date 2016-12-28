@@ -39,7 +39,9 @@
 
 			$key 		= $targetname;
 
-			list($ret, $err) = $content ? $uploadMgr->putFile($token, $key, $content) : $uploadMgr->putFile($token, $key, $filePath);
+			list($ret, $err) = $content ? $uploadMgr->put($token, $key, $content) : $uploadMgr->putFile($token, $key, $filePath);
+
+			\Log::debug($err);
 
 			return $err === null;
 		}

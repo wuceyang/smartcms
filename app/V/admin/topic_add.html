@@ -11,7 +11,7 @@
                     <th width="131"></th>
                     <th></th>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td align="right">标题</td>
                     <td><input type="text" name="title" value="" size="80" class="inpMain"> *</td>
                 </tr>
@@ -26,10 +26,10 @@
                         <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 标题列表中的图片</div>
                         <div class="clear"></div>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td align="right">主播</td>
-                    <td><input type="text" name="actorName" value="" size="10" class="inpMain"> <input type="text" name="actorId" value="" size="10" class="inpMain" readonly="readonly">*发布为该主播的话题</td>
+                    <td><input type="text" name="actorName" value="" size="10" class="inpMain"> <input type="text" name="actorId" value="1" size="10" class="inpMain" readonly="readonly">*发布为该主播的话题</td>
                 </tr>
                 <tr>
                     <td align="right">类型</td>
@@ -39,6 +39,10 @@
                         <label data-target="video"> <input type="radio" name="type" value="3" size="80">视频</label>
                         <label data-target="audio"> <input type="radio" name="type" value="4" size="80">音频</label>
                     </td>
+                </tr>
+                <tr>
+                    <td align="right">模板</td>
+                    <td><input type="text" name="template" value="admin/topic_info.html" size="40" class="inpMain"> *生成文件时，使用的页面模板，一般无需修改</td>
                 </tr>
                 <tr id="image_area" class="area hide">
                     <td></td>
@@ -88,7 +92,7 @@
                     <td align="right">标签</td>
                     <td>
                         <loop $tags $k $v />
-                        <label><input type="radio" name="tag[]" value="<=$k/>" /> <=$v/></label>
+                        <label><input type="checkbox" name="tag[]" value="<=$k/>" /> <=$v/></label>
                         </loop/>
                     </td>
                 </tr>
@@ -105,6 +109,7 @@
                 <tr>
                     <td align="right">内容正文</td>
                     <td>
+                        <input name="content_text" id="content_text" value="" type="hidden" />
                         <div id="contentbox"></div>
                     </td>
                 </tr>
@@ -136,7 +141,7 @@
 <define name="js"/>
 <script type="text/javascript" src="/wangeditor/js/wangEditor.min.js"></script>
 <script type="text/javascript" src="/jqplugin/qiniu.js"></script>
-<script type="text/javascript" src="/jqplugin/pupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/pupload.full.js"></script>
 <script type="text/javascript" src="/jqplugin/pupload/moxie.js"></script>
 <script type="text/javascript" src="/jqplugin/calendar/laydate.js"></script>
 <script type="text/javascript">
@@ -159,6 +164,11 @@ var buckets = {
               };
 
 var editor = new wangEditor('contentbox');
+
+    editor.onchange = function(){
+
+        $('#content_text').val(this.$txt.html());
+    }
 
     editor.create();
 
@@ -321,8 +331,10 @@ $('#submit').on('click', function(){
 
     var form = $('form');
 
-    pWin.doRequest(form.attr('action'), form.serialize(), function(ret){
-            pWin.showMsg(ret.code = 200 ? '话题发布成功' : (ret.message || '话题发布失败'), '话题发布');
+    var params = form.serialize();
+
+    pWin.doRequest(form.attr('action'), params, function(ret){
+            pWin.showMsg(ret.code == 200 ? '话题发布成功' : (ret.message || '话题发布失败'), '话题发布');
     });
 })
 
