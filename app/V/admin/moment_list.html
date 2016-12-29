@@ -1,0 +1,41 @@
+<extend from="admin/base.html"/>
+
+<define name="content"/>
+    <!-- 当前位置 -->
+    <div id="urHere">内容管理<b>»</b><strong>动态列表</strong> </div>
+    <div class="mainBox">
+        <h3><a href="/admin/moment/do-post" class="actionBtn add">发布动态</a> &nbsp; </h3>
+        <table border="0" align="center" cellpadding="8" cellspacing="0" class="tableBasic w90">
+            <tr>
+                <th width="50" align="center">ID</th>
+                <th align="center">主播</th>
+                <th align="center">动态类型</th>
+                <th width="100" align="center">图片数量</th>
+                <th width="100" align="center">视频数量</th>
+                <th width="100" align="center">音频数量</th>
+                <th width="120" align="center">操作</th>
+            </tr>
+            <loop $list $k $v/>
+            <tr>
+                <td align="center"><=$v.mid/></td>
+                <td align="center"><=isset($actors[$v.aid]) ? $actors[$v.aid].nickname : ''/></td>
+                <td align="center"><=isset($contentType[$v.content_type]) ? $contentType[$v.content_type] : ''/></td>
+                <td align="center"><=$v.img_count/></td>
+                <td align="center"><=isset($v.video_url) && $v.video_url ? 1 : 0/></td>
+                <td align="center"><=isset($v.audio_url) && $v.audio_url ? 1 : 0/></td>
+                <td align="center">
+                <a href="/admin/moment/edit-moment?id=<=$v.mid/>">编辑</a>
+                </td>
+            </tr>
+            </loop/>
+        </table>
+        <if $pageStr/>
+            <div class="pagerow w90">
+                <div class="inline pagetxt">当前第<=$curPage/>/<=$totalPage/>页，共<=$totalRecord/> 条记录</div>
+                <ul class="inline pagination">
+                    <=$pageStr/>
+                </ul>
+            </div>
+        </if/>
+    </div>
+</define/>

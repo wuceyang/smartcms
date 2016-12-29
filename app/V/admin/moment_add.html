@@ -1,0 +1,297 @@
+<extend from="admin/base.html"/>
+
+<define name="content"/>
+    <!-- 当前位置 -->
+    <div id="urHere">内容管理<b>»</b><strong>添加动态</strong> </div>
+    <div class="mainBox">
+        <form action="/admin/moment/do-post">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tbody>
+                <tr>
+                    <th width="131"></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td align="right">主播</td>
+                    <td><input type="text" name="actorName" value="" size="10" class="inpMain"> <input type="text" name="actorId" value="" size="10" class="inpMain" readonly="readonly">*发布为该主播的动态</td>
+                </tr>
+                <tr>
+                    <td align="right">类型</td>
+                    <td class="topic_type">
+                        <label data-target="none"> <input type="radio" name="type" value="1" checked size="80">文字</label>
+                        <label data-target="image"> <input type="radio" name="type" value="2" size="80">图片</label>
+                        <label data-target="video"> <input type="radio" name="type" value="3" size="80">视频</label>
+                        <label data-target="audio"> <input type="radio" name="type" value="4" size="80">音频</label>
+                    </td>
+                </tr>
+                <tr id="image_area" class="area hide">
+                    <td></td>
+                    <td>
+                        <div class="imagepath fleft  hide">
+                        </div>
+                        <div class="uploadbox fleft">
+                            <div data-bucket="image" data-max="9" id="imagelist-uploader" data-field="image" class="uploader icon-plus icon-large dashed"></div>
+                        </div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 最多上传9张图片</div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+                <tr id="video_area" class="area hide">
+                    <td></td>
+                    <td>
+                        <div class="imagepath fleft hide">
+                        </div>
+                        <div class="uploadbox fleft">
+                            <div data-bucket="video" id="video-uploader" data-max="1" data-field="video" class="uploader icon-plus icon-large dashed"></div>
+                        </div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 选择要上传的视频</div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+                <tr id="audio_area" class="area hide">
+                    <td></td>
+                    <td>
+                        <div class="imagepath fleft hide">
+                        </div>
+                        <div class="uploadbox fleft">
+                            <div data-bucket="audio" id="audio-uploader" data-max="1" data-field="audio" class="uploader icon-plus icon-large dashed"></div>
+                        </div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 选择要上传的音频</div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">付费观看</td>
+                    <td>
+                        <label><input type="checkbox" name="needPay" value="1"> 开启</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">内容正文</td>
+                    <td>
+                        <input name="content_text" id="content_text" value="" type="hidden" />
+                        <div id="contentbox"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"></td>
+                    <td>
+                      <button type="button" id="submit" class="btnPayment">确定</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+</define/>
+
+<define name="css"/>
+<link rel="stylesheet" type="text/css" href="/theme/FontAwesome/css/font-awesome.css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="/theme/FontAwesome/css/font-awesome-ie7.min.css">
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/wangeditor/css/wangEditor.min.css">
+<style type="text/css">
+    #contentbox{
+        height:400px;
+        width:100%;
+    }
+</style>
+</define/>
+
+<define name="js"/>
+<script type="text/javascript" src="/wangeditor/js/wangEditor.min.js"></script>
+<script type="text/javascript" src="/jqplugin/qiniu.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/pupload.full.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/moxie.js"></script>
+<script type="text/javascript">
+
+var pWin = window;
+
+var data = {};
+
+var url = '';
+
+var buckets = {
+                image: '<=\App\Helper\Storage\Qiniu::DOMAIN_IMAGE/>',
+                video: '<=\App\Helper\Storage\Qiniu::DOMAIN_VIDEO/>',
+                audio: '<=\App\Helper\Storage\Qiniu::DOMAIN_AUDIO/>',
+                other: '<=\App\Helper\Storage\Qiniu::DOMAIN_OTHER/>',
+              };
+
+var editor = new wangEditor('contentbox');
+
+    editor.onchange = function(){
+
+        $('#content_text').val(this.$txt.html());
+    }
+
+    editor.create();
+
+$(':radio[name=datatype]').on('click', function(){
+    
+    var dataType = $(this).val();
+
+    $('#addonRow').addClass('hide');
+
+    if(dataType == 0) return;
+
+    $('#addonRow').removeClass('hide');
+
+    $('#addonRow button').data('bucket', $(this).data('bucket'));
+})
+
+var deletefile = {};
+
+function createUploader(_this){
+    var bucket   = $(_this).data('bucket');
+    var field    = $(_this).data('field');
+    var thisId   = $(_this).attr('id');
+    var upParams = {
+        runtimes: 'html5,flash,html4',      // 上传模式,依次退化
+        uptoken_url: '/admin/upload/token?bucket=' + bucket,
+        get_new_uptoken: true,
+        multi_selection: false,
+        unique_names: true,
+        domain: buckets[bucket],
+        max_file_size: '100mb',
+        flash_swf_url: '/jqplugin/pupload/moxie.swf',
+        silverlight_xap_url : '/jqplugin/pupload/moxie.xap',
+        max_retries: 3,
+        chunk_size: '4mb',
+        unique_names: true,
+        auto_start: true,
+        browse_button: thisId,
+        init:{
+            FileUploaded: function(uploader, fileinfo){
+                
+            },
+            BeforeUpload: function(){
+                var td = $(_this).parent('div').parent('td');
+                $('<div class="imgpreview"><div class="progressbox"><div class="progressbar"></div></div></div>').appendTo($('.imagepath',td));
+            },
+            UploadComplete: function(uploader, fileinfo){
+                var preview = [];
+                var td = $(_this).parent('div').parent('td');
+                var fieldName = field == 'image' ? 'image[]' : field;
+                for(var i in fileinfo){
+                    if(deletefile[fileinfo[i].id]) continue;
+                    var url = buckets[bucket] + '/' + fileinfo[i].target_name;
+                    var previewhtml = createPreview(url, bucket);
+                    preview.push('<div class="imgpreview" data-id="' + fileinfo[i].id + '"><input type="hidden" name="' + fieldName + '" value="' + url + '">' + previewhtml + '</div>');
+                }
+                $('.imagepath', td).html($(preview.join('')));
+                $('.imagepath', td).removeClass('hide');
+                var max = $(_this).data('max');
+                //达到最大值，隐藏上传按钮
+                if(max > 0 && $('.imgpreview', $(_this).parent('div').parent('td')).size() >= max){
+                    $(_this).parent('div').hide();
+                    return;
+                }
+            },
+            UploadProgress: function(uploader, info){
+                var td = $(_this).parent('div').parent('td');
+                $('.progressbar', td).css({'width': info.percent + '%'});
+            },
+            Error: function(){
+                pWin.showMsg("文件上传失败", "错误提示");
+            }
+        }
+    };
+
+    var qiniu = new QiniuJsSDK();
+
+    qiniu.uploader(upParams);
+}
+
+function createPreview(url, bucket){
+
+    if(bucket == 'image'){
+
+        return '<img title="点击删除当前图片" src="' + url + '" height="100%"/>';
+    }
+
+    if(bucket == 'video'){
+
+        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持视频预览</video>';
+    }
+
+    if(bucket == 'audio'){
+
+        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持音频预览</video>';
+    }
+}
+
+$('.imagepath').delegate('.imgpreview', 'click', function(){
+    var _this = this;
+    pWin.showConfirm("确定要删除当前图片吗?", "删除确认", {onOk: function(){
+        var thisId = $(_this).data('id');
+        deletefile[thisId] = thisId;
+        var currentNum = $(_this).siblings('.imgpreview').size();
+        var uploader   = $(_this).parent('div').parent('td').find('.uploader');
+        var max        = $(uploader).data('max');
+        if(currentNum <= max){
+            uploader.parent('.uploadbox').show();
+        }
+        if(currentNum == 0){
+            $(_this).parent('div').addClass('hide');
+        }
+        _this.remove();
+    }});
+})
+
+$(function(){
+
+    $('.uploader').each(function(){
+
+        createUploader(this);
+    });
+});
+
+$('.topic_type label').on('click', function(){
+
+    var target = $(this).data('target');
+
+    var uploader = '#' + target + '_area';
+
+    $('.area').hide();
+
+    if(target != 'none'){
+
+        $(uploader).show();
+    }
+})
+
+$('input[name=actorName]').on('blur', function(){
+
+    var actorName = $.trim($(this).val());
+
+    if(actorName.length == 0){
+
+        return;
+    }
+
+    pWin.doRequest('/admin/actor/get-actor', {actorName: actorName}, function(ret){
+
+        if(ret.code == 200){
+
+            if(ret.data.id > 0){
+
+                $('input[name=actorId]').val(ret.data.id);
+            }
+        }
+    });
+})
+
+$('#submit').on('click', function(){
+
+    var form = $('form');
+
+    var params = form.serialize();
+
+    pWin.doRequest(form.attr('action'), params, function(ret){
+            pWin.showMsg(ret.code == 200 ? '动态发布成功' : (ret.message || '动态发布失败'), '动态发布');
+    });
+})
+
+</script>
+</define/>

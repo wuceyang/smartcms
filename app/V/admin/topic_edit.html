@@ -1,0 +1,334 @@
+<extend from="admin/base.html"/>
+
+<define name="content"/>
+    <!-- 当前位置 -->
+    <div id="urHere">内容管理<b>»</b><strong>话题编辑</strong> </div>
+    <div class="mainBox">
+        <form action="/admin/topic/edit-topic">
+        <input type="hidden" name="topicId" value="<=$topic.tid/>">
+        <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tbody>
+                <tr>
+                    <th width="131"></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td align="right">主播</td>
+                    <td><input type="text" name="actorName" value="<=$actor.nickname/>" size="10" class="inpMain"> <input type="text" name="actorId" value="<=$actor.aid/>" size="10" class="inpMain" readonly="readonly">*发布为该主播的话题</td>
+                </tr>
+                <tr>
+                    <td align="right">类型</td>
+                    <td class="topic_type">
+                        <label data-target="none"> <input type="radio" name="type" value="1"<if $topic.content_type == 1/> checked</if/>>文字</label>
+                        <label data-target="image"> <input type="radio" name="type" value="2"<if $topic.content_type == 2/> checked</if/>>图片</label>
+                        <label data-target="video"> <input type="radio" name="type" value="3"<if $topic.content_type == 3/> checked</if/>>视频</label>
+                        <label data-target="audio"> <input type="radio" name="type" value="4"<if $topic.content_type == 4/> checked</if/>>音频</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">模板</td>
+                    <td><input type="text" name="template" value="admin/topic_info.html" size="40" class="inpMain"> *生成文件时，使用的页面模板，一般无需修改</td>
+                </tr>
+                <tr id="image_area" class="area hide">
+                    <td></td>
+                    <td>
+                        <div class="imagepath fleft<if !isset($topic.image) || !$topic.image/> hide</if/>">
+                        <loop $topic.image $k $v/>
+                        <div class="imgpreview" data-id="<=$v/>"><input type="hidden" name="image[]" value="<=$v/>"><img height="100%" title="点击删除当前图片" src="<=$v/>"></div>
+                        </loop/>
+                        </div>
+                        <div class="uploadbox fleft">
+                            <div data-bucket="image" data-max="9" id="imagelist-uploader" data-field="image" class="uploader icon-plus icon-large dashed"></div>
+                        </div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 最多上传9张图片</div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+                <tr id="video_area" class="area hide">
+                    <td></td>
+                    <td>
+                        <div class="imagepath fleft<if !$topic.video_url/> hide</if/>">
+                        <if $topic.video_url/><div class="imgpreview" data-id="<=$topic.video_url/>"><input type="hidden" name="video" value="<=$topic.video_url/>"><video src="<=$topic.video_url/>" controls="controls" preload="preload" width="100%">您的浏览器不支持视频预览</video></div></if/>
+                        </div>
+                        <div class="uploadbox fleft">
+                            <div data-bucket="video" id="video-uploader" data-max="1" data-field="video" class="uploader icon-plus icon-large dashed"></div>
+                        </div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 选择要上传的视频</div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+                <tr id="audio_area" class="area hide">
+                    <td></td>
+                    <td>
+                        <div class="imagepath fleft<if !$topic.audio_url/> hide</if/>">
+                        <if $topic.audio_url/><div class="imgpreview" data-id="<=$topic.audio_url/>"><input type="hidden" name="video" value="<=$topic.audio_url/>"><audio src="<=$topic.audio_url/>" controls="controls" preload="preload" width="100%">您的浏览器不支持音频预览</audio></div></if/>
+                        </div>
+                        <div class="uploadbox fleft">
+                            <div data-bucket="audio" id="audio-uploader" data-max="1" data-field="audio" class="uploader icon-plus icon-large dashed"></div>
+                        </div>
+                        <div class="fleft" style="height:50px; line-height:50px; padding-left:5px;"> * 选择要上传的音频</div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">打开方式</td>
+                    <td>
+                        <label> <input type="radio" name="action" value="1"<if $topic.action == 1/> checked="checked"</if/>>原生应用</label>
+                        <label> <input type="radio" name="action" value="2"<if $topic.action == 2/> checked="checked"</if/>>内部浏览器</label>
+                        <label> <input type="radio" name="action" value="3"<if $topic.action == 3/> checked="checked"</if/>>外部浏览器</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">标签</td>
+                    <td>
+                        <loop $tags $k $v />
+                        <label><input type="checkbox" name="tag[]" value="<=$k/>"<if (pow(2, $k) & $topic.tag) == pow(2, $k)/> checked="checked"</if/> /> <=$v/></label>
+                        </loop/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">热门有效期</td>
+                    <td>
+                        <div class="calendar">
+                            <input type="text" name="hot_expire_after" value="<=$topic.hot_available_time/>" size="80" readonly="readonly" id="calendar">
+                            <div class="clicker laydate-icon"></div>
+                            <div class="clear"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">内容正文</td>
+                    <td>
+                        <input name="content_text" id="content_text" value="" type="hidden" />
+                        <div id="contentbox"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"></td>
+                    <td>
+                      <button type="button" id="submit" class="btnPayment">确定</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+</define/>
+
+<define name="css"/>
+<link rel="stylesheet" type="text/css" href="/theme/FontAwesome/css/font-awesome.css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="/theme/FontAwesome/css/font-awesome-ie7.min.css">
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/wangeditor/css/wangEditor.min.css">
+<style type="text/css">
+    #contentbox{
+        height:400px;
+        width:100%;
+    }
+</style>
+</define/>
+
+<define name="js"/>
+<script type="text/javascript" src="/wangeditor/js/wangEditor.min.js"></script>
+<script type="text/javascript" src="/jqplugin/qiniu.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/pupload.full.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/moxie.js"></script>
+<script type="text/javascript" src="/jqplugin/calendar/laydate.js"></script>
+<script type="text/javascript">
+
+$('.clicker').on('click', function(){
+    laydate.skin('dahong');//切换皮肤，请查看skins下面皮肤库
+    laydate({elem: '#calendar',format: 'YYYY-MM-DD hh:mm:ss', istime: true, istoday: true});//绑定元素
+})
+
+var content = '<=str_replace("'", "\'", $topic.content_text)/>';
+
+var pWin = window;
+
+var data = {};
+
+var url = '';
+
+var buckets = {
+                image: '<=\App\Helper\Storage\Qiniu::DOMAIN_IMAGE/>',
+                video: '<=\App\Helper\Storage\Qiniu::DOMAIN_VIDEO/>',
+                audio: '<=\App\Helper\Storage\Qiniu::DOMAIN_AUDIO/>',
+                other: '<=\App\Helper\Storage\Qiniu::DOMAIN_OTHER/>',
+              };
+
+var editor = new wangEditor('contentbox');
+
+    editor.create();
+
+    editor.$txt.html(content);
+
+$(':radio[name=datatype]').on('click', function(){
+    
+    var dataType = $(this).val();
+
+    $('#addonRow').addClass('hide');
+
+    if(dataType == 0) return;
+
+    $('#addonRow').removeClass('hide');
+
+    $('#addonRow button').data('bucket', $(this).data('bucket'));
+})
+
+var deletefile = {};
+
+function createUploader(_this){
+    var bucket   = $(_this).data('bucket');
+    var field    = $(_this).data('field');
+    var thisId   = $(_this).attr('id');
+    var upParams = {
+        runtimes: 'html5,flash,html4',      // 上传模式,依次退化
+        uptoken_url: '/admin/upload/token?bucket=' + bucket,
+        get_new_uptoken: true,
+        multi_selection: false,
+        unique_names: true,
+        domain: buckets[bucket],
+        max_file_size: '100mb',
+        flash_swf_url: '/jqplugin/pupload/moxie.swf',
+        silverlight_xap_url : '/jqplugin/pupload/moxie.xap',
+        max_retries: 3,
+        chunk_size: '4mb',
+        unique_names: true,
+        auto_start: true,
+        browse_button: thisId,
+        init:{
+            FileUploaded: function(uploader, fileinfo){
+                
+            },
+            BeforeUpload: function(){
+                var td = $(_this).parent('div').parent('td');
+                $('<div class="imgpreview"><div class="progressbox"><div class="progressbar"></div></div></div>').appendTo($('.imagepath',td));
+            },
+            UploadComplete: function(uploader, fileinfo){
+                var preview = [];
+                var td = $(_this).parent('div').parent('td');
+                var fieldName = field == 'image' ? 'image[]' : field;
+                for(var i in fileinfo){
+                    if(deletefile[fileinfo[i].id]) continue;
+                    var url = buckets[bucket] + '/' + fileinfo[i].target_name;
+                    var previewhtml = createPreview(url, bucket);
+                    preview.push('<div class="imgpreview" data-id="' + fileinfo[i].id + '"><input type="hidden" name="' + fieldName + '" value="' + url + '">' + previewhtml + '</div>');
+                }
+                $('.imagepath', td).html($(preview.join('')));
+                $('.imagepath', td).removeClass('hide');
+                var max = $(_this).data('max');
+                //达到最大值，隐藏上传按钮
+                if(max > 0 && $('.imgpreview', $(_this).parent('div').parent('td')).size() >= max){
+                    $(_this).parent('div').hide();
+                    return;
+                }
+            },
+            UploadProgress: function(uploader, info){
+                var td = $(_this).parent('div').parent('td');
+                $('.progressbar', td).css({'width': info.percent + '%'});
+            },
+            Error: function(){
+                pWin.showMsg("文件上传失败", "错误提示");
+            }
+        }
+    };
+
+    var qiniu = new QiniuJsSDK();
+
+    qiniu.uploader(upParams);
+}
+
+function createPreview(url, bucket){
+
+    if(bucket == 'image'){
+
+        return '<img title="点击删除当前图片" src="' + url + '" height="100%"/>';
+    }
+
+    if(bucket == 'video'){
+
+        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持视频预览</video>';
+    }
+
+    if(bucket == 'audio'){
+
+        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持音频预览</video>';
+    }
+}
+
+$('.imagepath').delegate('.imgpreview', 'click', function(){
+    var _this = this;
+    pWin.showConfirm("确定要删除当前图片吗?", "删除确认", {onOk: function(){
+        var thisId = $(_this).data('id');
+        deletefile[thisId] = thisId;
+        var currentNum = $(_this).siblings('.imgpreview').size();
+        var uploader   = $(_this).parent('div').parent('td').find('.uploader');
+        var max        = $(uploader).data('max');
+        if(currentNum <= max){
+            uploader.parent('.uploadbox').show();
+        }
+        if(currentNum == 0){
+            $(_this).parent('div').addClass('hide');
+        }
+        _this.remove();
+    }});
+})
+
+$(function(){
+
+    $('.uploader').each(function(){
+
+        createUploader(this);
+    });
+});
+
+$('.topic_type label').on('click', function(){
+
+    var target = $(this).data('target');
+
+    var uploader = '#' + target + '_area';
+
+    $('.area').hide();
+
+    if(target != 'none'){
+
+        $(uploader).show();
+    }
+})
+
+$('input[name=actorName]').on('blur', function(){
+
+    var actorName = $.trim($(this).val());
+
+    if(actorName.length == 0){
+
+        return;
+    }
+
+    pWin.doRequest('/admin/actor/get-actor', {actorName: actorName}, function(ret){
+
+        if(ret.code == 200){
+
+            if(ret.data.id > 0){
+
+                $('input[name=actorId]').val(ret.data.id);
+            }
+        }
+    });
+})
+
+$('#submit').on('click', function(){
+
+    var form = $('form');
+
+    $('#content_text').val(editor.$txt.html());
+
+    var params = form.serialize();
+
+    pWin.doRequest(form.attr('action'), params, function(ret){
+            pWin.showMsg(ret.code == 200 ? '话题更新成功' : (ret.message || '话题更新失败'), '话题发布');
+    });
+})
+
+</script>
+</define/>

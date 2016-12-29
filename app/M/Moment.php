@@ -1,11 +1,11 @@
 <?php
     namespace App\M;
 
-    class Topic extends Model{
+    class Moment extends Model{
 
-        public static $table = 'tbl_topic';
+        public static $table = 'tbl_moment';
 
-        public function getTopicList($actorId = null, $page = 0, $pagesize = 20){
+        public function getMomentList($actorId = null, $page = 0, $pagesize = 20){
 
             $where = $param = [];
 
@@ -30,7 +30,7 @@
 
         }
 
-        public function getTotalTopic($actorId = null){
+        public function getTotalMoment($actorId = null){
 
             $where = $param = [];
 
@@ -49,7 +49,7 @@
             return $this->getCount();
         }
 
-        public function doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tag, $hot_available_datetime){
+        public function doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay){
 
 
             $data = [
@@ -61,16 +61,9 @@
                 'img_count'     => count($image),
                 'content_type'  => intval($type),
                 'video_url'     => $video,
-                'action'        => intval($action),
-                '`check`'       => 1,
+                'needPay'       => intval($needPay),
                 'create_time'   => date('Y-m-d H:i:s'),
-                'tag'           => $tag,
             ];
-
-            if($hot_available_datetime){
-
-                $data['hot_available_time'] = $hot_available_datetime;
-            }
 
             return $this->insert($data);
         }

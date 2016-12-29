@@ -97,12 +97,7 @@
             if(!$req->isPost()){
 
                 $param = [
-                            'tags' => [
-                                        0 => '官方',
-                                        1 => '推广',
-                                        2 => '置顶',
-                                        3 => '加精',
-                                      ],
+                            'tags' => \App\Helper\Enum::TOPICTAGS,
                          ];
 
                 return $resp->withVars($param)->withView('admin/topic_add.html')->display();
@@ -153,11 +148,11 @@
                 }
             }
 
-            $audio = '';
+            $audio  = trim($req->post('audio'));
 
-            $topic = new mTopic();
+            $topic  = new mTopic();
 
-            $tagsum   = 0;
+            $tagsum = 0;
 
             if(is_array($tag)){
 
@@ -231,5 +226,114 @@
             }
 
             return true;
+        }
+
+        public function editTopic(Request $req, Response $resp){
+
+            if(!$req->isPost()){
+
+                $topicId    = intval($req->get('id'));
+
+                $topic      = new mTopic();
+
+                $topicInfo  = $topic->getInfoById($topicId, 'tid');
+
+                if(!$topicInfo){
+
+                    return $this->error('指定的话题不存在', 202, 'javascript:history.back();');
+                }
+
+                $actor = new Actor();
+
+                $actorInfo = $actor->getInfoById($topicInfo['aid'], 'aid');
+
+                $param = [
+                        'topic' => $topicInfo,
+                        'actor' => $actorInfo ? $actorInfo : ['id' => '', 'nickname' => ''],
+                        'tags' => \App\Helper\Enum::TOPICTAGS,
+                        ];
+
+                return $resp->withView('admin/topic_edit.html')->withVars($param)->display();
+            }
+
+            $topicId    = intval($req->post('topicId'));
+
+            $aid        = intval($req->post('actorId'));
+
+            $content    = trim($req->post('content_text'));
+
+            $type       = intval($req->post('type'));
+
+            $video      = trim($req->post('video'));
+
+            $image      = $req->post('image');
+
+            $action     = intval($req->post('action'));
+
+            $template   = trim($req->post('template'));
+
+            $uid        = 1;
+
+            $tag        = $req->post('tag');
+
+            $hotExpireAfter = $tag ? trim($req->post('hot_expire_after')) : null;
+
+            if(!in_array($type, [1, 2, 3, 4])){
+
+                return $this->error("参数错误，话题类型不正确", 101, "");
+            }
+            //文字话题
+            if($type == 1){
+
+                $content = strip_tags($content);
+            }else{
+
+                $tplpath = APP_ROOT . 'app/V/' . $template;
+
+                if(!file_exists($tplpath) || !is_file($tplpath)){
+
+                    return $this->error('模板不存在，请检查模板', 101, '');
+                }
+            }
+
+            $audio  = trim($req->post('audio'));
+
+            $topic  = new mTopic();
+
+            $tagsum = 0;
+
+            if(is_array($tag)){
+
+                foreach ($tag as $k => $v) {
+                    
+                    $tagsum += 1 << $v;
+                }
+            }
+
+            $params = [
+                        'uid'                => $uid,
+                        'aid'                => $aid,
+                        'content_text'       => $content,
+                        'content_type'       => $type,
+                        'action'             => $action,
+                        'video_url'          => $video,
+                        'audio_url'          => $audio,
+                        'img_url'            => json_encode($image),
+                        'img_count'          => count($image),
+                        'tag'                => $tagsum,
+                        'hot_available_time' => $hotExpireAfter,
+                      ];
+
+            if(!$topic->setInfo('tid = ?', [$topicId], $params)){
+
+                return $this->error('话题更新失败' . var_export($topic->getError(), true), 201, '');
+            }
+            //非文字话题，则需要生成html文件，并存储到七牛
+            if($type != 1){
+                //生成并上传html文件
+                $this->uploadHtml($req, $resp, $topicId, $template);
+            }
+
+            return $this->success('话题更新成功','');
         }
     }
