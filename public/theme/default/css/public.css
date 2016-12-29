@@ -1391,6 +1391,11 @@ select {
 .w90{
     width: 90%;
 }
+.inline{
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+}
 /*----------------公共样式结束-----------------*/
 .imageAdd{
     margin: 10px 20px 20px 0px;
@@ -1526,3 +1531,38 @@ select {
 .w670{
     width: 670px;
 }
+/*----------------分页样式开始-----------------*/
+.pagerow{
+    height:40px;
+    line-height: 40px;
+    margin:10px auto;
+}
+.pagetxt{
+    height: 100%;
+}
+.pagination{
+    height: 30px;
+}
+.pagination li{
+    border: 1px solid #68b7f1;
+    background-color: #FFF;
+    padding: 0px 5px;
+    height:20px;
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+    line-height: 20px;
+    margin: 3px
+}
+.pagination li a{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.pagination li:hover{
+    background-color: #DDD;
+}
+.pagination li.active{
+    background-color: #DDD;
+}
+/*----------------分页样式结束-----------------*/

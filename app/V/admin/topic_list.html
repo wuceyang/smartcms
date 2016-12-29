@@ -32,24 +32,15 @@
                 </td>
             </tr>
             </loop/>
-            <if $pageStr/>
-            <tr>
-                <td colspan="8">
-                    <div class="row">
-                        <div class="col-lg-4 adv-table">
-                            <div class="dataTables_info">当前第<=$curPage/>/<=$totalPage/>页，共<=$totalRecord/> 条记录
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <ul class="dataTables_paginate paging_bootstrap pagination">
-                                <=$pageStr/>
-                            </ul>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            </if/>
         </table>
+        <if $pageStr/>
+            <div class="pagerow w90">
+                <div class="inline pagetxt">当前第<=$curPage/>/<=$totalPage/>页，共<=$totalRecord/> 条记录</div>
+                <ul class="inline pagination">
+                    <=$pageStr/>
+                </ul>
+            </div>
+        </if/>
     </div>
 </define/>
 
