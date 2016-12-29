@@ -16,9 +16,9 @@
 
             $actorId    = '';
 
-            $moment      = new mMoment();
+            $moment     = new mMoment();
 
-            $momentList  = $moment->getMomentList($actorId, $page, $pagesize); 
+            $momentList = $moment->getMomentList($actorId, $page, $pagesize); 
 
             $actors     = [];
 
@@ -39,7 +39,7 @@
 
                 $actors   = $actor->getInfoById($actorsId, 'aid');
 
-                $totalTopic = $moment->getTotalMoment($actorId);
+                $totalMoment = $moment->getTotalMoment($actorId);
             }
 
             $param = [];
