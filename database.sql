@@ -2,7 +2,8 @@
 SQLyog 企业版 - MySQL GUI v8.14 
 MySQL - 5.6.26 : Database - smart_cms
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,9 +13,9 @@ MySQL - 5.6.26 : Database - smart_cms
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`smart_cms` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`sex_master` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `smart_cms`;
+USE `sex_master`;
 
 /*Table structure for table `cms_adv_category` */
 
@@ -119,7 +120,7 @@ CREATE TABLE `cms_group_privileges` (
 
 /*Data for the table `cms_group_privileges` */
 
-insert  into `cms_group_privileges`(`id`,`group_id`,`menu_id`) values (1,1,'1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18'),(2,2,'25,29');
+insert  into `cms_group_privileges`(`id`,`group_id`,`menu_id`) values (1,1,'1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20'),(2,2,'25,29');
 
 /*Table structure for table `cms_menu` */
 
@@ -135,11 +136,11 @@ CREATE TABLE `cms_menu` (
   `icon` varchar(16) NOT NULL DEFAULT '' COMMENT '菜单图标样式',
   `enable` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否启用,1:启用,0:禁用',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理后台菜单列表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='管理后台菜单列表';
 
 /*Data for the table `cms_menu` */
 
-insert  into `cms_menu`(`id`,`title`,`url`,`parent_id`,`show_order`,`level`,`icon`,`enable`) values (1,'广告位管理','',0,1,1,'show',1),(2,'推荐位管理','',0,2,1,'nav',1),(3,'栏目管理','',0,3,1,'product',1),(4,'权限管理','',0,4,1,'manager',1),(5,'系统设置','',0,5,1,'system',1),(6,'内容管理','',0,6,1,'page',1),(7,'广告位列表','/admin/adv/index',1,1,2,'',1),(8,'新建广告位','/admin/adv/add-new',1,2,2,'',1),(9,'推荐位管理','/admin/recommend/index',2,1,2,'',1),(10,'新建推荐位','/admin/recommend/add-new',2,2,2,'',1),(11,'栏目列表','/admin/category/index',3,1,2,'',1),(12,'新建栏目','/admin/category/add-new',3,2,2,'',1),(13,'用户列表','/admin/user/all-user',4,1,2,'',1),(14,'用户分组','/admin/user-group/index',4,2,2,'',1),(15,'后台菜单列表','/admin/menu/index',4,3,2,'',1),(16,'模板管理','/admin/template/index',5,1,2,'',1),(17,'文章列表','/admin/content/index',6,1,2,'',1),(18,'文章录入','/admin/content/add-new',6,2,2,'',1);
+insert  into `cms_menu`(`id`,`title`,`url`,`parent_id`,`show_order`,`level`,`icon`,`enable`) values (1,'广告位管理','',0,1,1,'show',1),(2,'推荐位管理','',0,2,1,'nav',1),(3,'栏目管理','',0,3,1,'product',1),(4,'权限管理','',0,4,1,'manager',1),(5,'系统设置','',0,5,1,'system',1),(6,'内容管理','',0,6,1,'page',1),(7,'广告位列表','/admin/adv/index',1,1,2,'',1),(8,'新建广告位','/admin/adv/add-new',1,2,2,'',1),(9,'推荐位管理','/admin/recommend/index',2,1,2,'',1),(10,'新建推荐位','/admin/recommend/add-new',2,2,2,'',1),(11,'栏目列表','/admin/category/index',3,1,2,'',1),(12,'新建栏目','/admin/category/add-new',3,2,2,'',1),(13,'用户列表','/admin/user/all-user',4,1,2,'',1),(14,'用户分组','/admin/user-group/index',4,2,2,'',1),(15,'后台菜单列表','/admin/menu/index',4,3,2,'',1),(16,'模板管理','/admin/template/index',5,1,2,'',1),(17,'文章列表','/admin/content/index',6,1,2,'',1),(18,'文章录入','/admin/content/add-new',6,2,2,'',1),(19,'话题列表','/admin/topic/index',6,3,2,'',1),(20,'话题发布','/admin/topic/do-post',6,4,2,'',1);
 
 /*Table structure for table `cms_recommend` */
 

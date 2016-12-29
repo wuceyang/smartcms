@@ -11,7 +11,7 @@
 
         public function index(Request $req, Response $resp){
 
-            $page       = $req->get('page');
+            $page       = max(intval($req->get('page')), 1);
 
             $pagesize   = 20;
 
