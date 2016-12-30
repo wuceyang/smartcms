@@ -5,6 +5,8 @@
     use \Response;
     use \App\M\Actor;
     use \App\M\Moment AS mMoment;
+    use \App\M\MomentCount;
+    use \App\M\MomentLike;
 
     class Moment extends Base{
 
@@ -78,7 +80,7 @@
 
             $needPay    = intval($req->post('needPay'));
 
-            $uid        = 1;
+            $uid        = intval($req->post('publisher'));
 
             if(!in_array($type, [1, 2, 3, 4])){
 
@@ -94,12 +96,48 @@
 
             $moment = new mMoment();
 
-            if(!$momentId = $moment->doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay)){
+            $flag = false;
 
-                return $this->error('动态发表失败' . var_export($topic->getError(), true), 201, '');
+            $msg = '';
+
+            $moment->transaction(function() use($moment, $content, $type, $video, $audio, $image, $aid, $uid, $needPay, &$msg, &$flag){
+
+                if(!$momentId = $moment->doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay)){
+
+                    $msg = var_export($moment->getError(), true);
+
+                    return false;
+                }
+
+                $momentCount = new MomentCount();
+
+                if(!$momentCount->insert(['mid' => $momentId])){
+
+                    $msg = var_export($momentCount->getError(), true);
+
+                    return false;
+                }
+
+                $momentLike = new MomentLike();
+
+                $momentLike->insert(['mid' => $momentId]);
+
+                $flag =  true;
+
+                return true;
+            });
+
+            // if(!$momentId = $moment->doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay)){
+
+            //     return $this->error('动态发表失败' . var_export($topic->getError(), true), 201, '');
+            // }
+
+            if(!$flag){
+
+                return $this->error('动态发表失败', 201, '');
             }
 
-            return $this->success('话题发表成功','');
+            return $this->success('动态发表成功','');
         }
 
         public function editMoment(Request $req, Response $resp){
@@ -143,8 +181,6 @@
 
             $needPay    = intval($req->post('needPay'));
 
-            $uid        = 1;
-
             if(!in_array($type, [1, 2, 3, 4])){
 
                 return $this->error("参数错误，动态类型不正确", 101, "");
@@ -160,7 +196,6 @@
             $moment = new mMoment();
 
             $params = [
-                        'uid'                => $uid,
                         'aid'                => $aid,
                         'content_text'       => $content,
                         'content_type'       => $type,

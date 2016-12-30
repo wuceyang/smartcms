@@ -26,7 +26,7 @@
                 $this->page($page)->pagesize($pagesize);
             }
 
-            return $this->getRows();
+            return $this->orderBy(['mid DESC'])->getRows();
 
         }
 

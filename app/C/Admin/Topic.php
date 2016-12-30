@@ -6,6 +6,7 @@
     use \App\M\Actor;
     use \App\Helper\Storage\Qiniu;
     use \App\M\Topic AS mTopic;
+    use \App\M\TopicCount;
 
     class Topic extends Base{
 
@@ -126,7 +127,7 @@
 
             $template   = trim($req->post('template'));
 
-            $uid        = 1;
+            $uid        = intval($req->post('publisher'));
 
             $tag        = $req->post('tag');
 
@@ -169,15 +170,38 @@
                 }
             }
 
-            if(!$topicId = $topic->doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter)){
+            $msg = '';
 
-                return $this->error('话题发表失败' . var_export($topic->getError(), true), 201, '');
+            $flag = false;
+
+            $topic->transaction(function() use($topic, $content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter, &$msg, &$flag){
+
+                if(!$topicId = $topic->doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter)){
+
+                    $msg = '1:' . var_export($topic->getError(),true);
+
+                    return false;
+                }
+
+                $topicCount = new TopicCount();
+
+                $topicCount->insert(['id' => intval($topicId)]);
+
+                $flag =  true;
+
+                return true;
+            });
+
+            if(!$flag){
+
+                return $this->error('话题发表失败' . $msg, '');
             }
+
             //非文字话题，则需要生成html文件，并存储到七牛
-            if($type != 1){
-                //生成并上传html文件
-                $this->uploadHtml($req, $resp, $topicId, $template);
-            }
+            // if($type != 1){
+            //     //生成并上传html文件
+            //     $this->uploadHtml($req, $resp, $topicId, $template);
+            // }
 
             return $this->success('话题发表成功','');
         }
@@ -279,8 +303,6 @@
 
             $template   = trim($req->post('template'));
 
-            $uid        = 1;
-
             $tag        = $req->post('tag');
 
             $hotExpireAfter = $tag ? trim($req->post('hot_expire_after')) : null;
@@ -318,7 +340,6 @@
             }
 
             $params = [
-                        'uid'                => $uid,
                         'aid'                => $aid,
                         'content_text'       => $content,
                         'content_type'       => $type,

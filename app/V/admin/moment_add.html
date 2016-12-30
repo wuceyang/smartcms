@@ -16,12 +16,16 @@
                     <td><input type="text" name="actorName" value="" size="10" class="inpMain"> <input type="text" name="actorId" value="" size="10" class="inpMain" readonly="readonly">*发布为该主播的动态</td>
                 </tr>
                 <tr>
+                    <td align="right">发布者</td>
+                    <td><input type="text" name="publisher" value="" size="10" class="inpMain"> *发布动态的用户ID</td>
+                </tr>
+                <tr>
                     <td align="right">类型</td>
                     <td class="topic_type">
-                        <label data-target="none"> <input type="radio" name="type" value="1" checked size="80">文字</label>
-                        <label data-target="image"> <input type="radio" name="type" value="2" size="80">图片</label>
-                        <label data-target="video"> <input type="radio" name="type" value="3" size="80">视频</label>
-                        <label data-target="audio"> <input type="radio" name="type" value="4" size="80">音频</label>
+                        <label data-target="none"><input type="radio" name="type" value="1" checked size="80"> 文字</label>
+                        <label data-target="image"><input type="radio" name="type" value="2" size="80"> 图片</label>
+                        <label data-target="video"><input type="radio" name="type" value="3" size="80"> 视频</label>
+                        <label data-target="audio"><input type="radio" name="type" value="4" size="80"> 音频</label>
                     </td>
                 </tr>
                 <tr id="image_area" class="area hide">
@@ -32,7 +36,7 @@
                         <div class="uploadbox fleft">
                             <div data-bucket="image" data-max="9" id="imagelist-uploader" data-field="image" class="uploader icon-plus icon-large dashed"></div>
                         </div>
-                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 最多上传9张图片</div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> *最多上传9张图片</div>
                         <div class="clear"></div>
                     </td>
                 </tr>
@@ -44,7 +48,7 @@
                         <div class="uploadbox fleft">
                             <div data-bucket="video" id="video-uploader" data-max="1" data-field="video" class="uploader icon-plus icon-large dashed"></div>
                         </div>
-                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 选择要上传的视频</div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> *选择要上传的视频</div>
                         <div class="clear"></div>
                     </td>
                 </tr>
@@ -56,7 +60,7 @@
                         <div class="uploadbox fleft">
                             <div data-bucket="audio" id="audio-uploader" data-max="1" data-field="audio" class="uploader icon-plus icon-large dashed"></div>
                         </div>
-                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> * 选择要上传的音频</div>
+                        <div class="fleft" style="height: 50px; line-height: 50px; padding-left: 5px;"> *选择要上传的音频</div>
                         <div class="clear"></div>
                     </td>
                 </tr>
@@ -277,6 +281,8 @@ $('input[name=actorName]').on('blur', function(){
             if(ret.data.id > 0){
 
                 $('input[name=actorId]').val(ret.data.id);
+
+                $('input[name=publisher]').val(ret.data.id);
             }
         }
     });
