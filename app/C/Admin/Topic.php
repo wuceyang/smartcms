@@ -9,6 +9,13 @@
 
     class Topic extends Base{
 
+        public $topicTags = [
+                            0 => '官方',
+                            1 => '推广',
+                            2 => '置顶',
+                            3 => '加精',
+                          ];
+
         public function index(Request $req, Response $resp){
 
             $page       = max(intval($req->get('page')), 1);
@@ -97,7 +104,7 @@
             if(!$req->isPost()){
 
                 $param = [
-                            'tags' => \App\Helper\Enum::TOPICTAGS,
+                            'tags' => $this->topicTags,
                          ];
 
                 return $resp->withVars($param)->withView('admin/topic_add.html')->display();
@@ -250,7 +257,7 @@
                 $param = [
                         'topic' => $topicInfo,
                         'actor' => $actorInfo ? $actorInfo : ['id' => '', 'nickname' => ''],
-                        'tags' => \App\Helper\Enum::TOPICTAGS,
+                        'tags' => $this->topicTags,
                         ];
 
                 return $resp->withView('admin/topic_edit.html')->withVars($param)->display();
