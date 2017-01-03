@@ -4,6 +4,7 @@
     use \Request;
     use \Response;
     use \App\M\Actor;
+    use \App\M\YouYuUser;
     use \App\M\Moment AS mMoment;
     use \App\M\MomentCount;
     use \App\M\MomentLike;
@@ -65,7 +66,15 @@
 
             if(!$req->isPost()){
 
-                return $resp->withView('admin/moment_add.html')->display();
+                $user   = new YouYuUser();
+
+                $userinfo = $user->getRandomUser();
+
+                $param = [
+                            'info' => $userinfo,
+                         ];
+
+                return $resp->withVars($param)->withView('admin/moment_add.html')->display();
             }
 
             $aid        = intval($req->post('actorId'));
@@ -87,10 +96,26 @@
                 return $this->error("参数错误，话题类型不正确", 101, "");
             }
             //文字话题
-            if($type == 1){
+            // if($type == 1){
 
-                $content = strip_tags($content);
+            //     $content = strip_tags($content);
+            // }
+            $image = is_array($image) ? $image : [];
+
+            foreach ($image as $k => $v) {
+                
+                $v = [
+                        'width'     => '300',
+                        'height'    => '300',
+                        'url'       => $v,
+                        'utl_t'     => $v . '?imageView2/0/w/300/h300',
+                        'platform'  => 'qiniu',
+                      ];
+
+                $image[$k] = $v;
             }
+
+            $content = strip_tags($content);
 
             $audio  = trim($req->post('audio'));
 
@@ -185,11 +210,23 @@
 
                 return $this->error("参数错误，动态类型不正确", 101, "");
             }
-            //文字话题
-            if($type == 1){
 
-                $content = strip_tags($content);
+            $image = is_array($image) ? $image : [];
+
+            foreach ($image as $k => $v) {
+                
+                $v = [
+                        'width'     => '300',
+                        'height'    => '300',
+                        'url'       => $v,
+                        'utl_t'     => $v . '?imageView2/0/w/300/h300',
+                        'platform'  => 'qiniu',
+                      ];
+
+                $image[$k] = $v;
             }
+
+            $content = strip_tags($content);
 
             $audio  = trim($req->post('audio'));
 
@@ -212,5 +249,23 @@
             }
 
             return $this->success('动态更新成功','');
+        }
+
+        public function switch(Request $req, Response $resp){
+
+            $momentId   = intval($req->get('id'));
+
+            $status     = intval($req->get('status'));
+
+            $status     = in_array($status, [0, 1]) ? $status : 0;
+
+            $moment = new mMoment();
+
+            if(!$moment->setInfo('mid = ?', [$momentId], ['is_delete' => $status])){
+
+                return $this->error('动态删除失败', 201, '');
+            }
+
+            return $this->success('动态删除成功','');
         }
     }

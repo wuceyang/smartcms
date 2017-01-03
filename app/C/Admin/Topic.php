@@ -4,6 +4,7 @@
     use \Request;
     use \Response;
     use \App\M\Actor;
+    use \App\M\YouYuUser;
     use \App\Helper\Storage\Qiniu;
     use \App\M\Topic AS mTopic;
     use \App\M\TopicCount;
@@ -104,7 +105,12 @@
 
             if(!$req->isPost()){
 
+                $user = new YouYuUser();
+
+                $userinfo = $user->getRandomUser();
+
                 $param = [
+                            'info' => $userinfo,
                             'tags' => $this->topicTags,
                          ];
 
@@ -142,19 +148,23 @@
 
                 return $this->error("参数错误，话题类型不正确", 101, "");
             }
-            //文字话题
-            if($type == 1){
 
-                $content = strip_tags($content);
-            }else{
+            $image = is_array($image) ? $image : [];
 
-                $tplpath = APP_ROOT . 'app/V/' . $template;
+            foreach ($image as $k => $v) {
+                
+                $v = [
+                        'width'     => '300',
+                        'height'    => '300',
+                        'url'       => $v,
+                        'utl_t'     => $v . '?imageView2/0/w/300/h300',
+                        'platform'  => 'qiniu',
+                      ];
 
-                if(!file_exists($tplpath) || !is_file($tplpath)){
-
-                    return $this->error('模板不存在，请检查模板', 101, '');
-                }
+                $image[$k] = $v;
             }
+
+            $content = strip_tags($content);
 
             $audio  = trim($req->post('audio'));
 
@@ -311,19 +321,8 @@
 
                 return $this->error("参数错误，话题类型不正确", 101, "");
             }
-            //文字话题
-            if($type == 1){
 
-                $content = strip_tags($content);
-            }else{
-
-                $tplpath = APP_ROOT . 'app/V/' . $template;
-
-                if(!file_exists($tplpath) || !is_file($tplpath)){
-
-                    return $this->error('模板不存在，请检查模板', 101, '');
-                }
-            }
+            $content = strip_tags($content);
 
             $audio  = trim($req->post('audio'));
 
@@ -337,6 +336,21 @@
                     
                     $tagsum += 1 << $v;
                 }
+            }
+
+            $image = is_array($image) ? $image : [];
+
+            foreach ($image as $k => $v) {
+                
+                $v = [
+                        'width'     => '300',
+                        'height'    => '300',
+                        'url'       => $v,
+                        'utl_t'     => $v . '?imageView2/0/w/300/h300',
+                        'platform'  => 'qiniu',
+                      ];
+
+                $image[$k] = $v;
             }
 
             $params = [
@@ -363,5 +377,23 @@
             }
 
             return $this->success('话题更新成功','');
+        }
+
+        public function switch(Request $req, Response $resp){
+
+            $topicId = intval($req->get('id'));
+
+            $status  = intval($req->get('status'));
+
+            $status  = in_array($status, [0, 1]) ? $status : 0;
+
+            $topic = new mTopic();
+
+            if(!$topic->setInfo('tid = ?', [$topicId], ['is_del' => $status])){
+
+                return $this->error('话题删除失败', 201, '');
+            }
+
+            return $this->success('话题删除成功','');
         }
     }

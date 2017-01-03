@@ -23,7 +23,7 @@
 
             if(!$actorinfo){
 
-                return $this->error(var_export($actor->getSqls(), true));
+                return $this->error("找不到任何主播", 101);
             }
 
             return $this->success('', '', ['id' => $actorinfo['aid'], 'nickname' => $actorinfo['nickname']]);

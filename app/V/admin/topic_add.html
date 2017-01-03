@@ -13,11 +13,11 @@
                 </tr>
                 <tr>
                     <td align="right">主播</td>
-                    <td><input type="text" name="actorName" value="" size="10" class="inpMain"> <input type="text" name="actorId" value="1" size="10" class="inpMain" readonly="readonly"> *发布为该主播的话题</td>
+                    <td><input type="text" name="actorName" value="" size="10" class="inpMain"> <input type="text" name="actorId" value="" size="10" class="inpMain" readonly="readonly"> *发布为该主播的话题</td>
                 </tr>
                 <tr>
                     <td align="right">发布者</td>
-                    <td><input type="text" name="publisher" value="" size="10" class="inpMain"> *发布话题的用户ID</td>
+                    <td><input type="text" name="publisher" value="<=$info.uid/>" size="10" class="inpMain"> *发布话题的用户ID</td>
                 </tr>
                 <tr>
                     <td align="right">类型</td>
@@ -28,10 +28,10 @@
                         <label data-target="audio"><input type="radio" name="type" value="4"> 音频</label>
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td align="right">模板</td>
                     <td><input type="text" name="template" value="admin/topic_info.html" size="40" class="inpMain"> *生成文件时，使用的页面模板，一般无需修改</td>
-                </tr>
+                </tr> -->
                 <tr id="image_area" class="area hide">
                     <td></td>
                     <td>

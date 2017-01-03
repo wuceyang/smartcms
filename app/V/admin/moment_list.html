@@ -24,7 +24,8 @@
                 <td align="center"><=isset($v.video_url) && $v.video_url ? 1 : 0/></td>
                 <td align="center"><=isset($v.audio_url) && $v.audio_url ? 1 : 0/></td>
                 <td align="center">
-                <a href="/admin/moment/edit-moment?id=<=$v.mid/>">编辑</a>
+                    <a href="/admin/moment/edit-moment?id=<=$v.mid/>">编辑</a>
+                    <a data-target="<=$v.is_delete/>" class="remove" href="/admin/moment/switch?id=<=$v.mid/>&status=<=1-$v.is_delete/>"><=$v.is_delete == '1' ? '恢复' : '删除'/></a>
                 </td>
             </tr>
             </loop/>
@@ -38,4 +39,42 @@
             </div>
         </if/>
     </div>
+</define/>
+
+<define name="js"/>
+<script type="text/javascript">
+
+var pWin = window;
+
+$('.remove').on('click', function(){
+
+    var url     = $(this).attr('href');
+
+    var status  = $(this).data('target');
+
+    var action = status == 1 ? '恢复' : '删除';
+
+    var opts = {
+
+        onOk:function(){
+
+            pWin.doRequest(url, null, function(ret){
+
+                if(ret.code == 200){
+
+                    top.location.reload();
+
+                    return;
+                }
+
+                pWin.showMsg(action + "动态发生错误", "系统提示");
+            })
+        }
+    };
+
+    pWin.showConfirm("确定" + action + "当前动态吗?", "动态" + action, opts);
+
+    return false;
+})
+</script>
 </define/>

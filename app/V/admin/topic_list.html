@@ -27,8 +27,8 @@
                 <td align="center"><=$v.audio_url ? 1 : 0/></td>
                 <td align="center">
                 <a href="/admin/topic/edit-topic?id=<=$v.tid/>">编辑</a>
-                <!--<if $v.content_type > 1 /> | <a class="regen" href="/admin/topic/reupload?id=<=$v.tid/>">重新生成</a></if/>-->
-                <if $v.page_url/> | <a href="<=$v.page_url/>" target="__blank">查看</a></if/>
+                <a data-target="<=$v.is_del/>" class="remove" href="/admin/topic/switch?id=<=$v.tid/>&status=<=1-$v.is_del/>"><=$v.is_del == '1' ? '恢复' : '删除'/></a>
+                <!-- <if $v.page_url/> | <a href="<=$v.page_url/>" target="__blank">查看</a></if/> -->
                 </td>
             </tr>
             </loop/>
@@ -74,6 +74,37 @@ $('.regen').on('click', function(){
     }
 
     pWin.showConfirm(content, "文件生成", options);
+
+    return false;
+})
+
+$('.remove').on('click', function(){
+
+    var url     = $(this).attr('href');
+
+    var status  = $(this).data('target');
+
+    var action = status == 1 ? '恢复' : '删除';
+
+    var opts = {
+
+        onOk:function(){
+
+            pWin.doRequest(url, null, function(ret){
+
+                if(ret.code == 200){
+
+                    top.location.reload();
+
+                    return;
+                }
+
+                pWin.showMsg(action + "话题发生错误", "系统提示");
+            })
+        }
+    };
+
+    pWin.showConfirm("确定" + action + "当前话题吗?", "话题" + action, opts);
 
     return false;
 })
