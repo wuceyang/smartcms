@@ -19,9 +19,11 @@
 
             $actorId    = '';
 
+            $isDel      = 0;
+
             $moment     = new mMoment();
 
-            $momentList = $moment->getMomentList($actorId, $page, $pagesize); 
+            $momentList = $moment->getMomentList($actorId, $isDel, $page, $pagesize); 
 
             $actors     = [];
 
@@ -42,12 +44,65 @@
 
                 $actors   = $actor->getInfoById($actorsId, 'aid');
 
-                $totalMoment = $moment->getTotalMoment($actorId);
+                $totalMoment = $moment->getTotalMoment($actorId, $isDel);
             }
 
             $param = [];
 
             $pageInfo   = $this->getPageInfo("/admin/moment", $page, $totalMoment, $param, $pagesize);
+
+            $param      = [
+                            'list'        => $momentList
+                            ,
+                            'actors'      => $actors,
+
+                            'contentType' => $contentType,
+                          ];
+
+            $param      = $param + $pageInfo;
+
+            return $resp->withView('admin/moment_list.html')->withVars($param)->display();
+        }
+
+        public function inTrash(Request $req, Response $resp){
+
+            $page       = max(intval($req->get('page')), 1);
+
+            $pagesize   = 20;
+
+            $actorId    = '';
+
+            $isDel      = 1;
+
+            $moment     = new mMoment();
+
+            $momentList = $moment->getMomentList($actorId, $isDel, $page, $pagesize); 
+
+            $actors     = [];
+
+            $contentType= [
+                            1 => '文本',
+                            2 => '图片',
+                            3 => '视频',
+                            4 => '音频',
+                          ];
+
+            $totalMoment = 0;
+
+            if($momentList){
+
+                $actorsId = array_column($momentList, 'aid');
+
+                $actor    = new Actor();
+
+                $actors   = $actor->getInfoById($actorsId, 'aid');
+
+                $totalMoment = $moment->getTotalMoment($actorId, $isDel);
+            }
+
+            $param = [];
+
+            $pageInfo   = $this->getPageInfo("/admin/moment/in-trash", $page, $totalMoment, $param, $pagesize);
 
             $param      = [
                             'list'        => $momentList
@@ -91,6 +146,8 @@
 
             $uid        = intval($req->post('publisher'));
 
+            $createTime = trim($req->post('create_date'));
+
             if(!in_array($type, [1, 2, 3, 4])){
 
                 return $this->error("参数错误，话题类型不正确", 101, "");
@@ -125,9 +182,9 @@
 
             $msg = '';
 
-            $moment->transaction(function() use($moment, $content, $type, $video, $audio, $image, $aid, $uid, $needPay, &$msg, &$flag){
+            $moment->transaction(function() use($moment, $content, $type, $video, $audio, $image, $aid, $uid, $needPay, $createTime, &$msg, &$flag){
 
-                if(!$momentId = $moment->doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay)){
+                if(!$momentId = $moment->doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay, $createTime)){
 
                     $msg = var_export($moment->getError(), true);
 
@@ -180,6 +237,8 @@
                     return $this->error('指定的动态不存在', 202, 'javascript:history.back();');
                 }
 
+                $momentInfo['image'] = $momentInfo['img_url'] ? json_decode($momentInfo['img_url'], true) : [];
+
                 $actor      = new Actor();
 
                 $actorInfo  = $actor->getInfoById($momentInfo['aid'], 'aid');
@@ -205,6 +264,8 @@
             $image      = $req->post('image');
 
             $needPay    = intval($req->post('needPay'));
+
+            $createTime = trim($req->post('create_date'));
 
             if(!in_array($type, [1, 2, 3, 4])){
 
@@ -241,6 +302,7 @@
                         'img_url'            => json_encode($image),
                         'img_count'          => count($image),
                         'needPay'            => $needPay,
+                        'create_time'        => $createTime,
                       ];
 
             if(!$moment->setInfo('mid = ?', [$momentId], $params)){

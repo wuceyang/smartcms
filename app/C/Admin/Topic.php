@@ -26,9 +26,11 @@
 
             $actorId    = '';
 
+            $isDel      = 0;
+
             $topic      = new mTopic();
 
-            $topicList  = $topic->getTopicList($actorId, $page, $pagesize); 
+            $topicList  = $topic->getTopicList($actorId, $isDel, $page, $pagesize); 
 
             $actors     = [];
 
@@ -54,7 +56,7 @@
 
                 $actors   = $actor->getInfoById($actorsId, 'aid');
 
-                $totalTopic = $topic->getTotalTopic($actorId);
+                $totalTopic = $topic->getTotalTopic($actorId, $isDel);
             }
 
             for ($i = 0; $i < count($topicList); ++$i) {
@@ -87,6 +89,91 @@
             $param = [];
 
             $pageInfo   = $this->getPageInfo("/admin/topic", $page, $totalTopic, $param, $pagesize);
+
+            $param      = [
+                            'list'        => $topicList
+                            ,
+                            'actors'      => $actors,
+
+                            'contentType' => $contentType,
+                          ];
+
+            $param      = $param + $pageInfo;
+
+            return $resp->withView('admin/topic_list.html')->withVars($param)->display();
+        }
+
+        public function inTrash(Request $req, Response $resp){
+
+            $page       = max(intval($req->get('page')), 1);
+
+            $pagesize   = 20;
+
+            $actorId    = '';
+
+            $isDel      = 1;
+
+            $topic      = new mTopic();
+
+            $topicList  = $topic->getTopicList($actorId, $isDel, $page, $pagesize); 
+
+            $actors     = [];
+
+            $contentType= [
+                            1 => '文本',
+                            2 => '图文',
+                            3 => '视频',
+                            4 => '音频',
+                          ];
+            $actionType = [
+                            1 => 'APP内部',
+                            2 => '内部浏览器',
+                            3 => '外部浏览器',
+                          ];
+
+            $totalTopic = 0;
+
+            if($topicList){
+
+                $actorsId = array_column($topicList, 'aid');
+
+                $actor    = new Actor();
+
+                $actors   = $actor->getInfoById($actorsId, 'aid');
+
+                $totalTopic = $topic->getTotalTopic($actorId, $isDel);
+            }
+
+            for ($i = 0; $i < count($topicList); ++$i) {
+                
+                $tags = [];
+
+                if(($topicList[$i]['tag'] & 1) == 1){
+
+                    $tags[] = '官方';
+                }
+
+                if(($topicList[$i]['tag'] & 2) == 2){
+
+                    $tags[] = '推广';
+                }
+
+                if(($topicList[$i]['tag'] & 4) == 4){
+
+                    $tags[] = '置顶';
+                }
+
+                if(($topicList[$i]['tag'] & 8) == 8){
+
+                    $tags[] = '加精';
+                }
+
+                $topicList[$i]['tags'] = implode(',', $tags);
+            }
+
+            $param = [];
+
+            $pageInfo   = $this->getPageInfo("/admin/topic/in-trash", $page, $totalTopic, $param, $pagesize);
 
             $param      = [
                             'list'        => $topicList
@@ -137,6 +224,8 @@
 
             $tag        = $req->post('tag');
 
+            $createTime = trim($req->post('create_date'));
+
             // if(!$title){
 
             //     return $this->error("参数错误，话题标题不能为空", 101, "");
@@ -184,9 +273,9 @@
 
             $flag = false;
 
-            $topic->transaction(function() use($topic, $content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter, &$msg, &$flag){
+            $topic->transaction(function() use($topic, $content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter, $createTime, &$msg, &$flag){
 
-                if(!$topicId = $topic->doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter)){
+                if(!$topicId = $topic->doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tagsum, $hotExpireAfter, $createTime)){
 
                     $msg = '1:' . var_export($topic->getError(),true);
 
@@ -284,6 +373,8 @@
                     return $this->error('指定的话题不存在', 202, 'javascript:history.back();');
                 }
 
+                $topicInfo['image'] = $topicInfo['img_url'] ? json_decode($topicInfo['img_url'], true) : [];
+
                 $actor = new Actor();
 
                 $actorInfo = $actor->getInfoById($topicInfo['aid'], 'aid');
@@ -314,6 +405,8 @@
             $template   = trim($req->post('template'));
 
             $tag        = $req->post('tag');
+
+            $createTime = trim($req->post('create_date'));
 
             $hotExpireAfter = $tag ? trim($req->post('hot_expire_after')) : null;
 
@@ -364,6 +457,7 @@
                         'img_count'          => count($image),
                         'tag'                => $tagsum,
                         'hot_available_time' => $hotExpireAfter,
+                        'create_time'        => $createTime,
                       ];
 
             if(!$topic->setInfo('tid = ?', [$topicId], $params)){

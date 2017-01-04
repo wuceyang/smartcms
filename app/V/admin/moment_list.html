@@ -25,7 +25,8 @@
                 <td align="center"><=isset($v.audio_url) && $v.audio_url ? 1 : 0/></td>
                 <td align="center">
                     <a href="/admin/moment/edit-moment?id=<=$v.mid/>">编辑</a>
-                    <a data-target="<=$v.is_delete/>" class="remove" href="/admin/moment/switch?id=<=$v.mid/>&status=<=1-$v.is_delete/>"><=$v.is_delete == '1' ? '恢复' : '删除'/></a>
+                    | <a data-target="<=$v.is_delete/>" class="remove" href="/admin/moment/switch?id=<=$v.mid/>&status=<=1-$v.is_delete/>"><=$v.is_delete == '1' ? '恢复' : '删除'/></a>
+                    | <a href="/admin/moment/info?id=<=$v.mid/>" class="info">详情</a>
                 </td>
             </tr>
             </loop/>

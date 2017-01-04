@@ -5,7 +5,7 @@
 
         public static $table = 'tbl_topic';
 
-        public function getTopicList($actorId = null, $page = 0, $pagesize = 20){
+        public function getTopicList($actorId = null, $isdel = 0, $page = 0, $pagesize = 20){
 
             $where = $param = [];
 
@@ -14,6 +14,13 @@
                 $where[] = 'aid = ?';
 
                 $param[] = intval($aid);
+            }
+
+            if(is_numeric($isdel)){
+
+                $where[] = 'is_del = ?';
+
+                $param[] = intval($isdel);
             }
 
             if($where){
@@ -30,7 +37,7 @@
 
         }
 
-        public function getTotalTopic($actorId = null){
+        public function getTotalTopic($actorId = null, $isdel = 0){
 
             $where = $param = [];
 
@@ -41,6 +48,13 @@
                 $param[] = intval($aid);
             }
 
+            if(is_numeric($isdel)){
+
+                $where[] = 'is_delete = ?';
+
+                $param[] = intval($isdel);
+            }
+
             if($where){
 
                 $this->where(implode(' AND ', $where), $param);
@@ -49,7 +63,7 @@
             return $this->getCount();
         }
 
-        public function doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tag, $hot_available_datetime){
+        public function doTopic($content, $type, $action, $video, $audio, $image, $aid, $uid, $tag, $hot_available_datetime, $createTime){
 
 
             $data = [
@@ -63,7 +77,7 @@
                 'video_url'     => $video,
                 'action'        => intval($action),
                 '`check`'       => 1,
-                'create_time'   => date('Y-m-d H:i:s'),
+                'create_time'   => $createTime ? $createTime : date('Y-m-d H:i:s'),
                 'tag'           => $tag,
             ];
 

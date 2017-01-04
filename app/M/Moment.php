@@ -5,7 +5,7 @@
 
         public static $table = 'tbl_moment';
 
-        public function getMomentList($actorId = null, $page = 0, $pagesize = 20){
+        public function getMomentList($actorId = null, $isdel = false, $page = 0, $pagesize = 20){
 
             $where = $param = [];
 
@@ -14,6 +14,13 @@
                 $where[] = 'aid = ?';
 
                 $param[] = intval($aid);
+            }
+
+            if(is_numeric($isdel)){
+
+                $where[] = 'is_delete = ?';
+
+                $param[] = intval($isdel);
             }
 
             if($where){
@@ -30,7 +37,7 @@
 
         }
 
-        public function getTotalMoment($actorId = null){
+        public function getTotalMoment($actorId = null, $isdel = 0){
 
             $where = $param = [];
 
@@ -41,6 +48,13 @@
                 $param[] = intval($aid);
             }
 
+            if(is_numeric($isdel)){
+
+                $where[] = 'is_delete = ?';
+
+                $param[] = intval($isdel);
+            }
+
             if($where){
 
                 $this->where(implode(' AND ', $where), $param);
@@ -49,7 +63,7 @@
             return $this->getCount();
         }
 
-        public function doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay){
+        public function doPost($content, $type, $video, $audio, $image, $aid, $uid, $needPay, $createTime){
 
 
             $data = [
@@ -62,7 +76,7 @@
                 'content_type'  => intval($type),
                 'video_url'     => $video,
                 'needPay'       => intval($needPay),
-                'create_time'   => date('Y-m-d H:i:s'),
+                'create_time'   => $createTime ? $createTime : date('Y-m-d H:i:s'),
             ];
 
             return $this->insert($data);

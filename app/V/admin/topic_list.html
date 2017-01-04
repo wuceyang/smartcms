@@ -27,8 +27,8 @@
                 <td align="center"><=$v.audio_url ? 1 : 0/></td>
                 <td align="center">
                 <a href="/admin/topic/edit-topic?id=<=$v.tid/>">编辑</a>
-                <a data-target="<=$v.is_del/>" class="remove" href="/admin/topic/switch?id=<=$v.tid/>&status=<=1-$v.is_del/>"><=$v.is_del == '1' ? '恢复' : '删除'/></a>
-                <!-- <if $v.page_url/> | <a href="<=$v.page_url/>" target="__blank">查看</a></if/> -->
+                | <a data-target="<=$v.is_del/>" class="remove" href="/admin/topic/switch?id=<=$v.tid/>&status=<=1-$v.is_del/>"><=$v.is_del == '1' ? '恢复' : '删除'/></a>
+                | <a href="/admin/topic/info?id=<=$v.tid/>" class="info">详情</a>
                 </td>
             </tr>
             </loop/>
