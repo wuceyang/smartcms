@@ -157,7 +157,7 @@
                         'width'     => '300',
                         'height'    => '300',
                         'url'       => $v,
-                        'utl_t'     => $v . '?imageView2/0/w/300/h300',
+                        'url_t'     => $v . '?imageView2/0/w/300/h300',
                         'platform'  => 'qiniu',
                       ];
 
@@ -346,7 +346,7 @@
                         'width'     => '300',
                         'height'    => '300',
                         'url'       => $v,
-                        'utl_t'     => $v . '?imageView2/0/w/300/h300',
+                        'url_t'     => $v . '?imageView2/0/w/300/h300',
                         'platform'  => 'qiniu',
                       ];
 
