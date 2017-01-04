@@ -164,7 +164,7 @@
                 $image[$k] = $v;
             }
 
-            $content = strip_tags($content);
+            $content = $this->formatContent($content);
 
             $audio  = trim($req->post('audio'));
 
@@ -180,7 +180,7 @@
                 }
             }
 
-            $msg = '';
+            $msg  = '';
 
             $flag = false;
 
@@ -322,7 +322,7 @@
                 return $this->error("参数错误，话题类型不正确", 101, "");
             }
 
-            $content = strip_tags($content);
+            $content = $this->formatContent($content);
 
             $audio  = trim($req->post('audio'));
 

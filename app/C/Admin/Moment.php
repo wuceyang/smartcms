@@ -115,7 +115,7 @@
                 $image[$k] = $v;
             }
 
-            $content = strip_tags($content);
+            $content = $this->formatContent($content);
 
             $audio  = trim($req->post('audio'));
 
@@ -226,7 +226,7 @@
                 $image[$k] = $v;
             }
 
-            $content = strip_tags($content);
+            $content = $this->formatContent($content);
 
             $audio  = trim($req->post('audio'));
 

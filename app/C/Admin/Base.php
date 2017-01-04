@@ -264,4 +264,20 @@
 
             return $userMenu;
 		}
+
+		//正文内容处理
+		public function formatContent($str){
+
+			$str = strip_tags($str);
+
+			return str_replace('&nbsp;', ' ', $str);
+		}
+
+		//标题处理
+		public function formatTitle($str){
+
+			$str = strip_tags($str);
+
+			return str_replace('&nbsp;', '', $str);
+		}
 	}
