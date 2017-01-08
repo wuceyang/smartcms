@@ -144,6 +144,13 @@ var buckets = {
 
 var editor = new wangEditor('contentbox');
 
+    editor.onchange = function(){
+
+        $('#content_text').val(this.$txt.html());
+    }
+
+    editor.config.emotionsShow = 'value';
+
     editor.create();
 
     editor.$txt.html(content);

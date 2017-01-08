@@ -145,6 +145,8 @@ var editor = new wangEditor('contentbox');
         $('#content_text').val(this.$txt.html());
     }
 
+    editor.config.emotionsShow = 'value';
+
     editor.create();
 
 $(':radio[name=datatype]').on('click', function(){

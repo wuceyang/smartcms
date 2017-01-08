@@ -47,6 +47,8 @@
 
 var pWin = window;
 
+var momentType = {1: '文字', 2: '图片', 3: '音频', 4: '视频'};
+
 $('.remove').on('click', function(){
 
     var url     = $(this).attr('href');
@@ -74,6 +76,41 @@ $('.remove').on('click', function(){
     };
 
     pWin.showConfirm("确定" + action + "当前动态吗?", "动态" + action, opts);
+
+    return false;
+})
+
+$('.info').on('click', function(){
+
+    var url = $(this).attr('href');
+
+    pWin.doRequest(url, null, function(ret){
+
+        if(ret.code == 200){
+
+            var imgHtml = [];
+
+            if(ret.data.images.length > 0){
+
+                for(var i in ret.data.images){
+
+                    imgHtml.push('<img src="' + ret.data.images[i].url_t + '" class="popimg"/>')
+                }
+            }
+
+            var contentHtml = '<div class="poppreview">'
+                              + '<div class="poprow"><label>类型:' + momentType[ret.data.type]  + '</label></div>'
+                              + '<div class="poprow"><label>内容:' + ret.data.content.replace(/\<.+?\>/g, '')  + '</label></div>'
+                              + (imgHtml.length > 0 ? '<div class="poprow">' + imgHtml.join('')  + '</div>' : '')
+                              + '</div>';
+
+            pWin.showMsg(contentHtml, "话题详情");
+
+            return;
+        }
+
+        pWin.showMsg(ret.message || '请求动态详情发生错误', '系统提示');
+    });
 
     return false;
 })

@@ -46,7 +46,12 @@
 
 <define name="js"/>
 <script type="text/javascript">
+
 var pWin = window;
+
+var tagNames = {1: '官方', 2: '推广', 4: '置顶', 8: '加精'};
+
+var topicType = {1: '文字', 2: '图片', 3: '视频', 4: '音频'};
 
 $('.regen').on('click', function(){
 
@@ -105,6 +110,55 @@ $('.remove').on('click', function(){
     };
 
     pWin.showConfirm("确定" + action + "当前话题吗?", "话题" + action, opts);
+
+    return false;
+})
+
+$('.info').on('click', function(){
+
+    var url = $(this).attr('href');
+
+    pWin.doRequest(url, null, function(ret){
+
+        if(ret.code == 200){
+
+            var imgHtml = [];
+
+            if(ret.data.images.length > 0){
+
+                for(var i in ret.data.images){
+
+                    imgHtml.push('<img src="' + ret.data.images[i].url_t + '" class="popimg"/>')
+                }
+            }
+
+            var tagHtml = [];
+
+            if(ret.data.tags){
+
+                for(var i in tagNames){
+
+                    if(i & ret.data.tags == i){
+
+                        tagHtml.push(tagNames[i]);
+                    }
+                }
+            }
+
+            var contentHtml = '<div class="poppreview">'
+                              + (tagHtml.length > 0 ? '<div class="poprow"><label>标签:' + tagHtml.join('')  + '</label></div>' : '')
+                              + '<div class="poprow"><label>类型:' + topicType[ret.data.type]  + '</label></div>'
+                              + '<div class="poprow"><label>内容:' + ret.data.content.replace(/\<.+?\>/g, '')  + '</label></div>'
+                              + (imgHtml.length > 0 ? '<div class="poprow">' + imgHtml.join('')  + '</div>' : '')
+                              + '</div>';
+
+            pWin.showMsg(contentHtml, "话题详情");
+
+            return;
+        }
+
+        pWin.showMsg(ret.message || '请求话题详情发生错误', '系统提示');
+    });
 
     return false;
 })

@@ -1566,3 +1566,12 @@ select {
     background-color: #DDD;
 }
 /*----------------分页样式结束-----------------*/
+.poppreview .poprow{
+    line-height: 30px;
+    max-width:330px;
+}
+
+.poppreview .poprow .popimg{
+    height:60px;
+    margin:3px;
+}

@@ -282,9 +282,9 @@
                     return false;
                 }
 
-                $topicCount = new TopicCount();
+                //$topicCount = new TopicCount();
 
-                $topicCount->insert(['id' => intval($topicId)]);
+                //$topicCount->insert(['id' => intval($topicId)]);
 
                 $flag =  true;
 
@@ -489,5 +489,31 @@
             }
 
             return $this->success('话题删除成功','');
+        }
+
+        public function info(Request $req, Response $resp){
+
+            $topicId    = intval($req->get('id'));
+
+            $topic      = new mTopic();
+
+            $topicInfo  = $topic->getInfoById($topicId, 'tid');
+
+            if(!$topicInfo){
+
+                return $this->error("找不到指定的话题信息" . var_export($topic->getSqls()), 201);
+            }
+
+            $retinfo = [
+                        'content' => $topicInfo['content_text'],
+                        'images'  => $topicInfo['img_url'] ? json_decode($topicInfo['img_url']) : [],
+                        'video'   => $topicInfo['video_url'],
+                        'audio'   => $topicInfo['audio_url'],
+                        'type'    => $topicInfo['content_type'],
+                        'tags'    => $topicInfo['tag'],
+                        'pubtime' => $topicInfo['create_time'],
+                        ];
+
+            return $this->success('', '', $retinfo);
         }
     }

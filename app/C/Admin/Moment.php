@@ -330,4 +330,30 @@
 
             return $this->success('动态删除成功','');
         }
+
+        public function info(Request $req, Response $resp){
+
+            $momentId   = intval($req->get('id'));
+
+            $moment     = new mMoment();
+
+            $momentInfo = $moment->getInfoById($momentId, 'mid');
+
+            if(!$momentInfo){
+
+                return $this->error("找不到指定的话题信息" . var_export($moment->getSqls()), 201);
+            }
+
+            $retinfo = [
+                        'content' => $momentInfo['content_text'],
+                        'images'  => $momentInfo['img_url'] ? json_decode($momentInfo['img_url']) : [],
+                        'video'   => $momentInfo['video_url'],
+                        'audio'   => '',
+                        'type'    => $momentInfo['content_type'],
+                        'needpay' => $momentInfo['needPay'],
+                        'pubtime' => $momentInfo['create_time'],
+                        ];
+
+            return $this->success('', '', $retinfo);
+        }
     }
