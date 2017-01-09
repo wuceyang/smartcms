@@ -145,6 +145,13 @@ var editor = new wangEditor('contentbox');
         $('#content_text').val(this.$txt.html());
     }
 
+    editor.config.emotions = {
+        default: {
+            title: '微博',
+            data: '/emotion/sina.js',
+        }
+    };
+
     editor.config.emotionsShow = 'value';
 
     editor.create();
