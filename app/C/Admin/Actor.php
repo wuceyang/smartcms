@@ -27,4 +27,30 @@
 
             return $this->success('', '', ['id' => $actorinfo['aid'], 'nickname' => $actorinfo['nickname']]);
         }
+
+        public function search(Request $req, Response $resp){
+
+            $kw = trim($req->post('kw'));
+
+            if(!$kw){
+
+                return $this->success('','',[]);
+            }
+
+            $actor      = new mActor();
+
+            $actors     = $actor->actorSearch($kw);
+
+            $actorlist  = [];
+
+            foreach($actors as $k => $v){
+
+                $actorlist[] = [
+                    'id'    => $v['aid'],
+                    'name'  => $v['nickname'],
+                ];
+            }
+
+            return $this->success('','', $actorlist);
+        }
     }

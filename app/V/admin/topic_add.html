@@ -13,7 +13,7 @@
                 </tr>
                 <tr>
                     <td align="right">主播</td>
-                    <td><input type="text" name="actorName" value="" size="10" class="inpMain"> <input type="text" name="actorId" value="" size="10" class="inpMain" readonly="readonly"> *发布为该主播的话题</td>
+                    <td><label class="suggest"><input type="text" name="actorName" value="" size="10" class="inpMain"></label> <input type="text" name="actorId" value="" size="10" class="inpMain" readonly="readonly"> *发布为该主播的话题</td>
                 </tr>
                 <tr>
                     <td align="right">发布者</td>
@@ -35,7 +35,7 @@
                 <tr id="image_area" class="area">
                     <td></td>
                     <td>
-                        <div class="imagepath fleft  hide">
+                        <div class="imagepath fleft hide">
                         </div>
                         <div class="uploadbox fleft">
                             <div data-bucket="image" data-max="9" id="imagelist-uploader" data-field="image" class="uploader icon-plus icon-large dashed"></div>
@@ -200,6 +200,8 @@ $(':radio[name=datatype]').on('click', function(){
 
 var deletefile = {};
 
+var uploaded = true;
+
 function createUploader(_this){
     var bucket   = $(_this).data('bucket');
     var field    = $(_this).data('field');
@@ -224,12 +226,13 @@ function createUploader(_this){
                 
             },
             BeforeUpload: function(){
+                uploaded = false;
                 var td = $(_this).parent('div').parent('td');
                 $('<div class="imgpreview"><div class="progressbox"><div class="progressbar"></div></div></div>').appendTo($('.imagepath',td));
+                $('.imagepath', td).removeClass('hide');
             },
             UploadComplete: function(uploader, fileinfo){
-                console.log(arguments);
-                return;
+                uploaded = true;
                 var preview = [];
                 var td = $(_this).parent('div').parent('td');
                 var fieldName = field == 'image' ? 'image[]' : field;
@@ -237,10 +240,9 @@ function createUploader(_this){
                     if(deletefile[fileinfo[i].id]) continue;
                     var url = buckets[bucket] + '/' + fileinfo[i].target_name;
                     var previewhtml = createPreview(url, bucket);
-                    preview.push('<div class="imgpreview" data-id="' + fileinfo[i].id + '"><input type="hidden" name="' + fieldName + '" value="' + url + '">' + previewhtml + '</div>');
+                    preview.push('<div title="点击删除当前项" class="imgpreview" data-id="' + fileinfo[i].id + '"><input type="hidden" name="' + fieldName + '" value="' + url + '">' + previewhtml + '</div>');
                 }
                 $('.imagepath', td).html($(preview.join('')));
-                $('.imagepath', td).removeClass('hide');
                 var max = $(_this).data('max');
                 //达到最大值，隐藏上传按钮
                 if(max > 0 && $('.imgpreview', $(_this).parent('div').parent('td')).size() >= max){
@@ -267,17 +269,17 @@ function createPreview(url, bucket){
 
     if(bucket == 'image'){
 
-        return '<img title="点击删除当前图片" src="' + url + '" height="100%"/>';
+        return '<img src="' + url + '" height="100%"/>';
     }
 
     if(bucket == 'video'){
 
-        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持视频预览</video>';
+        return '<div data-url="' + url + '" class="icon-film video"></div>';
     }
 
     if(bucket == 'audio'){
 
-        return '<video src="' + url + '" controls="controls" preload="preload" width="100%">您的浏览器不支持音频预览</video>';
+        return '<div data-url="' + url + '" class="icon-microphone video"></div>';
     }
 }
 
@@ -321,28 +323,35 @@ $('.topic_type label').on('click', function(){
     }
 })
 
-$('input[name=actorName]').on('blur', function(){
+// $('input[name=actorName]').on('blur', function(){
 
-    var actorName = $.trim($(this).val());
+//     var actorName = $.trim($(this).val());
 
-    if(actorName.length == 0){
+//     if(actorName.length == 0){
 
-        return;
-    }
+//         return;
+//     }
 
-    pWin.doRequest('/admin/actor/get-actor', {actorName: actorName}, function(ret){
+//     pWin.doRequest('/admin/actor/get-actor', {actorName: actorName}, function(ret){
 
-        if(ret.code == 200){
+//         if(ret.code == 200){
 
-            if(ret.data.id > 0){
+//             if(ret.data.id > 0){
 
-                $('input[name=actorId]').val(ret.data.id);
-            }
-        }
-    });
-})
+//                 $('input[name=actorId]').val(ret.data.id);
+//             }
+//         }
+//     });
+// })
 
 $('#submit').on('click', function(){
+
+    if(!uploaded){
+
+        pWin.showMsg("文件上传中，请稍候。。。", "上传提示");
+
+        return false;
+    }
 
     var form = $('form');
 
@@ -351,7 +360,86 @@ $('#submit').on('click', function(){
     pWin.doRequest(form.attr('action'), params, function(ret){
             pWin.showMsg(ret.code == 200 ? '话题发布成功' : (ret.message || '话题发布失败'), '话题发布');
     });
+
+    return false;
 })
 
+$('input[name=actorName]').on('input propertychange', function(){
+
+    var kw = $.trim($(this).val());
+
+    if(kw.length == 0) return;
+
+    pWin.doRequest('/admin/actor/search', {kw: kw}, function(ret){
+
+        var actors = [];
+
+        if(ret.data){
+
+            actors.push('<ul>');
+
+            for(var i in ret.data){
+
+                var cls = i == 0 ? ' class="active"' : '';
+
+                actors.push('<li data-aid="' + ret.data[i].id + '"' + cls + '>' + ret.data[i].name + '</li>');
+            }
+
+            actors.push('</ul>');
+        }
+
+        var box = $('.suggest');
+
+        $('ul', box).remove();
+
+        if(actors){
+
+            $(box).append(actors.join(''));
+
+            $('ul', box).show();
+        }
+
+    });
+});
+
+$('input[name=actorName]').on('focus', function(){
+
+    if($('.suggest').find('ul>li').size() > 0){
+
+        $('.suggest>ul').show();
+    }
+})
+$('.suggest').delegate('ul', 'mouseenter', function(){
+
+    $(this).show();
+});
+
+$('.suggest').delegate('ul', 'mouseleave', function(){
+
+    $(this).hide();
+});
+
+$('.suggest').delegate('ul>li', 'mouseenter', function(){
+
+    $(this).addClass('active');
+})
+
+$('.suggest').delegate('ul>li', 'mouseleave', function(){
+
+    $(this).removeClass('active');
+})
+
+$('.suggest').delegate('ul>li', 'click', function(){
+
+    var actorId = $('input[name=actorId]');
+
+    actorId.val($(this).data('aid'));
+
+    $('input[name=actorName]').val($(this).text());
+
+    $(this).parent('ul').hide();
+
+    $(actorId)[0].focus();
+})
 </script>
 </define/>
