@@ -3,7 +3,6 @@
 
     use \Request;
     use \Response;
-
     use \App\M\Actor AS mActor;
 
     class Actor extends Base{

@@ -138,9 +138,9 @@
 
 <define name="js"/>
 <script type="text/javascript" src="/wangeditor/js/wangEditor.min.js"></script>
-<script type="text/javascript" src="/jqplugin/qiniu.js"></script>
-<script type="text/javascript" src="/jqplugin/pupload/pupload.full.js"></script>
 <script type="text/javascript" src="/jqplugin/pupload/moxie.js"></script>
+<script type="text/javascript" src="/jqplugin/qiniu.cs.js"></script>
+<script type="text/javascript" src="/jqplugin/pupload/pupload.cs.js"></script>
 <script type="text/javascript" src="/jqplugin/calendar/laydate.js"></script>
 <script type="text/javascript">
 
@@ -228,6 +228,8 @@ function createUploader(_this){
                 $('<div class="imgpreview"><div class="progressbox"><div class="progressbar"></div></div></div>').appendTo($('.imagepath',td));
             },
             UploadComplete: function(uploader, fileinfo){
+                console.log(arguments);
+                return;
                 var preview = [];
                 var td = $(_this).parent('div').parent('td');
                 var fieldName = field == 'image' ? 'image[]' : field;

@@ -1,12 +1,12 @@
 /*!
- * qiniu-js-sdk v1.0.17.1
+ * qiniu-js-sdk v@VERSION
  *
  * Copyright 2015 by Qiniu
  * Released under GPL V2 License.
  *
  * GitHub: http://github.com/qiniu/js-sdk
  *
- * Date: 2016-10-13
+ * Date: @DATE
 */
 
 /*global plupload ,mOxie*/
@@ -660,7 +660,7 @@ function QiniuJsSDK() {
         };
 
         var getUptoken = function(file) {
-            if (!that.token || (op.uptoken_url && that.tokenInfo.isExpired())) {
+            if (!that.token || that.tokenInfo.isExpired()) {
                 return getNewUpToken(file);
             } else {
                 return that.token;

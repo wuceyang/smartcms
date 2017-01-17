@@ -1,12 +1,12 @@
 /*!
- * qiniu-js-sdk v1.0.17.1
+ * qiniu-js-sdk v@VERSION
  *
  * Copyright 2015 by Qiniu
  * Released under GPL V2 License.
  *
  * GitHub: http://github.com/qiniu/js-sdk
  *
- * Date: 2016-10-13
+ * Date: @DATE
 */
 
 /*global plupload ,mOxie*/
@@ -147,7 +147,7 @@ function QiniuJsSDK() {
     if (window.location.protocol === 'https:') {
         qiniuUploadUrl = 'https://up.qbox.me';
     } else {
-        qiniuUploadUrl = 'http://upload.qiniu.com';
+        qiniuUploadUrl = 'http://up-z2.qiniu.com';
     }
 
     /**
@@ -156,13 +156,13 @@ function QiniuJsSDK() {
      * @type {Array}
      */
     var qiniuUploadUrls = [
-        "http://upload.qiniu.com",
+        "http://up-z2.qiniu.com",
         "http://up.qiniu.com"
     ];
 
     var qiniuUpHosts = {
        "http": [
-           "http://upload.qiniu.com",
+           "http://up-z2.qiniu.com",
            "http://up.qiniu.com"
        ],
        "https": [
@@ -586,9 +586,12 @@ function QiniuJsSDK() {
             var result = [];
             for (var i = 0; i < hosts.length; i++) {
                 var host = hosts[i];
-                if (host.indexOf('-H') === 0) {
-                    result.push(host.split(' ')[2]);
-                } else {
+                // if (host.indexOf('-H') === 0) {
+                //     result.push(host.split(' ')[2]);
+                // } else {
+                //     result.push(host);
+                // }
+                if(host.substring(0, 4) == 'http'){
                     result.push(host);
                 }
             }
@@ -1033,6 +1036,7 @@ function QiniuJsSDK() {
                     }
                     // TODO: to support bput
                     // http://developer.qiniu.com/docs/v6/api/reference/up/bput.html
+                    console.log(qiniuUploadUrl + '/mkblk/' + blockSize);
                     up.setOption({
                         'url': qiniuUploadUrl + '/mkblk/' + blockSize,
                         'multipart': false,
@@ -1081,6 +1085,7 @@ function QiniuJsSDK() {
             var leftSize = info.total - info.offset;
             var chunk_size = up.getOption && up.getOption('chunk_size');
             chunk_size = chunk_size || (up.settings && up.settings.chunk_size);
+            console.log(chunk_size);
             if (leftSize < chunk_size) {
                 up.setOption({
                     'url': qiniuUploadUrl + '/mkblk/' + leftSize
@@ -1308,7 +1313,11 @@ function QiniuJsSDK() {
                         }
                     }
 
+                    console.log(file);
+
                     var url = qiniuUploadUrl + '/mkfile/' + file.size + key + fname + x_vars_url;
+
+                    console.log(url);
 
                     var ie = that.detectIEVersion();
                     var ajax;
@@ -1335,7 +1344,8 @@ function QiniuJsSDK() {
                                     status: ajax.status,
                                     response: ajax.responseText,
                                     file: file,
-                                    code: -200
+                                    code: -200,
+                                    responseHeaders: ajax.getAllResponseHeaders()
                                 };
                                 logger.debug("mkfile is error: ", info);
                                 uploader.trigger('Error', info);
