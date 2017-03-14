@@ -1,0 +1,129 @@
+.star-tool{
+    position: absolute;
+    right: 20px;
+    top: 60px;
+}
+.star-text{
+	position: relative;
+    padding: 15px 0 0;
+    clear: both;
+    color: #373737;
+    clear: both;
+}
+.star-text-h1{
+	color: #393D49; font-size: 28px; font-weight: 300; margin: 0px 10px 10px 0px; padding-top: 15px;
+}
+.star-page{
+	margin: 10px 20px;
+}
+.star-page .active{
+	background-color:#009688;
+}
+.star-page .star-total{
+	display: inline-block;
+	margin: 10px 0px;
+}
+.star-uploadbox{
+	height: 36px;
+    margin: 11px;
+}
+.star-uploader{
+	width:38px;
+    text-align: center;
+    line-height: 36px;
+    display: block;
+    cursor: pointer;
+}
+.star-dash{
+	border: 1px dashed #DDD;
+}
+.star-bgwhite{
+	background-color: #FFF;
+}
+.star-imagepath{
+	margin: 0px -5px;
+}
+.star-imagepreview{
+	width: 80px;
+	height: 60px;
+	margin: 0px 5px;
+}
+.star-imagepreview img{
+	width: 100%;
+	height: 100%;
+}
+.star-progressbox{
+	height: 100%;
+}
+.star-progressbar{
+	width: 0%;
+	height: 100%;
+	background-color: #009688;
+}
+.star-sub{
+	margin-left: 40px;
+}
+/************公共属性***************/
+.star-bottom{
+	vertical-align: bottom;
+}
+.star-left{
+	float: left;
+}
+.star-right{
+	float: right;
+}
+.star-clear{
+	clear: both;
+}
+.star-hide{
+	display: none;
+}
+.star-select100{
+	width: 100px;
+}
+.star-size20{
+	font-size: 20px;
+}
+.star-mt20{
+	margin-top: 20px;
+}
+.star-date{
+	width: 100px;
+}
+
+.recom-nickname{
+	width:150px;
+	height: 38px;
+	line-height: 38px;
+	line-height: 36px\9;
+	border: 1px solid #e6e6e6;
+	background-color: #fff;
+	border-radius: 2px;
+	padding-left:5px;
+}
+
+.recom-addnew-btns{
+	margin-left:112px;
+}
+
+.star-suggest ul{
+	width:150px;
+}
+
+/*提示*/
+.notice-tips{
+	line-height:36px;
+	font-size:16px;
+	color:red;
+}
+
+/*远传音乐特殊的字段*/
+.music-items{
+	display:none;
+}
+
+/*主播列表页搜索*/
+.search-form{
+	margin-top:30px;
+}

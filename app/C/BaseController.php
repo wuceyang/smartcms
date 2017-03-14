@@ -10,6 +10,6 @@
 
         public function __construct(Request $req, Response $resp){
 
-			
+			define('__RESPATH__', '');
         }
 	}

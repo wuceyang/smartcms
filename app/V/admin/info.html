@@ -1,19 +1,22 @@
 <extend from="admin/base.html"/>
 
 <define name="content"/>
-    <div style="maring-left:0px;background-color:#FFF;padding-top:40px; zoom:1;">
-        <div id="urHere">信息提示</div>
-        <div id="index" class="mainBox" style="padding-top:18px;height:auto!important;height:550px;min-height:550px;">
-            <div class="warning" style="line-height: 30px;">
-                <p><=$message/></p>
-                </p>系统会在<label id="timer">3</label>秒后自动跳转，如果页面没有自动跳转，请<a href="<=$uri/>">点击这里</a></p>
-            </div>
-        </div>
+    <div class="layui-tab layui-tab-card" id="tipbox" lay-filter="demo" style="margin: 0px auto; margin-top: 100px; width: 80%;">
+    <ul class="layui-tab-title">
+        <li class="layui-this">信息提示</li>
+    </ul>
+    <div class="layui-tab-content" style="padding: 10px;">
+    <div class="layui-tab-item layui-show">
+        <p>1.<=$message/></p>
+        </p>2.系统会在<label id="timer">3</label>秒后自动跳转，如果页面没有自动跳转，请<a href="<=$uri/>">点击这里</a></p>   
     </div>
+  </div>
+</div>
 </define/>
 
 <define name="js"/>
 <script type="text/javascript">
+
     var timer = document.getElementById('timer');
 
     var _timer = setInterval(function(){
