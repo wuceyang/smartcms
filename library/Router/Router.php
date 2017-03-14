@@ -112,14 +112,27 @@
 
             $this->resolveRoute();
 
+            $request   = Request::getInstance();
+            
+            $subdomain = Config::get('global.subdomain');
+            //如果配置了子域名，则强制指定子域名对应的分组
+            if(isset($subdomain) && $subdomain){
+
+                $host = $request->server('HTTP_HOST');
+
+                if(isset($subdomain[$host])){
+
+                    $this->_group = $this->toCamel($subdomain[$host]);
+                }
+            }
+
             $controllerPath = "\\App\\C\\" . ($this->_group ? $this->_group . '\\' : '') . $this->_controller;
 
             if(!class_exists($controllerPath)){
 
                 $prefixGroup = $this->_group . ($this->_group?'/':'');
 
-                throw new Exception("找不到指定的控制器:" . $prefixGroup . $this->_controller . '[' . $_SERVER['REQUEST_URI'] . ']', 101);
-
+                throw new Exception("找不到指定的控制器:" . $prefixGroup . $this->_controller . '[' . $request->server('REQUEST_URI') . ']', 101);
             }
 
             if(!method_exists($controllerPath, $this->_action)){
@@ -128,8 +141,6 @@
 
                 throw new Exception("找不到指定的处理方法:" . $prefixGroup . $this->_controller . '/' . $this->_action, 102);
             }
-
-            $request = Request::getInstance();
 
             $request->setController($this->_controller);
 

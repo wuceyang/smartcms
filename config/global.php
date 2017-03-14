@@ -12,6 +12,10 @@
                         //非正常query string模式下，params参数分隔符，比如:id-10-order-100,此时，分隔符为-;可以在此参数后面接正常的?和query string。如果参数只放在query string中，seperator请置为空字符串
                         'seperator'     => '/',
                         ],
+        //子域名与模块(group)的对应关系
+        'subdomain'  => [
+                        'm.wangxingcm.com' => 'H5'
+                        ],
         //是否记录日志
         'debug'     => true,
         //是否调试sql语句，在需要调试的模板底部使用<include file="sql.html"/>,如果未true会在该位置输出所有执行过的sql,可用参数:true/false
