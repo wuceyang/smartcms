@@ -27,7 +27,8 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree site-demo-nav">
-            <loop $menu $k $v/>
+            <loop $menu.0 $k $v/>
+            <php var_export($v); />
             <if isset($v.IsFixed) && $v.IsFixed && $userinfo.IsFixed || !isset($v.IsFxied)/>
             <li class="layui-nav-item<if preg_match('/(' . $v.flag . ')/i', $req->getController())/> layui-nav-itemed</if/>">
                 <a href="javascript:;">
@@ -37,7 +38,7 @@
                 <dl class="layui-nav-child">
                 <loop $v.sub $sk $sv/>
                 <dd<if $req->server('REQUEST_URI') == $sv/> class="layui-this"</if/>>
-                    <a href="<=$sv/>" class="star-sub"><=$sk/></a>
+                    <a href="<=$sv.url/>" class="star-sub"><=$sv.text/></a>
                 </dd>
                 </loop/>
                 </dl>

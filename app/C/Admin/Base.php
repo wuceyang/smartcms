@@ -58,6 +58,8 @@
 
 			$params = [
 						'menu' => $this->initSideBar(),
+						'req'  => &$req,
+						'resp' => &$resp,
 					  ];
 
 			$resp->withVars($params);
@@ -234,8 +236,6 @@
 
             $menuIds     = array_column($groupMenus, 'menu_id');
 
-            $menuIds     = array_map('trim', $menuIds);
-
             $userMenus   = explode(',', implode(',', $menuIds));
 
             $menu        = new Menu();
@@ -253,9 +253,10 @@
 
                 $userMenu[$v['parent_id']][] = [
                                                     'id'    => $v['id'],
-                                                    'name'  => $v['title'],
+                                                    'text'  => $v['title'],
                                                     'url'   => $v['url'],
                                                     'icon'  => $v['icon'],
+                                                    'flag'  => 'a',
                                                     'sub'   => &$userMenu[$v['id']],
                                                 ];
             }
