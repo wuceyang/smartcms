@@ -25,4 +25,15 @@
                 'charset' 	=> 'utf8'
             ],
         ],
+        'redis' => [
+	        
+	        'default' => [
+		        'host' 		=> 'localhost',
+		        'port' 		=> '6379',
+		        'username' 	=> '',
+		        'password' 	=> '',
+		        //key的前缀，以区分不同站点(多站点在同一db中可以定义相同key，不会冲突)
+		        'keyPrefix' => '',
+	        ]
+        ]
 	];

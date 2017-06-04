@@ -64,12 +64,17 @@
                         'maxLifetime' => 3600 * 24,
                         //session前缀
                         'prefix' => '',
-                        //加密密钥
-                        'encryptKey' => '&1as#r$',
                         //session回收百分比,可用值1-100,不建议使用较大的值
                         'gc_probability' => 5,
                         //session id在cookie中的名称
                         'cookieName' => 'SmartSid',
+                        //session内容加密解密方法，安全起见，建议设置,需要继承\Lib\Crypto\Base
+                        'crypto' => [
+	                        //加密解密类
+                        	'class'	=> '\\Library\\Crypto\\EcCrypto',
+                        	//加密解密密钥
+                        	'key'   => '&1as#r$',
+                        ]
                     ]
                 ],
     ];

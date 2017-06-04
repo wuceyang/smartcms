@@ -25,6 +25,7 @@
 				}
 
 				$debug = \Config::get('global.debug');
+
 				if($debug){
 					//注册会话结束自动保存函数
 					register_shutdown_function([$logDriver, 'save']);
@@ -33,18 +34,23 @@
 		}
 
 		public static function debug($info){
-			// var_export(debug_backtrace());
+
 			self::init();
+			
 			self::setLog('debug', $info);
 		}
 
 		public static function error($info){
+			
 			self::init();
+			
 			self::setLog('error', $info);
 		}
 
 		public static function info($info){
+			
 			self::init();
+			
 			self::setLog('error', $info);
 		}
 

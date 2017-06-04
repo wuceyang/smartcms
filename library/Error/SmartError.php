@@ -9,31 +9,24 @@
 
 		public function registerErrorHandler(){
 
-			set_exception_handler([$this, 'handle']);
+			set_error_handler([$this, 'handle'], E_ALL);
             //注册普通级别的错误处理方法
             register_shutdown_function([$this, 'otherErrorHandle']);
 
 		}
 
-		public function handle($error){
-
-			if ($error -> getCode() && !(error_reporting() & $error->getCode())) {
-
-		        return;
-		    }
+		public function handle($errno, $errstr, $errfile, $errline){
 
 		    $response   = Response::getInstance(Request::getInstance());
 
             $params     = [
-                'code'    => $error->getCode(),
-                'line'    => $error->getLine(),
-                'file'    => $error->getFile(),
-                'message' => $error->getMessage(),
-                'trace'   => $error->getTrace(),
+                'code'    => $errno,
+                'line'    => $errline,
+                'file'    => $errfile,
+                'message' => $errstr,
+                'trace'	  => [],
                 'type'    => 'Error',
             ];
-
-            \Log::debug('Exception:' . var_export($params, true));
 
             return $response->withVars($params)->withView('common/exception.html')->display();
 		}
@@ -54,11 +47,9 @@
                 'line'    => $error['line'],
                 'file'    => $error['file'],
                 'message' => $error['message'],
-                'trace'   => '',
+                'trace'   => [],
                 'type'    => 'Error',
             ];
-
-            \Log::debug('Error:' . var_export($params, true));
 
             return $response->withVars($params)->withView('common/exception.html')->display();
         }

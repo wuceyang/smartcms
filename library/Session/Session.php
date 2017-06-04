@@ -18,7 +18,7 @@
 
 			if(self::$_instance === null){
 
-				self::$_instance = new static($config);
+				self::$_instance = new self($config);
 			}
 
             return self::$_instance;
@@ -44,7 +44,7 @@
 
             $request = Request::getInstance();
 
-            $this->_sessid = $this->_sessid? $this->_sessid : $request->cookie($this->_config['cookieName'], '', false);
+            $this->_sessid = $this->_sessid ? $this->_sessid : $request->cookie($this->_config['cookieName'], '', false);
 
             register_shutdown_function([$this, 'save']);
 
@@ -54,9 +54,23 @@
         //设置cookie在session中的name值
         protected function setCookieSessId(){
 
-            $response = Response::getInstance(Request::getInstance());
+            $response     = Response::getInstance(Request::getInstance());
+            
+            $cookieName   = $this->_config['cookieName'];
+            
+            $expireTime   = $this->_config['maxLifetime'];
+            
+            $cookieConfig = Config::get('global.cookie');
+            
+            $cookiePath	  = $cookieConfig['path'];
+            
+            $cookieDomain = $cookieConfig['domain'];
 
-            $response->cookie($this->_config['cookieName'], $this->_sessid, $this->_config['maxLifetime'], '/', '', false, true, false);
+            $cookieSsl 	  = $cookieConfig['sslOnly'];
+            
+            $cookieHttp   = $cookieConfig['httpOnly'];
+
+            $response->cookie($cookieName, $this->_sessid, $expireTime, $cookiePath, $cookieDomain, $cookieSsl, $cookieHttp);
         }
 
         //生成session ID

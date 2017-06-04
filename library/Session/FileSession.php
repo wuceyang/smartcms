@@ -6,7 +6,7 @@
 	use \Exception;
 	use \Library\Common\Cryptography;
 
-	class FileSession extends \Library\Session\Session{
+	class FileSession extends Session{
 
 
 		protected $sess_data = [];
@@ -16,20 +16,18 @@
             if(!$this->_sessid){
 
                 $this->_sessid = $this->createId();
-
             }
 
             $this->setCookieSessId();
 
-            if(!is_dir($this->_config['saveDir'])){
+            if(!is_dir($this->_config['saveDir']) || !mkdir($this->_config['saveDir'], 0755, true)){
 
-            	mkdir($this->_config['saveDir'], 0755, true);
+            	throw new \Exception("创建session存储目录失败", 201);
             }
 
             if(!is_readable($this->_config['saveDir']) || !is_writable($this->_config['saveDir'])){
 
-                throw new \Exception("存储目录无法读写，请检查文件权限", 101);
-
+                throw new \Exception("存储目录无法读写，请检查文件权限", 201);
             }
 
 			$sess_file = $this->_config['saveDir'] . '/' . $this->_sessid;
@@ -37,19 +35,12 @@
 			if(!file_exists($sess_file)){
 
 				return;
-
 			}
 
 			$lastAccessTime = fileatime($sess_file);
 
-			if(!$lastAccessTime){
 
-				$this->destroy();
-
-				return;
-			}
-
-			if(TIME - $lastAccessTime > $this->_config['maxLifetime']){
+			if($lastAccessTime || TIME - $lastAccessTime > $this->_config['maxLifetime']){
 
 				$this->destroy();
 
@@ -58,15 +49,13 @@
 
 			if(!is_readable($sess_file) || !is_writable($sess_file)){
 
-				throw new \Exception("SESSION文件无法读写，请检查文件权限", 101);
+				throw new \Exception("SESSION文件无法读写，请检查文件权限", 201);
 
 			}
 
 			$sessString = file_get_contents($sess_file);
 
-			$rawString  = Cryptography::decode($sessString, $this->_config['encryptKey']);
-
-			$this->sess_data = unserialize($rawString);
+			$this->sess_data  = $this->_config['crypto']['class'] && $this->_config['crypto']['key'] ? $this->_config['crypto']['class']::decode($sessString, $this->_config['crypto']['key']) : unserialize($sessString);
 
 		}
 

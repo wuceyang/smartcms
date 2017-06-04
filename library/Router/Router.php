@@ -46,6 +46,7 @@
 
         //路由规则解析
         protected function resolveRoute(){
+
             $source             = [];
 
             $symbol             = '';
@@ -73,6 +74,7 @@
                     $this->_routeStr = $routeInfo[0] . $symbol . '(\?' . $routeInfo[1] . ')?';
                 }
             }
+
             $this->_routeStr    = str_replace($source, $destination, $this->_routeStr);
 
             $pathinfo           = parse_url($_SERVER['REQUEST_URI']);
@@ -130,14 +132,14 @@
 
             if(!class_exists($controllerPath)){
 
-                $prefixGroup = $this->_group . ($this->_group?'/':'');
+                $prefixGroup = $this->_group . ($this->_group ? '/' : '');
 
                 throw new Exception("找不到指定的控制器:" . $prefixGroup . $this->_controller . '[' . $request->server('REQUEST_URI') . ']', 101);
             }
 
             if(!method_exists($controllerPath, $this->_action)){
 
-                $prefixGroup = $this->_group . ($this->_group?'/':'');
+                $prefixGroup = $this->_group . ($this->_group ? '/' : '');
 
                 throw new Exception("找不到指定的处理方法:" . $prefixGroup . $this->_controller . '/' . $this->_action, 102);
             }

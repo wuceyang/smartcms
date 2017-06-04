@@ -76,8 +76,6 @@
 
             while(!$execFlag && $counter++ < $retry){
 
-                echo $counter . "<br>";
-
                 if(isset($options['cas']) && $options['cas']){
                     
                     $watchKeys   = is_array($options['watch']) ? $options['watch'] : [$options['watch']];

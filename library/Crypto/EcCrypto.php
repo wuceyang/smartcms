@@ -2,7 +2,7 @@
 
     namespace Library\Common;
 
-    class Cryptography{
+    class EcCrypto extends Base{
 
         public static function encode($string, $key){
             // 动态密匙长度，相同的明文会生成不同密文就是依靠动态密匙

@@ -10,12 +10,13 @@
 		public function registerExceptionHandler(){
             
             set_exception_handler([$this, 'handle']);
-            
         }
         
         //异常处理业务逻辑
         public function handle($e){
+	        
             $response = Response::getInstance();
+            
             $params = [
                 'code'    => $e->getCode(),
                 'line'    => $e->getLine(),
@@ -24,6 +25,7 @@
                 'trace'   => $e->getTrace(),
                 'type'    => 'Exception',
             ];
+            
             $response->withVars($params)->withView('common/exception.html')->display();
         }
 	}
