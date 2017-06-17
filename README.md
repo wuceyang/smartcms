@@ -30,7 +30,7 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
   
   4. 编写控制器逻辑,在app/C/Index/Index.php中实现如下代码:
  
-  ```
+    ```
   <?php
   	//控制器命名空间，以App开头，按照路径到当前文件所在目录
   	namespace App\C\Index;
@@ -54,7 +54,7 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
 		  	return $this->success($userList);
 		}
   	}
-  ```
+    ```
   
     * 控制器中封装了request对象，可以从函数中传入，也可以使用$this->request对象，其中request对象包含以下方法:
       - get('参数名', '默认值')：接收$_GET参数
@@ -90,28 +90,28 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
     	}
     ```
     
-      * 模型中封装了以下方法:
-        - where('id = ? AND status = ?', [100, 1])：获取指定id位100，状态为1的条件，参数2可以省略
-        - andWhere('id = ? AND status = ?', [100, 1])：同where
-        - orWhere('id = ? AND status = ?', [100, 1])：指定or条件，参数2可以省略，where/andWhere/orWhere可以连续使用，如:
-          + $this->where('id = ?', [100]);
-      	  + $this->andWhere('status = ?', [1]);
-	  	  + $this->orWhere('id = 101');
-	  	  + 或者$this->where('id = ?', [100])->where('status = ?', [1])->orWhere('id = 101');
-	  	  + 最终生成的条件为:(id = 100 AND status = 1) OR (id = 101)
-        - insert($data)：写入数据，$data可以为单条或者多条数据
-        - update($data)：搭配where使用，更新指定的记录
-        - delete()：搭配where使用，删除指定的记录
-        - getRow()：搭配where使用，获取一行记录
-        - getRows()：搭配where使用，获取多行记录
-        - getCount()：统计记录条数，相当于SELECT COUNT(1) AS num FROM xxx
-        - getValue()：获取字段的一个值
-        - fields(['id', 'name'])：查询指定的字段
-        - orderBy(['id DESC', 'createTime ASC'])：排序
-        - groupBy(['gender', 'age'])：分组
-        - having('count(1) > 1')：having过滤
-        - getSqls()：打印查询的sql
-        - getError()：返回错误信息
+    * 模型中封装了以下方法:
+      - where('id = ? AND status = ?', [100, 1])：获取指定id位100，状态为1的条件，参数2可以省略
+      - andWhere('id = ? AND status = ?', [100, 1])：同where
+      - orWhere('id = ? AND status = ?', [100, 1])：指定or条件，参数2可以省略，where/andWhere/orWhere可以连续使用，如:
+        + $this->where('id = ?', [100]);
+  	    + $this->andWhere('status = ?', [1]);
+  	    + $this->orWhere('id = 101');
+  	    + 或者$this->where('id = ?', [100])->where('status = ?', [1])->orWhere('id = 101');
+  	    + 最终生成的条件为:(id = 100 AND status = 1) OR (id = 101)
+      - insert($data)：写入数据，$data可以为单条或者多条数据
+      - update($data)：搭配where使用，更新指定的记录
+      - delete()：搭配where使用，删除指定的记录
+      - getRow()：搭配where使用，获取一行记录
+      - getRows()：搭配where使用，获取多行记录
+      - getCount()：统计记录条数，相当于SELECT COUNT(1) AS num FROM xxx
+      - getValue()：获取字段的一个值
+      - fields(['id', 'name'])：查询指定的字段
+      - orderBy(['id DESC', 'createTime ASC'])：排序
+      - groupBy(['gender', 'age'])：分组
+      - having('count(1) > 1')：having过滤
+      - getSqls()：打印查询的sql
+      - getError()：返回错误信息
       
   6. 在浏览器中，使用http://127.0.0.1访问你的网站
     
