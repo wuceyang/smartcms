@@ -94,11 +94,11 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
       - where('id = ? AND status = ?', [100, 1])：获取指定id位100，状态为1的条件，参数2可以省略
       - andWhere('id = ? AND status = ?', [100, 1])：同where
       - orWhere('id = ? AND status = ?', [100, 1])：指定or条件，参数2可以省略，where/andWhere/orWhere可以连续使用，如:
-      - $this->where('id = ?', [100]);
-      	$this->andWhere('status = ?', [1]);
-	  	$this->orWhere('id = 101');
-	  	或者$this->where('id = ?', [100])->where('status = ?', [1])->orWhere('id = 101');
-	  	最终生成的条件为:(id = 100 AND status = 1) OR (id = 101)
+        + $this->where('id = ?', [100]);
+      	+ $this->andWhere('status = ?', [1]);
+	  	+ $this->orWhere('id = 101');
+	  	+ 或者$this->where('id = ?', [100])->where('status = ?', [1])->orWhere('id = 101');
+	  	+ 最终生成的条件为:(id = 100 AND status = 1) OR (id = 101)
       - insert($data)：写入数据，$data可以为单条或者多条数据
       - update($data)：搭配where使用，更新指定的记录
       - delete()：搭配where使用，删除指定的记录
