@@ -56,7 +56,7 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
   	}
   ```
   
-  * 控制器中封装了request对象，可以从函数中传入，也可以使用$this->request对象，其中request对象包含以下方法:
+    * 控制器中封装了request对象，可以从函数中传入，也可以使用$this->request对象，其中request对象包含以下方法:
     - get('参数名', '默认值')：接收$_GET参数
     - post('参数名', '默认值')：接收$_POST参数
     - server('参数名', '默认值')：接收$_SERVER参数
@@ -72,7 +72,7 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
     - startSession()：手动启动session
     - 静态方法:getInstance()：获取当前request对象
     
-    5. 实现User模型app/M/User.php,代码如下
+  5. 实现User模型app/M/User.php,代码如下
     
     ```
     <?php
@@ -112,6 +112,8 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
       - having('count(1) > 1')：having过滤
       - getSqls()：打印查询的sql
       - getError()：返回错误信息
+      
+  6. 在浏览器中，使用http://127.0.0.1访问你的网站
     
     
     
