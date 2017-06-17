@@ -1,5 +1,5 @@
 <?php
-    define('ENV', 'DEV');
+    define('ENV', 'CLI');
     //加载常量定义文件
     include __DIR__ . '/../config/defined.php';
     //加载自动加载文件
