@@ -46,7 +46,7 @@
 
         public function setId($sessid){
 
-            $this->_sessid = $session_id;
+            $this->_sessid = $sessid;
 
             session_id($this->_sessid);
         }

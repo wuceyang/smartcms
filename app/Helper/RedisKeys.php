@@ -1,9 +1,14 @@
 <?php
     namespace App\Helper;
 
-    //定义key时，无需设置前缀。所有在config/database.php中的redis key的前缀，是在执行redis命令时自动添加
+    use \Config;
+
     class RedisKeys{
 
-        //用户信息,后缀:用户ID,存:hmset, 取:hgetall
-        const USER_PROFILE                  = 'user_profile_';
+        //分类详情，后面接分类的id
+        const CATEGORY_INFO = CACHE_PREFIX . 'category_detail_';
+        //按父分类的列表,zadd加入，按照id排序
+        const CATEGORY_LIST = CACHE_PREFIX . 'category_list_';
+        //视频剧集列表
+        const VIDEO_INFO    = CACHE_PREFIX . 'video_info_';
     }

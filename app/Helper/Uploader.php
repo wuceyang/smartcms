@@ -1,218 +1,260 @@
 <?php
-	/**
-	 *文件上传类,使用实例
-	  $uploader = new uploader('file');
-	  $uploader -> setMaxUploadSize(1024);
-	  $uploader -> setExtentions(array('png','jpg'));
-	  $uploader -> setUploadSaveDir(ROOT . 'upload');
-	  $uploadinfo = $uploader -> doUpload();
-	 */
-	 
 	namespace App\Helper;
 
-	class uploader{
+	class Uploader{
 
-		protected $_fieldName = ''; //上传文件字段名称
-		protected $_saveDir = './'; //文件保存目录
-		protected $_files = array(); //存储所有的上传文件，数组
-		protected $_failed = array(); //上传失败的文件信息,二维数组，格式:array('name' => '','info' => array() //失败的文件信息)
-		protected $_legalExts = array('jpg','gif','png','jpeg'); //合法扩展名
-		protected $_basename = ''; //生成的新文件名不变部分
-		
-		public function __construct ( $fieldName = '' ){
-			
-			if($fieldName) $this -> setField($fieldName);
-			
-			$this -> _basename = date('YmdHis');
-		}
-		
-		public function setPrefix($prefix){
-			
-			$this->_prefix = $prefix;
-		}
+		protected $_uploadConfig = [];
 
-		/**
-		 *设置文件字段
-		 */
-		public function setField($fieldName){
-			
-			$this -> _fieldName = $fieldName;
-			
-			$this -> extractFiles2Array();
-		}
+		protected $_files 		 = [];
 
-		/**
-		 *释放$_FILES到数组
-		 */
-		public function extractFiles2Array (){
+		protected $_errInfo 	 = [];
 
-			$fileArray = $_FILES[$this->_fieldName];
+		const ErrCode = [
+						//文件上传成功
+						'success' 			 => 0,
+						//超出设定大小
+						'sizeExcceed'        => 1,
+						//文件类型不正确
+						'typeInvalid'        => 2,
+						//上传时发生错误
+						'uploadError'        => 3,
+						//文件不存在
+						'fileMissing'        => 4,
+						//非法的上传文件
+						'fileInvalid'        => 5,
+						//未指定保存目录
+						'savePathInvalid'    => 6,
+						//移动到指定目录失败
+						'uploadFailed'       => 7,
+						//保存目录不可写
+						'savePathUnWritable' => 8
+						];
 
-			if(is_array($fileArray['name'])){
+		public function __construct($fieldName, $uploadConfigure = []){
 
-				foreach($fileArray['name'] as $k => $v ){
+			if(isset($_FILES[$fieldName])){
 
-					$this -> _files[] = [
-											'name' => $v,
-											'tmp_name' => $fileArray['tmp_name'][$k],
-											'type' => $fileArray['type'][$k],
-											'size' => $fileArray['size'][$k],
-											'error' => $fileArray['error'][$k],
-										];
-				}
-				
-				return;
-			}
-			$this->_files[] = $fileArray;
-		}
+				$files = [];
 
-		/**
-		 *检查系统错误代码
-		 */
-		protected function checkErrors(){
+				if(is_array($_FILES[$fieldName]['name'])){
 
-			foreach( $this -> _files as $k => $v ){
-				
-				if($v['error'] > 0){
-					
-					$this->_error[] = [
-											'code' => 1,
-											'name' =>$v['name'],
-											'info' => '文件大小超出前台设定值'
-									  ];
+					foreach ($_FILES[$fieldName]['name'] as $k => $v) {
 
-					continue;
-				}
-				
-				if($this -> maxUploadSize && $this -> maxUploadSize <= $v['size']){
+						if(!$_FILES[$fieldName]['name'][$k]) {
 
-					$this -> _error[] = [
-											'code' => 2,
-											'name' =>$v['name'],
-											'info' => '文件大小超出程序设定值'
-										];
+							continue;
+						}
 
-					continue;
-				}
-				
-				$ext = $this->getExtensionsByName($v['name']);
-				
-				if($this->_legalExts && !in_array($ext, $this -> _legalExts)){
-					
-					$this->_error[] = [
-											'code' => 3,
-											'name' => $v['name'],
-											'info' => '文件非法，不允许上传此类型文件'
-									   ];
-					
-					continue;
-				}
-			}
-		}
-
-		/**
-		 *设置合法的扩展名
-		 */
-		public function setExtentions (array $exts = []){
-			
-			$this -> _legalExts = $exts;
-		}
-
-		/**
-		 *根据文件名获取扩展名
-		 */
-		protected function getExtensionsByName($filename){
-			
-			$nameInfo = pathinfo($filename);
-			
-			return $nameInfo['extension'];
-		}
-
-		/**
-		 *设置最大上传文件大小，单位k
-		 */
-		public function setMaxUploadSize ($size){
-			
-			$this -> maxUploadSize = intval($size) * 1024;
-		}
-
-		/**
-		 *设定上传路径
-		 */
-		public function setUploadSaveDir ($saveDir){
-			
-			$this -> saveDir = substr($saveDir,-1) == '/'? $saveDir : $saveDir . '/';
-			
-			if(!is_dir($this -> _saveDir)) mkdir($this -> _saveDir,0777,true);
-		}
-
-		/**
-		 *上传文件
-		 */
-		public function doUpload ($saveDir = '',$savedPrefix = ''){
-			
-			if($saveDir) $this -> setUploadSaveDir($saveDir);
-			
-			if($savedPrefix) $this->setPrefix($savedPrefix);
-			
-			$this -> checkErrors();
-			
-			if(count($this->_files) == 0) return [];
-			
-			$uploadInfo = array();
-			
-			foreach( $this -> _files as $k => $v ){
-				
-				if(is_uploaded_file($v['tmp_name'])){
-				
-					$extension = $this -> getExtensionsByName($v['name']);
-				
-					$savepath = $this -> saveDir . $this -> getFileName($k,$extension);
-				
-					if(move_uploaded_file($v['tmp_name'],$savepath)){
-				
-						$uploadInfo[] = array(
-												'localname' => $v['name'],
-												'ext' => $extension,
-												'size' => $v['size'],
-												'uploadpath' => $savepath
-											 );
-				
-						continue;
+						$this->_files[] = [
+									'localName' => $_FILES[$fieldName]['name'][$k],
+									'filePath'  => $_FILES[$fieldName]['tmp_name'][$k],
+									'fileSize'  => $_FILES[$fieldName]['size'][$k],
+									'mimeType'  => $_FILES[$fieldName]['type'][$k],
+									'errCode'   => $_FILES[$fieldName]['error'][$k],
+									];
 					}
-				
-					$this -> _error[] = array(
-											'code' => 4,
-											'name' => $v['name'],
-											'info' => '文件非法，不是上传的文件'
-											);
-				
-					continue;
+				}else{
+
+					if($_FILES[$fieldName]['name']) {
+
+						$this->_files[] = [
+									'localName' => $_FILES[$fieldName]['name'],
+									'filePath'  => $_FILES[$fieldName]['tmp_name'],
+									'fileSize'  => $_FILES[$fieldName]['size'],
+									'mimeType'  => $_FILES[$fieldName]['type'],
+									'errCode'   => $_FILES[$fieldName]['error'],
+									];
+					}
 				}
 			}
-			
-			return $uploadInfo;
+
+			if(isset($uploadConfigure['maxsize'])){
+
+				$uploadConfigure['maxsize'] = $this->size2Byte($uploadConfigure['maxsize']);
+			}
+
+			if($uploadConfigure) $this->_uploadConfig = $uploadConfigure;
 		}
 
 		/**
-		 *生成文件名
+		 * 设置允许上传的最大文件大小
+		 * @param int $maxFileSize 文件大小
+		 * @return null
 		 */
-		protected function getFileName($index,$ext){
-			
-			$fileName = '';
-			
-			if($this->_prefix) $fileName = $this->_prefix;
-			
-			return $fileName . $this -> _basename . $index . '.' . $ext;
+		public function setMaxSize($maxFileSize){
+
+			$this->_uploadConfig['maxsize'] = $this->size2Byte($maxFileSize);
 		}
 
 		/**
-		 *获取错误信息
+		 * 设置允许上传的文件的mime
+		 * @param array $mime 允许上传的mime数组
+		 * @return null
 		 */
-		public function getError (){
-			
-			return $this -> _error;
+		public function setLegalMine($mime = []){
+
+			$this->_uploadConfig['mime'] = is_array($mime) ? $mime : [$mime];
+		}
+
+		/**
+		 * 指定文件保存路径
+		 * @param string $saveDir 保存路径
+		 * @return null
+		 */
+		public function setSavePath($saveDir){
+
+			$this->_uploadConfig['savedir'] = substr($saveDir, -1) == '/' ? $saveDir : $saveDir . '/';
+		}
+
+		/**
+		 * 文件上传
+		 * @param  string $prefix 文件保存前缀
+		 * @return array 文件上传结果，包含result:上传成功/失败
+		 */
+		public function doUpload($prefix = ''){
+
+			$saveInfo 	= [];
+
+			$time 		= microtime();
+
+			foreach ($this->_files as $k => $v) {
+
+				if($v['errCode']){
+
+					$saveInfo[] = ['result' => false, 'file' => $v['localName'], 'code' => self::ErrCode['uploadError'], 'error' => '上传时发生错误，错误码:' . $v['errCode']];
+
+					continue;
+				}
+				
+				if(!file_exists($v['filePath'])){
+
+					$saveInfo[] = ['result' => false, 'file' => $v['localName'], 'code' => self::ErrCode['fileMissing'], 'error' => '文件不存在'];
+
+					continue;
+				}
+
+				if(!is_uploaded_file($v['filePath'])){
+
+					$saveInfo[] = ['result' => false, 'file' => $v['localName'], 'code' => self::ErrCode['fileInvalid'], 'error' => '不是合法的上传文件'];
+
+					continue;
+				}
+
+				if(isset($this->_uploadConfig['maxsize']) && $v['fileSize'] > $this->_uploadConfig['maxsize']){
+
+					$fileSize   = number_format($v['fileSize'] / (1024 * 1024), 2) . 'M';
+
+					$maxSize    = number_format($this->_uploadConfig['maxsize'] / (1024 * 1024), 2) . 'M';
+
+					if($fileSize < 1){
+
+						$fileSize = number_format($v['fileSize'] / 1024, 2) . 'K';
+					}
+
+					if($maxSize < 1){
+
+						$maxSize = number_format($v['fileSize'] / (1024 * 1024), 2) . 'K';
+					}
+
+					$saveInfo[] = ['result' => false, 'file' => $v['localName'], 'code' => self::ErrCode['sizeExcceed'], 'error' => '文件大小(' . $fileSize . ')超出限制:' . $maxSize];
+
+					continue;
+				}
+
+				if(isset($this->_uploadConfig['mime']) && !in_array($v['mimeType'], $this->_uploadConfig['mime'])){
+
+					$saveInfo[] = ['result' => false, 'file' => $v['localName'], 'code' => self::ErrCode['typeInvalid'], 'error' => '文件类型不正确,只允许上传:' . implode(',', $this->_uploadConfig['mime']) . '类型的文件'];
+
+					continue;
+				}
+
+				$saveInfo[] = $this->saveFile($v, $k, $time, $prefix);
+			}
+
+			return $saveInfo;
+		}
+
+		protected function saveFile($fileinfo, $idx, $nameSeed, $prefix){
+
+			if(!isset($this->_uploadConfig['savedir'])){
+
+				return ['result' => false, 'file' => $fileinfo['localName'], 'code' => self::ErrCode['savePathInvalid'], 'error' => '请指定文件保存路径'];
+			}
+
+			if(!is_dir($this->_uploadConfig['savedir'])){
+
+				mkdir($this->_uploadConfig['savedir'], 0777, true);
+			}
+
+			if(!is_writeable($this->_uploadConfig['savedir'])){
+
+				return ['result' => false, 'file' => $fileinfo['localName'], 'code' => self::ErrCode['savePathUnWritable'], 'error' => '指定的文件保存目录不可写'];
+			}
+
+			$fileName = md5($idx . $nameSeed);
+
+			$savePath = $this->_uploadConfig['savedir'] . $prefix . $fileName . substr($fileinfo['localName'], strrpos($fileinfo['localName'], '.'));
+
+			if(!move_uploaded_file($fileinfo['filePath'], $savePath)){
+
+				return ['result' => false, 'file' => $fileinfo['localName'], 'code' => self::ErrCode['uploadFailed'], 'error' => '移动文件到上传目录失败'];
+			}
+
+			return ['result' => true, 'file' => $fileinfo['localName'],'code' => self::ErrCode['success'], 'error' => '', 'url' => $savePath];
+		}
+
+		/**
+		 * 文件大小单位转换
+		 * @param  string $size 文件大小，如20m,1024k，1g等
+		 * @return numeric
+		 */
+		protected function size2Byte($size){
+
+			if (preg_match('/^\d+\.\d+$/', $size) || preg_match('/^\d+$/', $size)) {
+				
+				return $size;
+			}
+
+			$suffix = strtoupper(substr($size, -1));
+
+			switch ($suffix) {
+
+				case 'K':
+					
+					$times = 1024;
+
+					break;
+
+				case 'M':
+					
+					$times = pow(1024,2);
+
+					break;
+
+				case 'G':
+					
+					$times = pow(1024,3);
+
+					break;
+				
+				default:
+
+					$times = 0;
+
+					break;
+			}
+
+			$size = substr($size, 0, -1) * $times;
+
+			return $size;
+		}
+
+		/**
+		 * 获取错误信息
+		 * @return string 错误信息
+		 */
+		public function getErrorInfo(){
+
+			return $this->_errInfo;
 		}
 	}
-	
-?>

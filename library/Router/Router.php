@@ -17,6 +17,8 @@
         protected $_controller  = '';
         protected $_action      = '';
         protected $_params      = '';
+        protected $_customRoute = '';
+        protected $_request     = null;
 
         public function __construct(){
 
@@ -25,6 +27,8 @@
             (new \Library\Exception\SmartException())->registerExceptionHandler();
 
             (new \Library\Error\SmartError())->registerErrorHandler();
+
+            $this->_request = Request::getInstance();
 
         }
 
@@ -37,9 +41,11 @@
 
             $this->_seperator   = $route['seperator'];
 
+            $this->_customRoute = $route['routefile'];
+
             $this->escapePattern();
 
-            unset($route['pattern']);
+            unset($route['pattern'], $route['seperator'], $route['routefile']);
 
             $this->_routeParams = $route;
         }
@@ -47,56 +53,79 @@
         //路由规则解析
         protected function resolveRoute(){
 
-            $source             = [];
-
-            $symbol             = '';
-
-            if(strpos($this->_routeStr, '{params}') !== false){
-
-                $symbol = preg_replace('/^.*?{action}(.+?){params}.*$/', '$1', $this->_routeStr);
-
-            }
-
-            foreach ($this->_routeParams as $k => $v) {
-
-                $source[]       = '\/{' . $k . '}';
-
-                $destination[]  = "(\/(?<$k>$v?))?";
-
-            }
-
-            if($symbol){
-
-                $routeInfo = explode($symbol, $this->_routeStr);
-
-                if($routeInfo && isset($routeInfo[1])){
-
-                    $this->_routeStr = $routeInfo[0] . $symbol . '(\?' . $routeInfo[1] . ')?';
-                }
-            }
-
-            $this->_routeStr    = str_replace($source, $destination, $this->_routeStr);
-
-            $pathinfo           = parse_url($_SERVER['REQUEST_URI']);
+            $pathinfo           = parse_url($this->_request->server('REQUEST_URI'));
 
             $this->_paramStr    = $pathinfo['path'];
 
-            if(substr($this->_paramStr, -1) == '/'){
+            if(($this->_paramStr) > 1 && substr($this->_paramStr, -1) == '/'){
 
-                $this->_paramStr = substr($this->_paramStr, 0, strlen($this->_paramStr)-1);
+                $this->_paramStr = substr($this->_paramStr, 0, -1);
             }
 
-            $defaultConfig      = Config::get('global.defaultConfig');
+            $customRoute = false;
 
-            preg_match_all("/^{$this->_routeStr}$/i", $this->_paramStr, $matches);
+            if($this->_customRoute){
 
-            $this->_group       = $this->toCamel((!isset($matches['group']) || count($matches['group']) == 0 || !$matches['group'][0]) ? $defaultConfig['group'] : $matches['group'][0]);
+                $customRoute = $this->matchCustomRoute();
+            }
 
-            $this->_controller  = $this->toCamel((!isset($matches['controller']) || count($matches['controller']) == 0 || !$matches['controller'][0]) ?  $defaultConfig['controller'] : $matches['controller'][0]);
+            if(!$customRoute){
 
-            $this->_action      = $this->toCamel((!isset($matches['action']) || count($matches['action']) == 0 || !$matches['action'][0]) ?  $defaultConfig['action'] : $matches['action'][0], true);
+                $this->_routeStr    = preg_replace('/\{([^}]+?)\}/is', '(?<$1>.+?)', $this->_routeStr);
 
-            $this->_params      = (!isset($matches['params']) || count($matches['params']) == 0) ? '' : $matches['params'][0];
+                $defaultConfig      = Config::get('global.defaultConfig');
+
+                preg_match_all("/^{$this->_routeStr}$/i", $this->_paramStr, $matches);
+
+                foreach ($this->_routeParams as $k => $v) {
+                    
+                    $key = '_' . $k;
+
+                    $this->$key = '';
+
+                    if(isset($matches[$k])){
+
+                        $this->$key = $defaultConfig[$k];
+
+                        if(count($matches[$k]) > 0){
+
+                            $this->$key = $this->toCamel($matches[$k][0], $k == 'action');
+                        }
+                    }
+                }
+            }
+
+            if(!$this->_controller && !$this->_action){
+
+                throw new Exception("路由规则不正确，请参考config/global.php中的路由规则", 1);
+            }
+        }
+
+        /**
+         * 匹配自定义路由
+         * @return bool
+         */
+        protected function matchCustomRoute(){
+
+            if(!$this->_customRoute) return false;
+
+            $routes = include $this->_customRoute;
+
+            if(!is_array($routes)) return false;
+
+            if(isset($routes[$this->_paramStr])){
+
+                foreach ($routes[$this->_paramStr] as $k => $v) {
+                    
+                    $key = '_' . $k;
+
+                    $this->$key = $v;
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         //正则特殊字符转义
@@ -113,14 +142,12 @@
         public function dispatch(){
 
             $this->resolveRoute();
-
-            $request   = Request::getInstance();
             
             $subdomain = Config::get('global.subdomain');
             //如果配置了子域名，则强制指定子域名对应的分组
             if(isset($subdomain) && $subdomain){
 
-                $host = $request->server('HTTP_HOST');
+                $host = $this->_request->server('HTTP_HOST');
 
                 if(isset($subdomain[$host])){
 
@@ -132,35 +159,35 @@
 
             if(!class_exists($controllerPath)){
 
-                $prefixGroup = $this->_group . ($this->_group ? '/' : '');
+                $prefixGroup = $this->_group . ($this->_group?'/':'');
 
-                throw new Exception("找不到指定的控制器:" . $prefixGroup . $this->_controller . '[' . $request->server('REQUEST_URI') . ']', 101);
+                throw new Exception("找不到指定的控制器:" . $prefixGroup . $this->_controller . '[' . $this->_request->server('REQUEST_URI') . ']', 101);
             }
 
             if(!method_exists($controllerPath, $this->_action)){
 
-                $prefixGroup = $this->_group . ($this->_group ? '/' : '');
+                $prefixGroup = $this->_group . ($this->_group?'/':'');
 
                 throw new Exception("找不到指定的处理方法:" . $prefixGroup . $this->_controller . '/' . $this->_action, 102);
             }
 
-            $request->setController($this->_controller);
+            $this->_request->setController($this->_controller);
 
-            $request->setAction($this->_action);
+            $this->_request->setAction($this->_action);
 
-            $request->setGroup($this->_group);
+            $this->_request->setGroup($this->_group);
 
-            $request->setParamStr($this->_params, $this->_seperator);
+            $this->_request->setParamStr($this->_params, $this->_seperator);
 
-            $request->parse();
+            $this->_request->parse();
 
-            $response = Response::getInstance($request);
+            $response = Response::getInstance($this->_request);
 
             $response->setSqlDebugMode(Config::get('global.debugSql'));
 
-            $controller = new $controllerPath($request, $response);
+            $controller = new $controllerPath($this->_request, $response);
 
-            call_user_func([$controller, $this->_action], $request, $response);
+            call_user_func([$controller, $this->_action], $this->_request, $response);
         }
 
         //驼峰转换

@@ -99,22 +99,22 @@
         }
 
         public function isPost(){
-            return isset($this->_server['REQUEST_METHOD']) && $this->_server['REQUEST_METHOD'] == 'POST';
+            return $this->server('REQUEST_METHOD') == 'POST';
         }
 
         public function isGet(){
-            return isset($this->_server['REQUEST_METHOD']) && $this->_server['REQUEST_METHOD'] == 'GET';
+            return $this->server('REQUEST_METHOD') == 'GET';
         }
 
         public function isAjax($crossDomain = false){
             if(!$crossDomain){
-                return isset($this->_server['HTTP_X_REQUESTED_WITH']) && $this->_server['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+                return $this->server('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest';
             }
-            return isset($this->_server['HTTP_ACCEPT']) && strpos($this->_server['HTTP_ACCEPT'], 'javascript') !== false;
+            return strpos($this->server('HTTP_ACCEPT'), 'javascript') !== false;
         }
 
         public function method(){
-            return $this->_server['REQUEST_METHOD'] ? $this->_server['REQUEST_METHOD'] : '';
+            return $this->server('REQUEST_METHOD');
         }
 
         public function get($paramName = '', $defaultValue = ''){
@@ -130,7 +130,7 @@
         public function server($paramName = '', $defaultValue = ''){
             if(!$paramName) return $this->_server;
             $key = strtoupper($paramName);
-            return $this->_server[$key] ? $this->_server[$key] : $defaultValue;
+            return isset($this->_server[$key]) ? $this->_server[$key] : $defaultValue;
         }
 
         public function session(){
@@ -142,7 +142,7 @@
             return $sessionClass::getInstance($config['configure']);
         }
 
-        public function cookie($key, $default = null, $decrypt = false){
+        public function cookie($key = '', $default = null, $decrypt = false){
             if(!$key){
                 return $this->_cookie;
             }

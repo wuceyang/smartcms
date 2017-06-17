@@ -14,9 +14,9 @@
         
         //异常处理业务逻辑
         public function handle($e){
-	        
+
             $response = Response::getInstance();
-            
+
             $params = [
                 'code'    => $e->getCode(),
                 'line'    => $e->getLine(),
@@ -25,7 +25,12 @@
                 'trace'   => $e->getTrace(),
                 'type'    => 'Exception',
             ];
-            
+
+            \Log::debug('Error:' . var_export($params, true));
+
+            var_export($params);
+            exit;
+
             $response->withVars($params)->withView('common/exception.html')->display();
         }
 	}

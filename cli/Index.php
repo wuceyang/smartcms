@@ -1,4 +1,5 @@
 <?php
+    define('ENV', 'DEV');
     //加载常量定义文件
     include __DIR__ . '/../config/defined.php';
     //加载自动加载文件
@@ -17,21 +18,17 @@
         exit;
     }
 
-    $service = $argv[1];
+    $service   = $argv[1];
     
-    $file = __DIR__ . '/' . $service . '.php';
+    $service   = substr($service, -4) == '.php' ? substr($service, 0, -4) : $service;
     
-    if(!file_exists($file)){
-
-        echo "参数名称错误，服务文件{$file}不存在";
-        exit;
-    }
-
     $className = '\\Cli\\' . $service;
 
     if(!class_exists($className)){
 
-        echo "服务{$className}不存在，请检查代码";
+        echo $className . "不存在，请检查代码";
+
+        exit;
     }
 
     $args     = array_slice($argv, 2);
@@ -43,6 +40,3 @@
     $instance = new $className($request, $response);
 
     call_user_func_array([$instance, 'start'], $args);
-
-
-

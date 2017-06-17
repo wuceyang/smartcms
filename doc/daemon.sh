@@ -8,8 +8,9 @@ cmdfile=$doc_dir"/cmd.txt"
 
 for cmd in `cat $cmdfile`
 do
-    procnum=`ps aux | grep $cmd | wc -l`
-    if [ $procnum -eq 1 ]; then
+	cmd=`echo $cmd | sed s/[[:space:]]//g`
+    procnum=`ps aux | grep $cmd | grep -v grep | wc -l`
+    if [ $procnum -lt 1 ]; then
             $setsid $phpbin $entry $cmd > /dev/null &
     fi
 done

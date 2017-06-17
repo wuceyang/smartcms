@@ -22,7 +22,6 @@
         protected $_offset           = 0;
         protected $_stmt 		     = null;
         protected $_debug            = false;
-        protected $_forUpdate 		 = false;
         protected $_fetchMode        = \PDO::FETCH_ASSOC;
 
         const EXECUTE       = 0;
@@ -33,7 +32,7 @@
         const MULTI_INSERT  = 5;
 
         //设置调试模式
-        public function setDebug(bool $isDebug = false){
+        public function setDebug($isDebug){
 
             $this->_debug = $isDebug;
 
@@ -49,7 +48,7 @@
         /**
          *连接数据库
          */
-		public function connect(array $connectionName){
+		public function connect($connectionName){
 
 
             $this->_connectionName = $connectionName;
@@ -95,16 +94,17 @@
 			}catch(Exception $e){
 
 				throw new Exception("数据库连接失败:" . $e->getMessage(), $e->getCode());
-
 			}
 
             return $this;
 		}
 
         /**
-         * 说明:切换数据表
+         * 说明:切换数据表,参数为空时则是获取当前表明
          */
-		public function table(string $tableName){
+		public function table($tableName = ''){
+
+            if(!$tableName) return Config::get('database.tablePrefix') . $this->_table;
 
 			$this->_table = $tableName;
 
@@ -116,7 +116,7 @@
          * 参数:$data = ['name' => '张三', 'age' => 25] 或者 $data = [['name' => '张三', 'age' => 25], ['name' => '李四', 'age' => 15]]
          * 返回:插入一条记录时，返回记录id，多条记录时，返回插入的记录条数
          */
-		public function insert(array $data = []){
+		public function insert($data = []){
 
             $firstData  = current($data);
 
@@ -127,14 +127,11 @@
 
 			if($isMulti){
 				foreach ($data as $k => $v) {
-					
 					foreach ($v as $sk => $sv) {
-					
 						$this->_bind[] = $sv;
 					}
 				}
 			}else{
-				
 				$this->_bind = array_values($data);
 			}
 
@@ -148,22 +145,20 @@
 
         /**
          * 说明:更新记录
-         * 参数:$data = ['name' => '张三', '`age`' => '`age` + 1'], 值中含有自增或者函数时，请用`包围字段名，如前面的`age`
+         * 参数:$data = ['name' => '张三', 'age' => '`age` + 1'], $where = ['a = ? AND b =  ?', [ "1", "man"]]，值中含有自增或者函数时，请用`包围字段名，如前面的`age`+1
          * 返回:更新影响到的记录条数
          */
-        public function update(array $data){
-            
+        public function update($data, $where = '', $bind = []){
+            if($where || $bind){
+                $this->where($where, $bind);
+            }
             foreach ($data as $k => $v) {
-                //可能是字段自运算或者函数运算，如a=ltrm(a),此时需要把key中的字段用`包围起来,比如`a` => `a`+1
+                //可能是字段自运算，如a=a+1,或者函数运算，如a=ltrm(a),此时需要把value中的字段用`包围起来,比如`a`+1,ltrm(`a`)
                 if(substr($k, 0, 1) == '`' && substr($k, -1, 1) == '`'){
-                    
                     $this->_fields[] = $k . ' = ' . $v;
-                    
                     continue;
                 }
-                
                 $this->_fields[] = $k;
-                
                 $this->_bind[]   = $v;
             }
 
@@ -179,8 +174,10 @@
          * 说明:删除记录
          * 参数:$where = ['a = ? AND b =  ?', [ "1", "man"]]
          */
-        public function delete(){
-
+        public function delete($where = '', $bind = []){
+            if($where || $bind){
+                $this->where($where, $bind);
+            }
             if(!$this->_internalExec(self::DELETE)){
 
                 return 0;
@@ -190,51 +187,33 @@
         }
 
         //获取多行记录
-        public function getRows(string $where = '', array $bind = [], bool $forUpdate = false){
-	        
+        public function getRows($where = '', $bind = []){
             if($where || $bind){
-            
                 $this->where($where, $bind);
             }
-            
-            $this->_forUpdate = $forUpdate;
-            
             $this->_internalExec(self::SELECT);
-            
             $result = $this->_stmt->fetchAll($this->_fetchMode);
-            
             return $result ? $result : [];
         }
 
         //获取单行记录
-        public function getRow(string $where = '', array $bind = [], bool $forUpdate = false){
-	        
+        public function getRow($where = '', $bind = []){
             if($where || $bind){
-            
                 $this->where($where, $bind);
             }
-            
-            $this->_forUpdate 	= $forUpdate;
-            
-            $this->_limit 		= 1;
-            
+            $this->_page = 1;
+            $this->_pagesize = 1;
             $this->_internalExec(self::SELECT);
-            
             $result = $this->_stmt->fetch($this->_fetchMode);
-            
             return $result ? $result : [];
         }
 
         //获取单列的值
         public function getValue($where = '', $bind = []){
-	        
             if($where || $bind){
-            
                 $this->where($where, $bind);
             }
-            
             $this->_internalExec(self::SELECT);
-            
             return $this->_stmt->fetchColumn(0);
         }
 
@@ -246,80 +225,61 @@
 
         //最后插入的id
         public function lastInsertId(){
-
             return $this->_conn[$this->_connectionName]->lastInsertId();
         }
 
         //受影响的行数
         public function affectedRows(){
-
             return $this->_stmt->rowCount();
         }
 
         //设置排序
-        public function orderBy(array $orderBy = []){
-
+        public function orderBy($orderBy = []){
             $this->_order = $orderBy;
-
             return $this;
         }
 
         //分组
-        public function groupBy(array $groupBy = []){
-
+        public function groupBy($groupBy = []){
             $this->_group = $groupBy;
-
             return $this;
         }
 
         //设置having条件
         public function having($having){
-
             $this->_having = $having;
-
             return $this;
         }
 
         //设置查询字段
-        public function fields(array $fields = []){
-
+        public function fields($fields = []){
             $this->_selectedFields = $fields;
-
             return $this;
         }
 
         //设置查询的偏移量
-        public function page(int $page){
-	        
+        public function page($page){
             $this->_page = $page;
-            
             return $this;
         }
 
         //设置需要查询的记录数量
-        public function pagesize(int $pagesize){
-	        
+        public function pagesize($pagesize){
             $this->_pagesize = $pagesize;
-            
             return $this;
         }
 
         //创建子查询
         public function subQuery($subBuilder){
-
             $this->_subBuilder = $subBuilder;
-            
             return $this;
         }
 
         //直接执行sql语句
         public function execute($sql, $bind = []){
-            
             if($bind){
-            
                 $this->_bind = $bind;
             }
-            
             return $this->_internalExec(self::EXECUTE, $sql);
         }
 
@@ -331,36 +291,25 @@
             $this->_stmt = $this->_conn[$this->_connectionName]->prepare($sql);
 
             if($this->_bind){
-	            
                 for ($i = 0, $total = count($this->_bind); $i < $total; ++$i) {
-                
                     switch (true) {
 
                         case is_bool($this->_bind[$i]):
-                
                             $type = PDO::PARAM_BOOL;
-                
                             break;
 
                         case is_int($this->_bind[$i]):
-                
                             $type = PDO::PARAM_INT;
-                
                             break;
 
                         case is_null($this->_bind[$i]):
-                    
                             $type = PDO::PARAM_NULL;
-                    
                             break;
 
                         default:
-                    
                             $type = PDO::PARAM_STR;
-                    
                             break;
                     }
-
                     $this->_stmt->bindParam($i + 1, $this->_bind[$i], $type);
                 }
             }
@@ -370,7 +319,6 @@
             $execResult  = $this->_stmt->execute();
 
             if(!$execResult){
-
             	$this->_errorInfo = $this->_stmt->errorInfo();
             }
 
@@ -389,22 +337,13 @@
 
         //转换为sql语句
         public function toSql($operator = self::SELECT){
-
             $where = '';
-
             if($this->_where){
-
-                $where = "";
-
+                $where = " WHERE 1 ";
                 foreach ($this->_where as $k => $v) {
-
                     $where .= ' ' . $v['symbol'] . ' ' . $v['string'];
-
                     $this->_bind = array_merge($this->_bind, $v['bind']);
                 }
-                
-                $where = $where ? ' WHERE ' . $where : '';
-
                 $this->_where = '';
             }
 
@@ -413,125 +352,92 @@
             switch($operator){
 
                 case self::SELECT:
-
                     $order = $having = $group = '';
-
                     if($this->_order){
-
                         $order = ' ORDER BY ' . implode(',', $this->_order);
-
                         $this->_order = [];
                     }
-
                     if($this->_group){
-
                         $group = ' GROUP BY ' . implode(',', $this->_group);
-
                         $this->_group = [];
                     }
-                    
                     if($this->_having){
-                    
                         $order = ' HAVING ' . $this->_having;
-                    
                         $this->_having = '';
                     }
-                    
                     if($this->_subBuilder){
-                    
                         $table  = '(' . $this->_subBuilder . ') AS tmp_tbl';
                     }
-                   
                     $limit  = $this->_page && $this->_pagesize ? (' LIMIT ' . (($this->_page - 1) * $this->_pagesize) . ',' . $this->_pagesize) : '';
-                    
                     $fields = $this->_selectedFields ? implode(',', $this->_selectedFields) : '*';
-                    
-                    $sql    = "SELECT $fields FROM $table " . $where . $group . $order . $having . $limit . ($this->_forUpdate ? ' FOR UPDATE' : '');
-
+                    $sql    = "SELECT $fields FROM $table" . $where . $group . $order . $having . $limit . ($this->_forUpdate ? ' FOR UPDATE' : '');
                     break;
 
                 case self::INSERT:
-
                     $placeHolder = array_fill(0, count($this->_fields), '?');
-
                     $sql         = "INSERT INTO $table (" . implode(',', $this->_fields) . ") values(" . implode(',', $placeHolder) . ")";
-
                     break;
 
                 case self::MULTI_INSERT:
-
                     $itemHolder  = '(' . implode(',', array_fill(0, count($this->_fields), '?')) . ')';
-
                     $placeHolder = implode(',', array_fill(0, count($this->_bind)/count($this->_fields), $itemHolder));
                     $sql         = "INSERT INTO $table (" . implode(',', $this->_fields) . ") values" . $placeHolder;
                     break;
 
                 case self::DELETE:
-
                     $sql = "DELETE FROM $table" . $where;
-
                     break;
 
                 case self::UPDATE:
-
                     $sets = [];
-
                     foreach ($this->_fields as $k => $v) {
-
                         $sets[] = strpos($v, ' = ') === false ? $v . ' = ?' : $v;
                     }
-
                     $sql = "UPDATE $table SET " . implode(',' ,$sets) . $where;
-
                     break;
                 default:
-
                     throw new \Exception("错误的操作，找不到指定的SQL操作:" . $operator);
             }
-
             return $sql;
         }
 
-        public function where(string $where, array $bind = []){
-	        
+        public function where($where, $bind = []){
             return $this->andWhere($where, $bind);
         }
 
-        public function orWhere(string $where, array $bind = []){
-            
+        public function orWhere($where, $bind = []){
             $this->_where[]  = ['symbol' => 'OR', 'string' => $where, 'bind' => $bind];
-            
             return $this;
         }
 
-        public function andWhere(string $where, array $bind = []){
-	        
+        public function andWhere($where, $bind = []){
             $this->_where[]  = ['symbol' => 'AND', 'string' => $where, 'bind' => $bind];
-            
             return $this;
         }
-		
-        public function transaction(callable $func){
+
+        public function transaction($func){
 
             try{
-
-                $commitFlag = false;
+                
+                $rollbackFlag = $commitFlag = false;
 
                 $startFlag  = $this->_conn[$this->_connectionName]->beginTransaction();
 
                 if(!$startFlag){
 
-                    throw new \Exception("事务启动失败", 201);
+                    throw new \Exception("事务启动失败", 101);
                 }
-                
-                $transRet     = call_user_func($func);
+                $return     = call_user_func($func);
 
-                $commitFlag   = $this->_conn[$this->_connectionName]->commit();
-                
-                return $transRet;
+                if($return !== false){
+
+                    $commitFlag = $this->_conn[$this->_connectionName]->commit();
+
+                    return;
+                }
             }catch(\Exception $e){
 
-                throw new \Exception($e->getMessage(), 202);
+                throw new \Exception($e->getMessage(), 102);
             }finally{
                 //启动事务，并且提交失败时，回滚，防止死锁
                 if($startFlag && !$commitFlag){

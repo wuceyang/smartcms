@@ -11,20 +11,36 @@
 
             if(!$key) throw new Exception("请指定要获取的配置参数名", 100);
 
-            $keys = explode('.', $key);
+            $keys    = explode('.', $key);
+            
+            $file    = $keys[0];
+            
+            $request = \Library\Request\Request::getInstance();
 
-            $file = $keys[0];
+            $suffix  = strtolower($request->server('ENV'));
 
-            $configFile = APP_ROOT . '/config/' . $file . '.php';
+            if(!$suffix){
+
+                $suffix = defined('ENV') ? strtolower(ENV) : '';
+            }
+
+            $suffix  = $suffix ? '_' . $suffix : '';
+
+            $configFile = APP_ROOT . '/config/' . $file . $suffix . '.php';
 
             if(!file_exists($configFile)){
-                throw new Exception("找不到指定的配置文件:" . $file . '.php', 105);
+
+                $configFile = APP_ROOT . '/config/' . $file . '.php';
+
+                if(!file_exists($configFile)){
+                    
+                    throw new Exception("找不到指定的配置文件:" . $file . '.php', 105);
+                }
             }
 
             if(!isset(self::$_configMap[$file])){
 
                 self::$_configMap[$file] = include $configFile;
-
             }
 
             unset($keys[0]);

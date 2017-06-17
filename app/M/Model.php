@@ -83,17 +83,20 @@
          * 通过ID取数据记录
          * @param  mixed  $id          需要获取的记录ID
          * @param  string $idxField    用于索引的字段名，默认为id字段
-         * @param  string $cachePrefix 缓存的key的前缀
-         * @param  int    $expireTime  过期时间，不设置时则不缓存
          * @param  string $extraWhere  从数据库取出数据的其他where条件
-         * @param  array $orderby 排序方式
+         * @param  array $orderby      排序方式
          * @return array
          */
         public function getInfoById($id, $idxField = 'id', $extraWhere = '',$orderby = ''){
 
             $isMulti = is_array($id);
-            
-            $id      = $isMulti ? array_map('intval', $id) : [intval($id)];
+
+            $id      = $isMulti ? $id : [$id];
+
+            foreach ($id as $k => $v) {
+
+                $id[$k] = intval($v);
+            }
             
             $retInfo = [];
                 
@@ -120,15 +123,49 @@
         }
 
         /**
-         * 更新表信息
-         * @param string    $where       更新条件
-         * @param array     $param       更新条件绑定的数据
-         * @param array     $infomation  需要更新的信息
-         * @return  int
+         * 数据格式化
+         * @param  array $datas  需要格式化的数据
+         * @param  array $keyMap 目标数组key与db字段的映射关系，格式为:[目标字段 => db字段...]
+         * @return array
          */
-        public function setInfo($where, $param = [], $infomation = []){
+        public function dataFormat($datas, $keyMap){
 
-            return $this->where($where, $param)->update($infomation);
+            if(!$datas) return [];
+            
+            $isMulti  = is_array(current($datas));
+            
+            $datas    = !$isMulti ? [$datas] : $datas;
+            
+            $item     = $retdata = [];
+
+            foreach ($datas as $k => $v) {
+                
+                if(!$v) continue;
+
+                $item = [];
+
+                foreach ($keyMap as $sk => $sv) {
+
+                    if(!isset($v[$sv])) continue;
+
+                    $item[$sk] = $v[$sv];
+                }
+
+                $retdata[] = $item;
+            }
+
+            return $isMulti ? $retdata : $item;
+        }
+
+        /**
+         * 密码加密
+         * @param  string $salt1   加密key
+         * @param  string $passwd  密码原始字符串
+         * @return string
+         */
+        public function encryptPasswd($salt1, $passwd){
+
+            return md5(md5($salt1 . '|' . $passwd) . '|' . $salt1);
         }
     }
     

@@ -11,12 +11,12 @@
             //只读连接设置，设置此项时，default设置无效
             //默认连接设置，不需要读写分离时设置此项代替。否则此项设置无效
             'default' => [
-                'host' 		=> '192.168.17.200',
+                'host' 		=> '192.168.17.150',
                 'port' 		=> 3306,
                 'username' 	=> 'root',
                 'password' 	=> '123456',
                 'dbname' 	=> 'theatre',
-                'charset' 	=> 'utf8mb4'
+                'charset' 	=> 'utf8'
             ],
         ],
         'redis' => [

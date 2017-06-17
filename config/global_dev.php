@@ -9,12 +9,14 @@
                         'controller'    => '[\w\-]+',
                         'action'        => '[\w\-]+',
                         'params'        => '.+',
+                        //自定义路由文件，优先使用
+                        'routefile'     => APP_ROOT . 'config/router.php',
                         //非正常query string模式下，params参数分隔符，比如:id-10-order-100,此时，分隔符为-;可以在此参数后面接正常的?和query string。如果参数只放在query string中，seperator请置为空字符串
                         'seperator'     => '/',
                         ],
         //子域名与模块(group)的对应关系
         'subdomain'  => [
-                        /*'m.wangxingcm.com' => 'H5'*/
+                        'm.wangxingcm.com' => 'H5'
                         ],
         //是否记录日志
         'debug'     => true,
@@ -71,5 +73,9 @@
                 //session id在cookie中的名称
                 'cookieName' => 'SmartSid',
             ]
+        ],
+        'cache' => [
+            //缓存前缀
+            'prefix' => 'story_dev_',
         ]
     ];

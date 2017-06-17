@@ -29,4 +29,4 @@
     //错误级别
     define('ERROR_LEVEL', E_ALL);
     //缓存前缀，保证缓存时，即使在同一个库，也不会与其他应用冲突
-    define('CACHE_PREFIX', 'story_');
+    define('CACHE_PREFIX', 'story_dev_');
