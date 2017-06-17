@@ -41,11 +41,11 @@
 
             $this->_seperator   = $route['seperator'];
 
-            $this->_customRoute = $route['routefile'];
+            $this->_customRoute = $route['rules'];
 
             $this->escapePattern();
 
-            unset($route['pattern'], $route['seperator'], $route['routefile']);
+            unset($route['pattern'], $route['seperator'], $route['rules']);
 
             $this->_routeParams = $route;
         }
