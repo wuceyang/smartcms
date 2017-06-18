@@ -30,7 +30,7 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
   
   4. 编写控制器逻辑,在app/C/Index/Index.php中实现如下代码:
  
-    ```
+  ```
     <?php
   	//控制器命名空间，以App开头，按照路径到当前文件所在目录
   	namespace App\C\Index;
@@ -43,9 +43,9 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
 	  	
 	  	public function Index(Request $req, Response $resp){
 		  	
-		  	$page = intval($this->request->get('page'));
-		  	//以上代码也可以使用下面的方式接收参数
-		  	//$page = intval($req->get('page'));
+		  	$page = max(1, intval($this->request->get('page')));
+		  	//也可以使用下面的方式接收参数
+		  	//$page = max(1, intval($req->get('page')));
 
 		  	$user = new User();
 		  	
@@ -54,7 +54,7 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
 		  	return $this->success($userList);
 		}
   	}
-    ```
+  ```
   
   * 控制器中封装了request对象，可以从函数中传入，也可以使用$this->request对象，其中request对象包含以下方法:
     - get('参数名', '默认值')：接收$_GET参数
@@ -73,22 +73,21 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
     - 静态方法:getInstance()：获取当前request对象
     
   5. 实现User模型app/M/User.php,代码如下
-    
-    ```
+  ```
     <?php
-    	namespace App\M;
+    namespace App\M;
     	
-    	class User extends Model{
+    class User extends Model{
 	    	
-	    	//指定使用member表，依赖于配置，数据库配置中可以统一指定表前缀。实际使用的表名为:前缀 + $table
-	    	public static $table = 'member';
+	    //指定使用member表，依赖于配置，数据库配置中可以统一指定表前缀。实际使用的表名为:前缀 + $table
+	    public static $table = 'member';
 	    	
-	    	public function getUserList($page, $pagesize){
+	    public function getUserList($page, $pagesize){
 		    	
-		    	return $this->page($page)->pagesize($pagesize)->getRows();
-	    	}
-    	}
-    ```
+		    return $this->page($page)->pagesize($pagesize)->getRows();
+	    }
+    }
+  ```
     
   * 模型中封装了以下方法:
     - where('id = ? AND status = ?', [100, 1])：获取指定id位100，状态为1的条件，参数2可以省略
@@ -113,7 +112,7 @@ smartcms主要包含:路由、配置、ORM、日志、MVC、模板引擎等功�
     - getSqls()：打印查询的sql
     - getError()：返回错误信息
       
-  6. 在浏览器中，使用http://127.0.0.1访问你的网站
+  6. 在浏览器中，使用http://127.0.0.1 访问你的网站
     
     
     
