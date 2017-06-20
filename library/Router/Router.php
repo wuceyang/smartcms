@@ -85,7 +85,7 @@
 
                     if(isset($matches[$k])){
 
-                        $this->$key = $defaultConfig[$k];
+                        $this->$key = $this->toCamel($defaultConfig[$k], $k == 'action');
 
                         if(count($matches[$k]) > 0){
 
@@ -181,7 +181,7 @@
 
             $this->_request->parse();
 
-            $response = Response::getInstance($this->_request);
+            $response = Response::getInstance();
 
             $response->setSqlDebugMode(Config::get('global.debugSql'));
 

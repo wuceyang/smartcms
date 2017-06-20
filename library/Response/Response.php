@@ -11,24 +11,23 @@
         protected $debug    = false;
         protected static $_instance = null;
 
-        protected function __construct(\Request &$req){
+        protected function __construct(){
 
-                $this->vars['request'] = &$req;
-
+                $this->vars['request'] = \Request::getInstance();
         }
 
-        public static function getInstance(\Request $req){
+        public static function getInstance(){
 
             if(self::$_instance === null){
 
-                self::$_instance = new self($req);
+                self::$_instance = new self();
             }
 
             return self::$_instance;
-
         }
 
         public function setSqlDebugMode($debugMode = false){
+
             $this->debug = $debugMode;
         }
 
@@ -105,4 +104,56 @@
             return $retstr;
         }
 
+        //指定返回的数据类型
+        public function dataType($isAjax = true){
+
+            $this->_retAjax = $isAjax;
+        }
+
+        //返回错误信息
+        public function error($err_code = 101, $message = '', $retdata = []){
+
+            $data = ['code' => $err_code, 'message' => $message];
+
+            if($retdata){
+
+                $data['data'] = $retdata;
+            }
+
+            return $this->response($data);
+        }
+
+        //返回成功信息
+        public function success($retdata = '', $message = ''){
+
+            $data = ['code' => 200, 'message' => $message, 'data' => $retdata];
+
+            return $this->response($data);
+        }
+
+        //信息返回
+        public function response($retdata){
+
+            ob_clean();
+
+            $this->_retAjax ? $this->retAjax($retdata) : $this->retHtml($retdata);
+
+            exit;
+        }
+
+        //返回json
+        private function retAjax($data){
+
+            exit(json_encode($data, JSON_UNESCAPED_UNICODE));
+        }
+
+        //返回HTML信息提示页面
+        private function retHtml($data){
+
+            $req  = Request::getInstance();
+
+            $resp = Response::getInstance($req);
+
+            return $resp->withVars($data)->withView('admin/info.html')->display();
+        }
     }

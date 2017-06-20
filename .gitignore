@@ -1,6 +1,11 @@
-composer.phar
-/vendor/
+/cache/logs/*
+/cache/template/*
+.idea/
+*.DS_Store
+/cache/
+/public/._shabi
+/public/shabi/
+/config/database.php
+/config/global.php
 
-# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+

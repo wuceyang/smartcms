@@ -3,11 +3,12 @@
         //路由格式定义
         'route'     => [
                         //除去query string部分之外的路由字符串格式，以下格式可以使用如下url:/mv/test/go/b/200/c/134.html?a=123（group=mv,controller=test,action=go,params=b/200/c/134）
-                        'pattern'       => '/{controller}/{action}',
+                        'pattern'       => '/{group}/{controller}/{action}',
                         //不同组成部分可以接受的字符串
                         'group'         => '[\w\-]+',
                         'controller'    => '[\w\-]+',
                         'action'        => '[\w\-]+',
+                        'rules'         => '',
                         'params'        => '.+',
                         //非正常query string模式下，params参数分隔符，比如:id-10-order-100,此时，分隔符为-;可以在此参数后面接正常的?和query string。如果参数只放在query string中，seperator请置为空字符串
                         'seperator'     => '/',

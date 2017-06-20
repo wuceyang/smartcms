@@ -20,7 +20,7 @@
             $params = [
                 'code'    => $e->getCode(),
                 'line'    => $e->getLine(),
-                'file'    => $e->getFile(),
+                'file'    => str_replace(APP_ROOT, '/', $e->getFile()),
                 'message' => $e->getMessage(),
                 'trace'   => $e->getTrace(),
                 'type'    => 'Exception',
@@ -28,8 +28,14 @@
 
             \Log::debug('Error:' . var_export($params, true));
 
-            var_export($params);
-            exit;
+           $handle = include APP_ROOT . 'config/handle.php';
+
+            if($handle && isset($handle['error'])){
+
+                ob_clean();
+
+                return call_user_func_array($handle['error'], [$params]);
+            }
 
             $response->withVars($params)->withView('common/exception.html')->display();
         }
