@@ -3,17 +3,19 @@
 
     use Library\Template\SmartTpl;
     use \Config;
+    use \Request;
 
     class Response{
 
         protected $vars     = [];
         protected $retstr   = '';
         protected $debug    = false;
+        protected $_retAjax = false;
         protected static $_instance = null;
 
         protected function __construct(){
 
-                $this->vars['request'] = \Request::getInstance();
+                $this->vars['request'] = Request::getInstance();
         }
 
         public static function getInstance(){
@@ -150,10 +152,6 @@
         //返回HTML信息提示页面
         private function retHtml($data){
 
-            $req  = Request::getInstance();
-
-            $resp = Response::getInstance($req);
-
-            return $resp->withVars($data)->withView('admin/info.html')->display();
+            return $this->withVars($data)->withView('common/info.html')->display();
         }
     }
