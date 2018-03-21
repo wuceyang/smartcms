@@ -5,10 +5,6 @@
 
 		public function Index(){
 
-			$category = new \App\M\IqiyiCategory();
-
-			$categories = $category->page(1)->pagesize(10)->getRows();
-
-			return $this->response->success($categories);
+			echo 'hello';
 		}
 	}

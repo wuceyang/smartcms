@@ -11,9 +11,10 @@
         protected $_fields           = [];
 		protected $_bind             = [];
         protected $_where            = [];
+        protected $_page  			 = 0;
+        protected $_pagesize 		 = 20;
 		protected $_table            = '';
         protected $_conn             = [];
-        protected $_selectedFields   = [];
         protected $_having           = [];
         protected $_order            = [];
         protected $_group            = [];
@@ -21,8 +22,7 @@
         protected $_subBuilder       = '';
         protected $_offset           = 0;
         protected $_stmt 		     = null;
-        protected $_debug            = false;
-        protected $_fetchMode        = \PDO::FETCH_ASSOC;
+        protected $_join             = [];
 
         const EXECUTE       = 0;
         const SELECT        = 1;
@@ -31,85 +31,34 @@
         const INSERT        = 4;
         const MULTI_INSERT  = 5;
 
-        //设置调试模式
-        public function setDebug($isDebug){
+        /**
+         * 表连接查询
+         * @param  string $table 连接的目标表，不太前缀
+         * @param  string $on    连接条件
+         * @param  string $type  连接类型
+         * @return 当前对象的实例
+         */
+        public function join($table, $on, $type = JoinType::INNER){
 
-            $this->_debug = $isDebug;
+            $this->_join[] = ' ' . $type . ' ' . $this->table($table) . ' ON ' . $on;
 
-        }
-
-        //设置数据取出的格式
-        public function setFetchMode($fetchMode = \PDO::FETCH_ASSOC){
-
-            $this->_fetchMode = $fetchMode;
-
+            return $this;
         }
 
         /**
-         *连接数据库
+         * 获取或者设置表名称
+         * @param  string $table 表名，不含前缀
+         * @return string        表全名
          */
-		public function connect($connectionName){
+        public function table($table = null){
 
+            if(null === $table){
 
-            $this->_connectionName = $connectionName;
-
-            //如果已经连接过当前连接，则直接返回
-            if(isset($this->_conn[$this->_connectionName])){
-
-                return $this;
-
+                return $this->_table;
             }
 
-            $driver   = Config::get('database.driver');
-
-			$dbConfig = Config::get('database.' . $driver . '.' . $this->_connectionName);
-
-			if(!$dbConfig || !is_array($dbConfig)){
-
-				throw new Exception("找不到指定的数据库连接设置:" . $this->_connectionName, 101);
-
-			}
-			try{
-
-                extract($dbConfig);
-
-				$dsn = "mysql:host={$host}; port={$port}; dbname={$dbname}; charset={$charset}";
-
-                $options = [];
-
-                if(Config::get('database.persistent')){
-
-                    $options[] = [PDO::ATTR_PERSISTENT => true];
-
-                }
-
-				$this->_conn[$this->_connectionName] = new PDO($dsn, $username, $password, $options);
-
-                //设置字符集,为了兼容utf-8，增加了一步字符串替换
-
-                $charset = str_replace(['-','_'], '', $charset);
-
-                $this->execute("SET NAMES $charset");
-
-			}catch(Exception $e){
-
-				throw new Exception("数据库连接失败:" . $e->getMessage(), $e->getCode());
-			}
-
-            return $this;
-		}
-
-        /**
-         * 说明:切换数据表,参数为空时则是获取当前表明
-         */
-		public function table($tableName = ''){
-
-            if(!$tableName) return Config::get('database.tablePrefix') . $this->_table;
-
-			$this->_table = $tableName;
-
-            return $this;
-		}
+            return $this->_dbConfig['tablePrefix'] . $table;
+        }
 
         /**
          * 说明:写入一条或者多条记录
@@ -118,24 +67,18 @@
          */
 		public function insert($data = []){
 
-            $firstData  = current($data);
-
+            $firstData     = current($data);
+            
             //是否插入多行记录
-            $isMulti    = is_array($firstData);
-
+            $isMulti       = is_array($firstData);
+            
             $this->_fields = !$isMulti ? array_keys($data) : array_keys($firstData);
+            
+            $this->_bind   = $isMulti ? $data : [$data];
+            
+            $sql           = $this->getSql($isMulti ? self::MULTI_INSERT : self::INSERT);
 
-			if($isMulti){
-				foreach ($data as $k => $v) {
-					foreach ($v as $sk => $sv) {
-						$this->_bind[] = $sv;
-					}
-				}
-			}else{
-				$this->_bind = array_values($data);
-			}
-
-            if(!$this->_internalExec($isMulti ? self::MULTI_INSERT : self::INSERT)){
+            if(!$this->execute($sql)){
 
                 return 0;
             }
@@ -145,24 +88,27 @@
 
         /**
          * 说明:更新记录
-         * 参数:$data = ['name' => '张三', 'age' => '`age` + 1'], $where = ['a = ? AND b =  ?', [ "1", "man"]]，值中含有自增或者函数时，请用`包围字段名，如前面的`age`+1
+         * 参数:$data = ['name' => '张三', '`age`' => 'age + 1'], $where = ['a = ? AND b =  ?', [ "1", "man"]]，值中含有自增或者函数时，请用`包围key中的字段名，如前面的'`age`' => '`age` + 1'
          * 返回:更新影响到的记录条数
          */
-        public function update($data, $where = '', $bind = []){
-            if($where || $bind){
-                $this->where($where, $bind);
-            }
+        public function update($data){
+
             foreach ($data as $k => $v) {
-                //可能是字段自运算，如a=a+1,或者函数运算，如a=ltrm(a),此时需要把value中的字段用`包围起来,比如`a`+1,ltrm(`a`)
+                //可能是字段自运算，如a=a+1,或者函数运算，如a=ltrm(a),此时需要把key中的字段用`包围起来
                 if(substr($k, 0, 1) == '`' && substr($k, -1, 1) == '`'){
+
                     $this->_fields[] = $k . ' = ' . $v;
+                    
                     continue;
                 }
-                $this->_fields[] = $k;
+                $this->_fields[] = $k . ' = ?';
+                
                 $this->_bind[]   = $v;
             }
 
-            if(!$this->_internalExec(self::UPDATE)){
+            $sql = $this->getSql(self::UPDATE);
+
+            if(!$this->execute($sql)){
 
                 return  0;
             }
@@ -172,13 +118,13 @@
 
         /**
          * 说明:删除记录
-         * 参数:$where = ['a = ? AND b =  ?', [ "1", "man"]]
+         * 参数:无
          */
-        public function delete($where = '', $bind = []){
-            if($where || $bind){
-                $this->where($where, $bind);
-            }
-            if(!$this->_internalExec(self::DELETE)){
+        public function delete(){
+
+            $sql = $this->getSql(self::DELETE);
+
+            if(!$this->execute($sql)){
 
                 return 0;
             }
@@ -187,129 +133,170 @@
         }
 
         //获取多行记录
-        public function getRows($where = '', $bind = []){
-            if($where || $bind){
-                $this->where($where, $bind);
+        public function getRows($page = null, $pagesize = null){
+
+            if(isset($page)){
+
+                $this->page($page);
             }
-            $this->_internalExec(self::SELECT);
+
+            if(isset($pagesize)){
+
+                $this->pagesize($pagesize);
+            }
+            
+            $sql = $this->getSql(self::SELECT);
+
+            if(!$this->execute($sql)){
+
+                return [];
+            }
+            
             $result = $this->_stmt->fetchAll($this->_fetchMode);
+            
             return $result ? $result : [];
         }
 
         //获取单行记录
-        public function getRow($where = '', $bind = []){
-            if($where || $bind){
-                $this->where($where, $bind);
-            }
-            $this->_page = 1;
+        public function getRow(){
+
+            $this->_page     = 1;
+            
             $this->_pagesize = 1;
-            $this->_internalExec(self::SELECT);
+            
+            $sql = $this->getSql(self::SELECT);
+
+            if(!$this->execute($sql)){
+
+                return [];
+            }
+            
             $result = $this->_stmt->fetch($this->_fetchMode);
+            
             return $result ? $result : [];
         }
 
         //获取单列的值
-        public function getValue($where = '', $bind = []){
-            if($where || $bind){
-                $this->where($where, $bind);
+        public function getValue(){
+
+            $this->_page     = 1;
+            
+            $this->_pagesize = 1;
+            
+            $sql             = $this->getSql(self::SELECT);
+
+            if(!$this->execute($sql)){
+
+                return '';
             }
-            $this->_internalExec(self::SELECT);
+
             return $this->_stmt->fetchColumn(0);
         }
 
         //统计总数
-        public function getCount($where = '', $bind = []){
+        public function getCount(){
 
-            return $this->fields(['COUNT(1) AS num'])->getValue($where, $bind);
+            return $this->fields(['COUNT(1) AS num'])->getValue();
         }
 
         //最后插入的id
         public function lastInsertId(){
+
             return $this->_conn[$this->_connectionName]->lastInsertId();
         }
 
         //受影响的行数
         public function affectedRows(){
+
             return $this->_stmt->rowCount();
         }
 
         //设置排序
         public function orderBy($orderBy = []){
+
             $this->_order = $orderBy;
+
             return $this;
         }
 
         //分组
         public function groupBy($groupBy = []){
+
             $this->_group = $groupBy;
+
             return $this;
         }
 
         //设置having条件
         public function having($having){
+
             $this->_having = $having;
+
             return $this;
         }
 
         //设置查询字段
         public function fields($fields = []){
-            $this->_selectedFields = $fields;
+
+            $this->_fields = $fields;
+
             return $this;
         }
 
         //设置查询的偏移量
         public function page($page){
-            $this->_page = $page;
+
+            $this->_page = intval($page);
+
             return $this;
         }
 
         //设置需要查询的记录数量
         public function pagesize($pagesize){
-            $this->_pagesize = $pagesize;
-            return $this;
-        }
 
-        //创建子查询
-        public function subQuery($subBuilder){
-            $this->_subBuilder = $subBuilder;
+            $this->_pagesize = intval($pagesize);
+
             return $this;
         }
 
         //直接执行sql语句
         public function execute($sql, $bind = []){
-            if($bind){
-                $this->_bind = $bind;
-            }
-            return $this->_internalExec(self::EXECUTE, $sql);
-        }
-
-        //执行sql，并绑定数据
-        protected function _internalExec($operator, $sql = ''){
-
-            $sql = $operator === self::EXECUTE ? $sql : $this->toSql($operator);
 
             $this->_stmt = $this->_conn[$this->_connectionName]->prepare($sql);
 
+            $this->_bind = array_merge($this->_bind, $bind);
+
             if($this->_bind){
+
                 for ($i = 0, $total = count($this->_bind); $i < $total; ++$i) {
+
                     switch (true) {
 
                         case is_bool($this->_bind[$i]):
+
                             $type = PDO::PARAM_BOOL;
+
                             break;
 
                         case is_int($this->_bind[$i]):
+                        
                             $type = PDO::PARAM_INT;
+                        
                             break;
 
                         case is_null($this->_bind[$i]):
+                        
                             $type = PDO::PARAM_NULL;
+                        
                             break;
 
                         default:
+                        
                             $type = PDO::PARAM_STR;
+                        
                             break;
                     }
+
                     $this->_stmt->bindParam($i + 1, $this->_bind[$i], $type);
                 }
             }
@@ -319,7 +306,10 @@
             $execResult  = $this->_stmt->execute();
 
             if(!$execResult){
-            	$this->_errorInfo = $this->_stmt->errorInfo();
+
+                $this->_errorInfo = $this->_stmt->errorInfo();
+
+                throw new Exception($this->_errorInfo[2], 402);
             }
 
             $endtime     = microtime(true);
@@ -327,117 +317,265 @@
             if($this->_debug){
 
                 $this->_sqls[] = ['sql' => $sql, 'params' => $this->_bind, 'time' => round(1000 * ($endtime - $starttime),2)];
-
             }
             //执行完sql之后，清空数据，以备下次查询使用
             $this->reset();
 
-            return $execResult;
+            return true;
         }
 
-        //转换为sql语句
-        public function toSql($operator = self::SELECT){
-            $where = '';
-            if($this->_where){
-                $where = " WHERE 1 ";
-                foreach ($this->_where as $k => $v) {
-                    $where .= ' ' . $v['symbol'] . ' ' . $v['string'];
-                    $this->_bind = array_merge($this->_bind, $v['bind']);
-                }
-                $this->_where = '';
-            }
+        public function getAll(){
 
-            $table = Config::get('database.tablePrefix') . $this->_table;
+            return $this->_stmt->fetchAll($this->_fetchMode);
+        }
 
-            switch($operator){
+        protected function getSql($sqlMode = self::SELECT){
 
+            switch ($sqlMode) {
+                
                 case self::SELECT:
-                    $order = $having = $group = '';
-                    if($this->_order){
-                        $order = ' ORDER BY ' . implode(',', $this->_order);
-                        $this->_order = [];
-                    }
-                    if($this->_group){
-                        $group = ' GROUP BY ' . implode(',', $this->_group);
-                        $this->_group = [];
-                    }
-                    if($this->_having){
-                        $order = ' HAVING ' . $this->_having;
-                        $this->_having = '';
-                    }
-                    if($this->_subBuilder){
-                        $table  = '(' . $this->_subBuilder . ') AS tmp_tbl';
-                    }
-                    $limit  = $this->_page && $this->_pagesize ? (' LIMIT ' . (($this->_page - 1) * $this->_pagesize) . ',' . $this->_pagesize) : '';
-                    $fields = $this->_selectedFields ? implode(',', $this->_selectedFields) : '*';
-                    $sql    = "SELECT $fields FROM $table" . $where . $group . $order . $having . $limit . ($this->_forUpdate ? ' FOR UPDATE' : '');
-                    break;
-
-                case self::INSERT:
-                    $placeHolder = array_fill(0, count($this->_fields), '?');
-                    $sql         = "INSERT INTO $table (" . implode(',', $this->_fields) . ") values(" . implode(',', $placeHolder) . ")";
-                    break;
+                    
+                    return $this->getSelectSQL();
 
                 case self::MULTI_INSERT:
-                    $itemHolder  = '(' . implode(',', array_fill(0, count($this->_fields), '?')) . ')';
-                    $placeHolder = implode(',', array_fill(0, count($this->_bind)/count($this->_fields), $itemHolder));
-                    $sql         = "INSERT INTO $table (" . implode(',', $this->_fields) . ") values" . $placeHolder;
-                    break;
+                case self::INSERT:
+
+                    return $this->getInsertSQL();
 
                 case self::DELETE:
-                    $sql = "DELETE FROM $table" . $where;
-                    break;
+
+                    return $this->getDeleteSQL();
 
                 case self::UPDATE:
-                    $sets = [];
-                    foreach ($this->_fields as $k => $v) {
-                        $sets[] = strpos($v, ' = ') === false ? $v . ' = ?' : $v;
-                    }
-                    $sql = "UPDATE $table SET " . implode(',' ,$sets) . $where;
-                    break;
+
+                    return $this->getUpdateSQL();
+                
                 default:
-                    throw new \Exception("错误的操作，找不到指定的SQL操作:" . $operator);
+                    
+                    throw new \Exception("错误的操作，找不到指定的SQL操作:" . $sqlMode);
             }
-            return $sql;
         }
 
+        /**
+         * 获取查询SQL语句
+         * @return string
+         */
+        protected function getSelectSQL(){
+
+            $where  = $this->getWhere();
+            
+            $order  = $this->getOrder();
+            
+            $group  = $this->getGroup();
+            
+            $having = $this->getHaving();
+            
+            $limit  = $this->getLimit();
+            
+            $fields = $this->_fields ? implode(',', $this->_fields) : '*';
+            
+            $join   = !$this->_join ? '' : implode(' ', $this->_join) . '';
+
+            return 'SELECT ' . $fields . ' FROM ' . $this->_table . $join . $where . $order . $group . $limit;
+        }
+
+        /**
+         * 获取插入SQL语句
+         * @return string
+         */
+        protected function getInsertSQL(){
+            
+            $bind        = [];
+            
+            $placeHolder = [];
+
+            foreach ($this->_bind as $k => $v) {
+
+                $placeHolder[$k]     = '';
+                
+                foreach ($v as $sk => $sv) {
+                    
+                    $bind[]          = $sv;
+                    
+                    $placeHolder[$k] .= '?,';
+                }
+
+                $placeHolder[$k] = '(' . substr($placeHolder[$k], 0, -1) . ')';
+            }
+
+            $this->_bind = $bind;
+            
+            return "INSERT INTO {$this->_table} (" . implode(',', $this->_fields) . ") values" . implode(',', $placeHolder);
+        }
+
+        /**
+         * 获取删除SQL语句
+         * @return string
+         */
+        protected function getDeleteSQL(){
+
+            $where  = $this->getWhere();
+
+            return 'DELETE FROM ' . $this->_table . $where;
+        }
+
+        /**
+         * 获取更新SQL语句
+         * @return string
+         */
+        protected function getUpdateSQL(){
+
+            $where  = $this->getWhere();
+
+            return 'UPDATE ' . $this->_table . ' SET ' . implode(',', $this->_fields) . $where;
+        }
+
+        /**
+         * 排序查询
+         * @return string
+         */
+        protected function getOrder(){
+
+            if($this->_order){
+
+                $order = ' ORDER BY ' . implode(',', $this->_order);
+
+                return $order;
+            }
+
+            return '';
+        }
+
+        /**
+         * 排序查询
+         * @return string
+         */
+        protected function getGroup(){
+
+            if($this->_group){
+
+                $group = ' GROUP BY ' . implode(',', $this->_group);
+
+                return $group;
+            }
+
+            return '';
+        }
+
+        /**
+         * 排序查询
+         * @return string
+         */
+        protected function getHaving(){
+
+            return $this->_having ? " HAVING " . $this->_having : '';
+        }
+
+        /**
+         * 获取分页字符串
+         * @return string
+         */
+        protected function getLimit(){
+
+            if($this->_page && $this->_pagesize){
+
+                $offset = ($this->_page - 1) * $this->_pagesize;
+
+                return ' LIMIT ' . $offset . ',' . $this->_pagesize
+                ;
+            }
+
+            return '';
+        }
+
+        /**
+         * 获取where条件
+         * @return string
+         */
+        protected function getWhere(){
+            
+            $where          = '';
+
+            $multiCondition = count($this->_where) > 1;
+
+            foreach ($this->_where as $k => $v) {
+                
+                $where .= ' ' . ($multiCondition ? $v['symbol'] : '') . ' (' . $v['string'] . ')';
+                
+                $this->_bind = array_merge($this->_bind, $v['bind']);
+            }
+
+            return $where ? ' WHERE ' . $where : "";
+        }
+
+        /**
+         * and条件(andWhere简写)
+         * @param  string $where where条件字符串
+         * @param  array  $bind  where条件绑定参数
+         * @return Mysql
+         */
         public function where($where, $bind = []){
+
             return $this->andWhere($where, $bind);
         }
 
+        /**
+         * or条件
+         * @param  string $where where条件字符串
+         * @param  array  $bind  where条件绑定参数
+         * @return Mysql
+         */
         public function orWhere($where, $bind = []){
+
             $this->_where[]  = ['symbol' => 'OR', 'string' => $where, 'bind' => $bind];
+
             return $this;
         }
 
+        /**
+         * and条件
+         * @param  string $where where条件字符串
+         * @param  array  $bind  where条件绑定参数
+         * @return Mysql
+         */
         public function andWhere($where, $bind = []){
+
             $this->_where[]  = ['symbol' => 'AND', 'string' => $where, 'bind' => $bind];
+
             return $this;
         }
 
+        /**
+         * 事务处理
+         * @param  function $func 事务中需要执行的业务逻辑处理函数
+         * @return mixed 事务函数返回结果返回给客户端
+         */
         public function transaction($func){
 
             try{
                 
                 $rollbackFlag = $commitFlag = false;
-
-                $startFlag  = $this->_conn[$this->_connectionName]->beginTransaction();
+                
+                $startFlag    = $this->_conn[$this->_connectionName]->beginTransaction();
 
                 if(!$startFlag){
 
                     throw new \Exception("事务启动失败", 101);
                 }
+
                 $return     = call_user_func($func);
 
                 if($return !== false){
 
                     $commitFlag = $this->_conn[$this->_connectionName]->commit();
 
-                    return;
+                    return $return;
                 }
-            }catch(\Exception $e){
 
-                throw new \Exception($e->getMessage(), 102);
+            }catch(Exception $e){
+
+                throw new Exception($e->getMessage(), 102);
+
             }finally{
                 //启动事务，并且提交失败时，回滚，防止死锁
                 if($startFlag && !$commitFlag){
@@ -447,15 +585,19 @@
             }
         }
 
+        /**
+         * 重置内部变量，以备下次使用
+         * @return null
+         */
         protected function reset(){
-            $this->_where          = [];
-            $this->_order          = [];
-            $this->_having         = [];
-            $this->_bind           = [];
-            $this->_fields         = [];
-            $this->_page           = 0;
-            $this->_pagesize       = 0;
-            $this->_forUpdate      = false;
-            $this->_selectedFields = [];
+            $this->_where     = [];
+            $this->_order     = [];
+            $this->_having    = [];
+            $this->_bind      = [];
+            $this->_fields    = [];
+            $this->_join      = [];
+            $this->_page      = 0;
+            $this->_pagesize  = 0;
+            $this->_forUpdate = false;
         }
 	}
