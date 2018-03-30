@@ -80,8 +80,9 @@
         }
 
         //输出模板运行后的html
-        public function display(){
+        public function render(){
             echo $this->runCode();
+            exit;
         }
 
         //获取模板运行后的html
@@ -113,7 +114,7 @@
         }
 
         //返回错误信息
-        public function error($err_code = 101, $message = '', $retdata = []){
+        public function error($message = '', $err_code = 101, $retdata = []){
 
             $data = ['code' => $err_code, 'message' => $message];
 
@@ -152,6 +153,6 @@
         //返回HTML信息提示页面
         private function retHtml($data){
 
-            return $this->withVars($data)->withView('common/info.html')->display();
+            return $this->withVars($data)->withView('common/exception.html')->render();
         }
     }

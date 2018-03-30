@@ -71,7 +71,7 @@
 
             if(!$customRoute){
 
-                $this->_routeStr    = preg_replace('/\{([^}]+?)\}/is', '(?<$1>.+?)', $this->_routeStr);
+                $this->_routeStr    = preg_replace('/\/\{([^}]+?)\}/is', '(\/(?<$1>[^\/]+)?)?', $this->_routeStr);
 
                 $defaultConfig      = Config::get('global.defaultConfig');
 
@@ -79,25 +79,25 @@
 
                 foreach ($this->_routeParams as $k => $v) {
                     
-                    $key = '_' . $k;
-
+                    $key        = '_' . $k;
+                    
                     $this->$key = '';
 
-                    if(isset($matches[$k])){
+                    if(isset($matches[$k]) && isset($matches[$k][0]) && $matches[$k][0]){
 
-                        $this->$key = $this->toCamel($defaultConfig[$k], $k == 'action');
+                        $phrase = $matches[$k][0];
+                    }else{
 
-                        if(count($matches[$k]) > 0){
-
-                            $this->$key = $this->toCamel($matches[$k][0], $k == 'action');
-                        }
+                        $phrase = isset($defaultConfig[$k]) ? $defaultConfig[$k] : '';
                     }
+                    
+                    $this->$key = $this->toCamel($phrase, $k == 'action');
                 }
             }
 
             if(!$this->_controller && !$this->_action){
 
-                throw new Exception("路由规则不正确，请参考config/global.php中的路由规则", 1);
+                throw new Exception("无法理解的路由", 1);
             }
         }
 
@@ -131,9 +131,9 @@
         //正则特殊字符转义
         protected function escapePattern(){
 
-            $fromChars = ['/', '?', '.', '^', '$', '[', ']', '(', ')', '+', '-'];
+            $fromChars = ['?', '.', '^', '$', '[', ']', '(', ')', '+', '-'];
 
-            $toChars   = ['\/', '\?', '\.', '\^', '\$', '\[', '\]', '\(', '\)', '\+', '\-'];
+            $toChars   = ['\?', '\.', '\^', '\$', '\[', '\]', '\(', '\)', '\+', '\-'];
 
             $this->_routeStr = str_replace($fromChars, $toChars, $this->_routeStr);
         }
@@ -192,6 +192,8 @@
 
         //驼峰转换
         protected function toCamel($str, $isAction = false){
+
+            if(!$str) return '';
 
             $str    = str_replace(['-', '_', ' '], '.', $str);
 

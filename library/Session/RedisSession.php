@@ -40,7 +40,7 @@
 		}
 
         //销毁当前session
-		public function destroy(){
+		public function destroy(string $sessid){
 
 			$this->sess_data = [];
 
@@ -56,7 +56,7 @@
 
             $sess_data = \Library\Common\Cryptography::encode(serialize($this->sess_data), $this->_config['encryptKey']);
 
-			$this->_conn->set($this->_sessid, $sess_data, 'EX', $this->_config['maxLifetime']);
+			return !!$this->_conn->set($this->_sessid, $sess_data, 'EX', $this->_config['maxLifetime']);
 		}
 
         //重新生成session id

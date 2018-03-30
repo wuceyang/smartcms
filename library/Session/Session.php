@@ -6,7 +6,7 @@
 	use \Response;
     use \Exception;
 
-	abstract class Session{
+	abstract class Session implements \SessionHandlerInterface{
 
 		protected static $_instance = null;
 
@@ -14,11 +14,15 @@
 
         protected $_sessid          = '';
 
+        protected $_sessdata        = [];
+
 		public static function getInstance($config = []){
 
 			if(self::$_instance === null){
 
 				self::$_instance = new static($config);
+
+                session_set_save_handler(self::$_instance, true);
 			}
 
             return self::$_instance;
@@ -45,10 +49,6 @@
             $request = Request::getInstance();
 
             $this->_sessid = $this->_sessid? $this->_sessid : $request->cookie($this->_config['cookieName'], '', false);
-
-            register_shutdown_function([$this, 'save']);
-
-            $this->init();
         }
 
         //设置cookie在session中的name值
@@ -65,24 +65,42 @@
             return ($this->_config['prefix'] ? $this->_config['prefix'] : '') . md5($this->_sessid ? $this->_sessid : (uniqid() . '-' . rand(1, 10000)));
         }
 
-		//初始化session
-		abstract public function init();
+        public function reGenerateId(){
 
-		//从session中取值
-		abstract public function get($key);
+            $this->_sessid = $this->createId();
 
-		//向session中设置值
-		abstract public function set($key, $val);
+            $this->setCookieSessId();
 
-        //重新生成session ID
-        abstract public function reGenerateId();
+            return $this->sessid;
+        }
+
+		public function get($key, $default = null){
+
+            return isset($this->_sessdata[$key]) ? $this->_sessdata[$key] : $default;
+        }
+
+        public function set($key, $val){
+
+            $this->_sessdata[$key] = $val;
+
+            return true;
+        }
+
+        /*//打开连接设置参数
+        abstract public function open(string $savepath, string $name):bool;
+
+        //关闭会话连接
+        abstract public function close():bool;
 
 		//session资源回收
-		abstract public function gc();
+		abstract public function gc(int $maxLifetime):bool;
 
 		//销毁session
-		abstract public function destroy();
+		abstract public function destroy(string $sessid):bool;
 
 		//会话结束时，自动保存session
-		abstract public function save();
+		abstract public function write(string $sessid, string $session_data):bool;
+
+        //会话结束时，自动保存session
+        abstract public function read(string $sessid):string;*/
 	}

@@ -4,10 +4,10 @@
 
     use \Config;
     use \Request;
+    use \Response;
     use \Exception;
-    use \Library\Common\Cryptography;
 
-    class SystemSession extends \Library\Session\Session{
+    class SystemSession extends Session{
 
         public function init(){
 
@@ -39,18 +39,6 @@
             session_start();
         }
 
-        public function getId(){
-
-            return session_id();
-        }
-
-        public function setId($sessid){
-
-            $this->_sessid = $sessid;
-
-            session_id($this->_sessid);
-        }
-
         public function get($key, $default = null){
 
             return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
@@ -58,30 +46,84 @@
 
         public function set($key, $val){
 
-            $_SESSION[$key] = $val;
+            $this->_sessdata[$key] = $val;
+
+            $_SESSION[$key]        = $val;
+
+            return true;
         }
 
-        public function save(){
+        public function open($savepath, $sessname):bool{
 
+            return true;
         }
 
-        public function destroy(){
+        public function read($sessid):string{
 
-            session_destroy();
+            $sessfile = $this->_config['saveDir'] . $sessid;
+
+            if(!file_exists($sessfile)){
+
+                $this->_sessdata = [];
+
+                $_SESSION        = [];
+
+                return session_encode();
+            }
+
+            $sessdata        = file_get_contents($sessfile);
+
+            if(session_decode($sessdata)){
+
+                $this->_sessdata = $_SESSION;
+            }
+
+            return $sessdata;
         }
 
-        public function gc(){
+        public function write($key, $val):bool{
 
-            session_gc();
+            if(!$val) return true;
+
+            $sessfile = $this->_config['saveDir'] . $key;
+
+            return !!file_put_contents($sessfile, $val);
         }
 
-        public function reGenerateId(){
+        public function close():bool{
 
-            $this->_sessid = $this->createId();
-
-            $this->setCookieSessId();
-
-            return $this->sessid;
+            return true;
         }
 
+        public function destroy($sessid):bool{
+
+            unlink($this->_config['saveDir'] . $sessid);
+
+            return true;
+        }
+
+        public function gc($maxLifetime){
+
+            $dirs = scandir($this->_config['saveDir']);
+
+            foreach($dirs as $k => $v){
+
+                if($v == '.' || $v == '..'){
+
+                    continue;
+                }
+
+                $sessfile = $this->_config['saveDir'] . $v;
+
+                if(filemtime($sessfile) < TIME - $maxLifetime){
+
+                    unlink($this->_config['saveDir'] . $v);
+                }
+            }
+        }
+
+        public function create_sid():string{
+
+            return $this->createId();
+        }
     }

@@ -27,7 +27,7 @@
 
             $this->_server  = $_SERVER;
 
-            unset($_POST, $_GET, $_COOKIE, $_SERVER, $_SESSION, $_REQUEST);
+            unset($_POST, $_GET, /*$_COOKIE,*/ $_SERVER, $_SESSION, $_REQUEST);
         }
 
         public static function getInstance(){
