@@ -57,7 +57,9 @@
                 return $this->_table;
             }
 
-            return $this->_dbConfig['tablePrefix'] . $table;
+            $this->_table = $this->_dbConfig['tablePrefix'] . $table;
+
+            return $this->_table;
         }
 
         /**
@@ -130,6 +132,29 @@
             }
 
             return $this->affectedRows();
+        }
+
+        //生成器获取多行记录,更省内存，推荐在需要将结果循环遍历时使用
+        public function getAll($page = null, $pagesize = null){
+
+            if(isset($page)){
+
+                $this->page($page);
+            }
+
+            if(isset($pagesize)){
+
+                $this->pagesize($pagesize);
+            }
+            
+            $sql = $this->getSql(self::SELECT);
+
+            if(!$this->execute($sql)){
+
+                return [];
+            }
+            
+            yield $this->_stmt->fetchAll($this->_fetchMode);
         }
 
         //获取多行记录
@@ -322,11 +347,6 @@
             $this->reset();
 
             return true;
-        }
-
-        public function getAll(){
-
-            return $this->_stmt->fetchAll($this->_fetchMode);
         }
 
         protected function getSql($sqlMode = self::SELECT){

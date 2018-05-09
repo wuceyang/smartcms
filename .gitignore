@@ -7,5 +7,4 @@
 /public/shabi/
 /config/database.php
 /config/global.php
-
-
+/.phpintel/*
