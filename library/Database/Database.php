@@ -1,14 +1,14 @@
 <?php
 
-    namespace Library\Database;
+	namespace Library\Database;
 
-    use \Exception;
+	use \Exception;
     use \Config;
     use \PDO;
 
-    abstract class Database{
+	abstract class Database{
 
-        protected $_connectionName   = '';
+		protected $_connectionName   = '';
         protected $_errorInfo        = [];
         protected $_sqls             = [];
         protected static $_instance  = null;
@@ -24,19 +24,19 @@
 
         abstract public function insert($data = []);
 
-        abstract public function update($data);
+		abstract public function update($data);
 
-        abstract public function delete();
+		abstract public function delete();
 
-        abstract public function getRow();
+		abstract public function getRow();
 
-        abstract public function getRows($page, $pagesize);
+		abstract public function getRows($page, $pagesize);
 
         abstract public function getValue();
 
         abstract public function getCount();
 
-        abstract public function orderBy($orderBy = []);
+		abstract public function orderBy($orderBy = []);
 
         abstract public function groupBy($groupBy = []);
 
@@ -54,15 +54,17 @@
 
         abstract public function page($page);
 
-        abstract public function pagesize($pagesize);
+		abstract public function pagesize($pagesize);
 
-        abstract public function execute($sql);
+		abstract public function execute($sql);
 
         abstract public function lastInsertId();
 
         abstract public function affectedRows();
 
         abstract public function transaction($func);
+
+        use Library\Database\DbParser;
 
         /**
          * 设置调试模式
@@ -174,16 +176,16 @@
          * @param  string $tableName 需要设置的表名
          * @return 当前类的实例对象
          */
-        public function table($tableName = ''){
+        public function table($table = null){
 
-            if($tableName){
-                
-                $this->_table = $this->_tablePrefix[$this->connectionName] . $tableName;
+            if(null === $table){
+
+                return $this->_table;
             }
-            
-            if(!$tableName) return $this->_table;
 
-            return $this;
+            $this->_table = $this->_tablePrefix[$this->connectionName] . $table;
+
+            return $this->_table;
         }
 
         /**
@@ -209,21 +211,21 @@
             return self::$_instance;
         }
 
-        //获取错误信息
-        public function getError(){
+		//获取错误信息
+		public function getError(){
 
-            return $this->_errorInfo;
-        }
+			return $this->_errorInfo;
+		}
 
         /**
          * 获取当前的连接名称
          * @return string 当前连接配置名称，如:default
          */
-        public function getCurrentConnection(){
+		public function getCurrentConnection(){
 
-            return $this->_connectionName;
+			return $this->_connectionName;
 
-        }
+		}
 
         /**
          * 获取全部执行过的SQL语句列表
@@ -242,4 +244,4 @@
 
             return $this->_sqls ? $this->_sqls[0] : [];
         }
-    }
+	}

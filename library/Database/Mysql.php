@@ -33,33 +33,16 @@
 
         /**
          * 表连接查询
-         * @param  string $table 连接的目标表，不太前缀
-         * @param  string $on    连接条件
+         * @param  string $table 连接的目标表，不带前缀
+         * @param  string $on    连接条件,表名会自动转换，不需要带前缀
          * @param  string $type  连接类型
          * @return 当前对象的实例
          */
         public function join($table, $on, $type = JoinType::INNER){
 
-            $this->_join[] = ' ' . $type . ' ' . $this->table($table) . ' ON ' . $on;
+            $this->_join[] = ' ' . $type . ' ' . $this->table($table) . ' ON ' . $this->onParser($on);
 
             return $this;
-        }
-
-        /**
-         * 获取或者设置表名称
-         * @param  string $table 表名，不含前缀
-         * @return string        表全名
-         */
-        public function table($table = null){
-
-            if(null === $table){
-
-                return $this->_table;
-            }
-
-            $this->_table = $this->_dbConfig['tablePrefix'] . $table;
-
-            return $this->_table;
         }
 
         /**
@@ -132,29 +115,6 @@
             }
 
             return $this->affectedRows();
-        }
-
-        //生成器获取多行记录,更省内存，推荐在需要将结果循环遍历时使用
-        public function getAll($page = null, $pagesize = null){
-
-            if(isset($page)){
-
-                $this->page($page);
-            }
-
-            if(isset($pagesize)){
-
-                $this->pagesize($pagesize);
-            }
-            
-            $sql = $this->getSql(self::SELECT);
-
-            if(!$this->execute($sql)){
-
-                return [];
-            }
-            
-            yield $this->_stmt->fetchAll($this->_fetchMode);
         }
 
         //获取多行记录
@@ -347,6 +307,11 @@
             $this->reset();
 
             return true;
+        }
+
+        public function getAll(){
+
+            return $this->_stmt->fetchAll($this->_fetchMode);
         }
 
         protected function getSql($sqlMode = self::SELECT){
