@@ -309,9 +309,15 @@
             return true;
         }
 
+        /**
+         * 获取全部行，效率较高，内存占用较少，可以在循环中使用
+         */
         public function getAll(){
 
-            return $this->_stmt->fetchAll($this->_fetchMode);
+            while($row = $this->_stmt->fetch($this->_fetchMode)){
+
+                yield $row;
+            }
         }
 
         protected function getSql($sqlMode = self::SELECT){

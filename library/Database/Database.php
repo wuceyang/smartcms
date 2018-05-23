@@ -28,6 +28,8 @@
 
 		abstract public function delete();
 
+        abstract public function getAll();
+
 		abstract public function getRow();
 
 		abstract public function getRows($page, $pagesize);
