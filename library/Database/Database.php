@@ -1,14 +1,14 @@
 <?php
 
-	namespace Library\Database;
+    namespace Library\Database;
 
-	use \Exception;
+    use \Exception;
     use \Config;
     use \PDO;
 
-	abstract class Database{
+    abstract class Database{
 
-		protected $_connectionName   = '';
+        protected $_connectionName   = '';
         protected $_errorInfo        = [];
         protected $_sqls             = [];
         protected static $_instance  = null;
@@ -16,6 +16,7 @@
         protected $_fetchMode        = \PDO::FETCH_ASSOC;
         protected $_debug            = true;
         protected $_dbConfig         = [];
+        protected $_tablePrefix      = [];
 
         const FETCH_ARRAY  = PDO::FETCH_ASSOC;
         const FETCH_OBJECT = PDO::FETCH_OBJ;
@@ -23,19 +24,19 @@
 
         abstract public function insert($data = []);
 
-		abstract public function update($data);
+        abstract public function update($data);
 
-		abstract public function delete();
+        abstract public function delete();
 
-		abstract public function getRow();
+        abstract public function getRow();
 
-		abstract public function getRows($page, $pagesize);
+        abstract public function getRows($page, $pagesize);
 
         abstract public function getValue();
 
         abstract public function getCount();
 
-		abstract public function orderBy($orderBy = []);
+        abstract public function orderBy($orderBy = []);
 
         abstract public function groupBy($groupBy = []);
 
@@ -53,9 +54,9 @@
 
         abstract public function page($page);
 
-		abstract public function pagesize($pagesize);
+        abstract public function pagesize($pagesize);
 
-		abstract public function execute($sql);
+        abstract public function execute($sql);
 
         abstract public function lastInsertId();
 
@@ -129,6 +130,8 @@
             try{
 
                 extract($connParam);
+                //设置表前缀
+                $this->_tablePrefix[$connectionName] = $prefix;
 
                 $dsn     = "mysql:host={$host}; port={$port}; dbname={$dbname}; charset={$charset}";
 
@@ -175,7 +178,7 @@
 
             if($tableName){
                 
-                $this->_table = $this->_dbConfig['tablePrefix'] . $tableName;
+                $this->_table = $this->_tablePrefix[$this->connectionName] . $tableName;
             }
             
             if(!$tableName) return $this->_table;
@@ -206,21 +209,21 @@
             return self::$_instance;
         }
 
-		//获取错误信息
-		public function getError(){
+        //获取错误信息
+        public function getError(){
 
-			return $this->_errorInfo;
-		}
+            return $this->_errorInfo;
+        }
 
         /**
          * 获取当前的连接名称
          * @return string 当前连接配置名称，如:default
          */
-		public function getCurrentConnection(){
+        public function getCurrentConnection(){
 
-			return $this->_connectionName;
+            return $this->_connectionName;
 
-		}
+        }
 
         /**
          * 获取全部执行过的SQL语句列表
@@ -239,4 +242,4 @@
 
             return $this->_sqls ? $this->_sqls[0] : [];
         }
-	}
+    }
