@@ -23,7 +23,18 @@
                     throw new \Exception("找不到指定的redis设置:" . $connection, 2);
                 }
 
-			    self::$_conn[$connection] = new self($config[$connection]);
+                $password                 = isset($config[$connection]['password']) ?: '';
+                
+                self::$_conn[$connection] = new self($config[$connection]);
+
+                if($password){
+
+                    self::$_conn[$connection]->auth($password);
+                }
+
+                $database = isset($config[$connection]['database']) ?: 0;
+
+                self::$_conn[$connection]->select(intval($database));
             }
 
             return self::$_conn[$connection];

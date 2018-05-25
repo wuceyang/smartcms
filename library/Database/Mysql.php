@@ -8,6 +8,8 @@
 
 	class Mysql extends \Library\Database\Database{
 
+        trait Library\Database\DbParser;
+
         protected $_fields           = [];
 		protected $_bind             = [];
         protected $_where            = [];
@@ -313,6 +315,23 @@
          * 获取全部行，效率较高，内存占用较少，可以在循环中使用
          */
         public function getAll(){
+
+            if(isset($page)){
+
+                $this->page($page);
+            }
+
+            if(isset($pagesize)){
+
+                $this->pagesize($pagesize);
+            }
+            
+            $sql = $this->getSql(self::SELECT);
+
+            if(!$this->execute($sql)){
+
+                yield [];
+            }
 
             while($row = $this->_stmt->fetch($this->_fetchMode)){
 

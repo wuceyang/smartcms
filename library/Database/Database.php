@@ -66,7 +66,7 @@
 
         abstract public function transaction($func);
 
-        use Library\Database\DbParser;
+        use \Library\Database\DbParser;
 
         /**
          * 设置调试模式
@@ -185,7 +185,7 @@
                 return $this->_table;
             }
 
-            $this->_table = $this->_tablePrefix[$this->connectionName] . $table;
+            $this->_table = $this->_tablePrefix[$this->_connectionName] . $table;
 
             return $this->_table;
         }
