@@ -8,7 +8,7 @@
 
 	class Mysql extends \Library\Database\Database{
 
-        trait Library\Database\DbParser;
+        use \Library\Database\DbParser;
 
         protected $_fields           = [];
 		protected $_bind             = [];
