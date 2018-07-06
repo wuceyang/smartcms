@@ -606,6 +606,7 @@
             $this->_bind      = [];
             $this->_fields    = [];
             $this->_join      = [];
+            $this->_group     = [];
             $this->_page      = 0;
             $this->_pagesize  = 0;
             $this->_forUpdate = false;
