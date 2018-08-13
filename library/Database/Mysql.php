@@ -8,8 +8,6 @@
 
 	class Mysql extends \Library\Database\Database{
 
-        use \Library\Database\DbParser;
-
         protected $_fields           = [];
 		protected $_bind             = [];
         protected $_where            = [];
@@ -25,6 +23,7 @@
         protected $_offset           = 0;
         protected $_stmt 		     = null;
         protected $_join             = [];
+        protected $_execFlag         = false;
 
         const EXECUTE       = 0;
         const SELECT        = 1;
@@ -35,16 +34,77 @@
 
         /**
          * 表连接查询
-         * @param  string $table 连接的目标表，不带前缀
-         * @param  string $on    连接条件,表名会自动转换，不需要带前缀
-         * @param  string $type  连接类型
+         * @param  string $tableWithAlias   连接的目标表，不带前缀，必须使用别名
+         * @param  string $on               连接条件,表名需要使用别名
+         * @param  string $type             连接类型
          * @return 当前对象的实例
          */
-        public function join($table, $on, $type = JoinType::INNER){
+        public function join($tableWithAlias, $on, $type = JoinType::INNER){
 
-            $this->_join[] = ' ' . $type . ' ' . $this->table($table) . ' ON ' . $this->onParser($on);
+            //如果没有使用别名
+            if(strpos($tableWithAlias) === false){
+
+                throw new \Exception("连表查询时，请使用别名");
+            }
+
+            $this->_join[] = ' ' . $type . ' ' . $tableWithAlias . ' ON ' . $on;
 
             return $this;
+        }
+
+        /**
+         * 内连接查询
+         * @param  string $tableWithAlias   连接的目标表，不带前缀，必须使用别名
+         * @param  string $on               连接条件,表名需要使用别名
+         * @return 当前对象的实例
+         */
+        public function innerJoin($tableWithAlias, $on){
+
+            return $this->join($tableWithAlias, $on, JoinType::INNER);
+        }
+
+        /**
+         * 左连接查询
+         * @param  string $tableWithAlias   连接的目标表，不带前缀，必须使用别名
+         * @param  string $on               连接条件,表名需要使用别名
+         * @return 当前对象的实例
+         */
+        public function leftJoin($tableWithAlias, $on){
+
+            return $this->join($tableWithAlias, $on, JoinType::LEFT);
+        }
+
+        /**
+         * 右连接查询
+         * @param  string $tableWithAlias   连接的目标表，不带前缀，必须使用别名
+         * @param  string $on               连接条件,表名需要使用别名
+         * @return 当前对象的实例
+         */
+        public function rightJoin($tableWithAlias, $on){
+
+            return $this->join($tableWithAlias, $on, JoinType::RIGHT);
+        }
+
+        /**
+         * 外连接查询
+         * @param  string $tableWithAlias   连接的目标表，不带前缀，必须使用别名
+         * @param  string $on               连接条件,表名需要使用别名
+         * @return 当前对象的实例
+         */
+        public function outerJoin($tableWithAlias, $on){
+
+            return $this->join($tableWithAlias, $on, JoinType::OUTER);
+        }
+
+        /**
+         * 交叉连接查询
+         * @param  string $tableWithAlias   连接的目标表，不带前缀，必须使用别名
+         * @param  string $on               连接条件,表名需要使用别名
+         * @return 当前对象的实例
+         */
+        public function crossJoin($tableWithAlias, $on){
+
+            return $this->join($tableWithAlias, $on, JoinType::CROSS);
         }
 
         /**
@@ -54,20 +114,23 @@
          */
 		public function insert($data = []){
 
-            $firstData     = current($data);
-            
-            //是否插入多行记录
-            $isMulti       = is_array($firstData);
-            
-            $this->_fields = !$isMulti ? array_keys($data) : array_keys($firstData);
-            
-            $this->_bind   = $isMulti ? $data : [$data];
-            
-            $sql           = $this->getSql($isMulti ? self::MULTI_INSERT : self::INSERT);
+            if($data && !$this->_execFlag){
 
-            if(!$this->execute($sql)){
+                $firstData     = current($data);
+                
+                //是否插入多行记录
+                $isMulti       = is_array($firstData);
+                
+                $this->_fields = !$isMulti ? array_keys($data) : array_keys($firstData);
+                
+                $this->_bind   = $isMulti ? $data : [$data];
+                
+                $sql           = $this->getSql($isMulti ? self::MULTI_INSERT : self::INSERT);
 
-                return 0;
+                if(!$this->execute($sql)){
+
+                    return 0;
+                }
             }
 
             return !$isMulti ? $this->lastInsertId() : $this->affectedRows();
@@ -78,26 +141,29 @@
          * 参数:$data = ['name' => '张三', '`age`' => 'age + 1'], $where = ['a = ? AND b =  ?', [ "1", "man"]]，值中含有自增或者函数时，请用`包围key中的字段名，如前面的'`age`' => '`age` + 1'
          * 返回:更新影响到的记录条数
          */
-        public function update($data){
+        public function update($data = []){
 
-            foreach ($data as $k => $v) {
-                //可能是字段自运算，如a=a+1,或者函数运算，如a=ltrm(a),此时需要把key中的字段用`包围起来
-                if(substr($k, 0, 1) == '`' && substr($k, -1, 1) == '`'){
+            if($data && !$this->_execFlag){
 
-                    $this->_fields[] = $k . ' = ' . $v;
+                foreach ($data as $k => $v) {
+                    //可能是字段自运算，如a=a+1,或者函数运算，如a=ltrm(a),此时需要把key中的字段用`包围起来
+                    if(substr($k, 0, 1) == '`' && substr($k, -1, 1) == '`'){
+
+                        $this->_fields[] = $k . ' = ' . $v;
+                        
+                        continue;
+                    }
+                    $this->_fields[] = $k . ' = ?';
                     
-                    continue;
+                    $this->_bind[]   = $v;
                 }
-                $this->_fields[] = $k . ' = ?';
-                
-                $this->_bind[]   = $v;
-            }
 
-            $sql = $this->getSql(self::UPDATE);
+                $sql = $this->getSql(self::UPDATE);
 
-            if(!$this->execute($sql)){
+                if(!$this->execute($sql)){
 
-                return  0;
+                    return  0;
+                }
             }
 
             return $this->affectedRows();
@@ -109,11 +175,14 @@
          */
         public function delete(){
 
-            $sql = $this->getSql(self::DELETE);
+            if(!$this->_execFlag){
 
-            if(!$this->execute($sql)){
+                $sql = $this->getSql(self::DELETE);
 
-                return 0;
+                if(!$this->execute($sql)){
+
+                    return 0;
+                }
             }
 
             return $this->affectedRows();
@@ -131,12 +200,15 @@
 
                 $this->pagesize($pagesize);
             }
+
+            if(!$this->_execFlag){
             
-            $sql = $this->getSql(self::SELECT);
+                $sql = $this->getSql(self::SELECT);
 
-            if(!$this->execute($sql)){
+                if(!$this->execute($sql)){
 
-                return [];
+                    return [];
+                }
             }
             
             $result = $this->_stmt->fetchAll($this->_fetchMode);
@@ -147,15 +219,18 @@
         //获取单行记录
         public function getRow(){
 
-            $this->_page     = 1;
-            
-            $this->_pagesize = 1;
-            
-            $sql = $this->getSql(self::SELECT);
+            if(!$this->_execFlag){
 
-            if(!$this->execute($sql)){
+                $this->_page     = 1;
+            
+                $this->_pagesize = 1;
+            
+                $sql = $this->getSql(self::SELECT);
 
-                return [];
+                if(!$this->execute($sql)){
+
+                    return [];
+                }
             }
             
             $result = $this->_stmt->fetch($this->_fetchMode);
@@ -166,15 +241,18 @@
         //获取单列的值
         public function getValue(){
 
-            $this->_page     = 1;
-            
-            $this->_pagesize = 1;
-            
-            $sql             = $this->getSql(self::SELECT);
+            if(!$this->_execFlag){
 
-            if(!$this->execute($sql)){
+                $this->_page     = 1;
+                
+                $this->_pagesize = 1;
+                
+                $sql             = $this->getSql(self::SELECT);
 
-                return '';
+                if(!$this->execute($sql)){
+
+                    return '';
+                }
             }
 
             return $this->_stmt->fetchColumn(0);
@@ -288,33 +366,40 @@
                 }
             }
 
-            $starttime   = microtime(true);
+            try{
 
-            $execResult  = $this->_stmt->execute();
+                $starttime       = microtime(true);
+                
+                $execResult      = $this->_stmt->execute();
+                
+                $this->_execFlag = true;
 
-            if(!$execResult){
+                if(!$execResult){
 
-                $this->_errorInfo = $this->_stmt->errorInfo();
+                    $this->_errorInfo = $this->_stmt->errorInfo();
 
-                throw new Exception($this->_errorInfo[2], 402);
+                    throw new Exception($this->_errorInfo[2], 402);
+                }
+
+                $endtime     = microtime(true);
+                //根据配置是否调试mysql
+                if($this->_debug){
+
+                    $this->_sqls[] = ['sql' => $sql, 'params' => $this->_bind, 'time' => round(1000 * ($endtime - $starttime),2)];
+                }
+                return true;
+            }catch(Exception $e){
+                throw $e;
+            }finally{
+                //执行完sql之后，清空数据，以备下次查询使用
+                $this->reset();
             }
-
-            $endtime     = microtime(true);
-            //根据配置是否调试mysql
-            if($this->_debug){
-
-                $this->_sqls[] = ['sql' => $sql, 'params' => $this->_bind, 'time' => round(1000 * ($endtime - $starttime),2)];
-            }
-            //执行完sql之后，清空数据，以备下次查询使用
-            $this->reset();
-
-            return true;
         }
 
         /**
          * 获取全部行，效率较高，内存占用较少，可以在循环中使用
          */
-        public function getAll(){
+        public function getAll($page = 0, $pagesize = 0){
 
             if(isset($page)){
 
@@ -325,12 +410,15 @@
 
                 $this->pagesize($pagesize);
             }
-            
-            $sql = $this->getSql(self::SELECT);
 
-            if(!$this->execute($sql)){
+            if(!$this->_execFlag){
 
-                yield [];
+                $sql = $this->getSql(self::SELECT);
+
+                if(!$this->execute($sql)){
+
+                    yield [];
+                }
             }
 
             while($row = $this->_stmt->fetch($this->_fetchMode)){
@@ -609,6 +697,7 @@
             $this->_group     = [];
             $this->_page      = 0;
             $this->_pagesize  = 0;
+            $this->_execFlag  = false;
             $this->_forUpdate = false;
         }
 	}
