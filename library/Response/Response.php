@@ -16,6 +16,8 @@
         protected function __construct(){
 
                 $this->vars['request'] = Request::getInstance();
+
+                $this->_retAjax        = $this->vars['request']->isAjax();
         }
 
         public static function getInstance(){
@@ -114,13 +116,15 @@
         }
 
         //返回错误信息
-        public function error($message = '', $err_code = 101, $retdata = []){
+        public function error($message = '', $err_code = 101, $returl = ''){
 
-            $data = ['code' => $err_code, 'message' => $message];
+            $data   = ['code' => $err_code, 'message' => $message];
 
-            if($retdata){
+            $returl = $this->vars['request']->server('HTTP_REFERER');
 
-                $data['data'] = $retdata;
+            if($returl){
+
+                $data['returl'] = $returl;
             }
 
             return $this->response($data);
@@ -129,7 +133,7 @@
         //返回成功信息
         public function success($retdata = '', $message = ''){
 
-            $data = ['code' => 200, 'message' => $message, 'data' => $retdata];
+            $data = ['code' => 0, 'message' => $message, 'data' => $retdata];
 
             return $this->response($data);
         }
@@ -153,6 +157,10 @@
         //返回HTML信息提示页面
         private function retHtml($data){
 
-            return $this->withVars($data)->withView('common/exception.html')->render();
+            $error_template = Config::get('global.template.error');
+
+            $error_template =  $error_template ? $error_template : 'common/exception.html';
+
+            return $this->withVars($data)->withView($error_template)->render();
         }
     }
