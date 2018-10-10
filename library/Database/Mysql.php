@@ -1,19 +1,19 @@
 <?php
 
-	namespace Library\Database;
+    namespace Library\Database;
 
-	use \Config;
+    use \Config;
     use \Exception;
     use \PDO;
 
-	class Mysql extends \Library\Database\Database{
+    class Mysql extends \Library\Database\Database{
 
         protected $_fields           = [];
-		protected $_bind             = [];
+        protected $_bind             = [];
         protected $_where            = [];
-        protected $_page  			 = 0;
-        protected $_pagesize 		 = 20;
-		protected $_table            = '';
+        protected $_page             = 0;
+        protected $_pagesize         = 20;
+        protected $_table            = '';
         protected $_conn             = [];
         protected $_having           = [];
         protected $_order            = [];
@@ -21,7 +21,7 @@
         protected $_limit            = 0;
         protected $_subBuilder       = '';
         protected $_offset           = 0;
-        protected $_stmt 		     = null;
+        protected $_stmt             = null;
         protected $_join             = [];
         protected $_execFlag         = false;
 
@@ -112,7 +112,7 @@
          * 参数:$data = ['name' => '张三', 'age' => 25] 或者 $data = [['name' => '张三', 'age' => 25], ['name' => '李四', 'age' => 15]]
          * 返回:插入一条记录时，返回记录id，多条记录时，返回插入的记录条数
          */
-		public function insert($data = []){
+        public function insert($data = []){
 
             if($data && !$this->_execFlag){
 
@@ -134,7 +134,7 @@
             }
 
             return !$isMulti ? $this->lastInsertId() : $this->affectedRows();
-		}
+        }
 
         /**
          * 说明:更新记录
@@ -625,6 +625,11 @@
          */
         public function orWhere($where, $bind = []){
 
+            if(!$where){
+
+                return $this;
+            }
+
             $this->_where[]  = ['symbol' => 'OR', 'string' => $where, 'bind' => $bind];
 
             return $this;
@@ -637,6 +642,11 @@
          * @return Mysql
          */
         public function andWhere($where, $bind = []){
+
+            if(!$where){
+
+                return $this;
+            }
 
             $this->_where[]  = ['symbol' => 'AND', 'string' => $where, 'bind' => $bind];
 
@@ -652,34 +662,27 @@
 
             try{
                 
-                $rollbackFlag = $commitFlag = false;
-                
                 $startFlag    = $this->_conn[$this->_connectionName]->beginTransaction();
 
                 if(!$startFlag){
 
-                    throw new \Exception("事务启动失败", 101);
+                    throw new Exception("事务启动失败");
                 }
 
                 $return     = call_user_func($func);
 
-                if($return !== false){
-
-                    $commitFlag = $this->_conn[$this->_connectionName]->commit();
-
-                    return $return;
-                }
+                $this->_conn[$this->_connectionName]->commit();
 
             }catch(Exception $e){
 
-                throw new Exception($e->getMessage(), 102);
+                $this->_conn[$this->_connectionName]->rollBack();
 
-            }finally{
-                //启动事务，并且提交失败时，回滚，防止死锁
-                if($startFlag && !$commitFlag){
+                throw $e;
+            }catch(Error $e){
 
-                    $rollbackFlag = $this->_conn[$this->_connectionName]->rollBack();
-                }
+                $this->_conn[$this->_connectionName]->rollBack();
+
+                throw $e;
             }
         }
 
@@ -700,4 +703,4 @@
             $this->_execFlag  = false;
             $this->_forUpdate = false;
         }
-	}
+    }
