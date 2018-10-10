@@ -47,7 +47,7 @@
                 throw new \Exception("连表查询时，请使用别名");
             }
 
-            $this->_join[] = ' ' . $type . ' ' . $tableWithAlias . ' ON ' . $on;
+            $this->_join[] = ' ' . $type . ' ' . $this->getFullName($tableWithAlias) . ' ON ' . $this->getFullName($on);
 
             return $this;
         }

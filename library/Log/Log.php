@@ -56,7 +56,7 @@
 			self::setLog('error', $info);
 		}
 
-		protected static function setLog($level, $info = ''){
+		protected static function setLog($level, $info){
 
 			self::$_logs[] = [
 				'level' => $level,
@@ -74,7 +74,7 @@
 				return call_user_func_array([self::$_logDriver, $func], $args);
 			}
 
-			throw new \Exception("找不到指定的日志处理方法" . self::$_logDriver, 111);
+			throw new Exception("找不到指定的日志处理方法" . self::$_logDriver, 111);
 		}
 	}
 

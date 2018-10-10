@@ -4,6 +4,7 @@
 
 	use \Library\Response\Response;
 	use \Library\Request\Request;
+    use \Log;
 
 	class SmartError{
 
@@ -12,15 +13,9 @@
 			set_exception_handler([$this, 'handle']);
             //注册普通级别的错误处理方法
             register_shutdown_function([$this, 'otherErrorHandle']);
-
 		}
 
 		public function handle($error){
-
-			if ($error -> getCode() && !(error_reporting() & $error->getCode())) {
-
-		        return;
-		    }
 
             $params     = [
                 'code'    => $error->getCode(),
@@ -31,7 +26,12 @@
                 'type'    => 'Error',
             ];
 
-            \Log::debug('Error:' . var_export($params, true));
+            Log::debug($params);
+
+            if ($error -> getCode() && !(error_reporting() & $error->getCode())) {
+
+                return;
+            }
 
             $handle = include APP_ROOT . 'config/handle.php';
 
@@ -65,7 +65,7 @@
                 'type'    => 'Error',
             ];
 
-            \Log::debug('Error:' . var_export($params, true));
+            Log::debug($params);
 
             $handle = include APP_ROOT . 'config/handle.php';
 

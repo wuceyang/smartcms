@@ -17,6 +17,7 @@
         protected $_debug            = true;
         protected $_dbConfig         = [];
         protected $_tablePrefix      = [];
+        protected $_tableSuffix      = [];
 
         const FETCH_ARRAY  = PDO::FETCH_ASSOC;
         const FETCH_OBJECT = PDO::FETCH_OBJ;
@@ -245,5 +246,39 @@
         public function getLastSql(){
 
             return $this->_sqls ? $this->_sqls[0] : [];
+        }
+
+        /**
+         * 表名补全前缀,主要用于连接查询的表名参数以及连接条件参数
+         * @param $tableName string 需要补全表名的字符串
+         * @return string 补全表名前缀的字符串
+         **/
+        protected function getFullName($tableName){
+
+            $prefix = $this->_tablePrefix[$this->_connectionName];
+            //纯表名
+            if(strpos($tableName, '=') === false){
+                //去掉别名
+                $suffix                      = trim(preg_replace('/([^\s]+)\s.+/', "$1", $tableName));
+                
+                $this->_tableSuffix[$suffix] = $suffix;
+
+                return $prefix . $tableName;
+            }
+
+            //连接条件
+            $joinCond = explode('=', $tableName);
+
+            foreach ($joinCond as $k => $v) {
+                
+                $suffix = trim(preg_replace('/([^\s]+)\..+/', '$1', $v));
+
+                if(isset($this->_tableSuffix[$suffix])){
+
+                    $joinCond[$k] = str_replace($suffix . '.', $prefix . $suffix . '.', $v);
+                }
+            }
+
+            return implode('=', $joinCond);
         }
 	}

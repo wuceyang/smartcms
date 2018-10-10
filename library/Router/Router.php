@@ -26,7 +26,7 @@
 
             (new \Library\Exception\SmartException())->registerExceptionHandler();
 
-            (new \Library\Error\SmartError())->registerErrorHandler();
+            // (new \Library\Error\SmartError())->registerErrorHandler();
 
             $this->_request = Request::getInstance();
 
@@ -187,7 +187,16 @@
 
             $controller = new $controllerPath($this->_request, $response);
 
-            call_user_func([$controller, $this->_action], $this->_request, $response);
+            try{
+
+                call_user_func([$controller, $this->_action], $this->_request, $response);
+            }catch(Exception $e){
+
+                throw $e;
+            }catch(Error $e){
+
+                throw $e;
+            }
         }
 
         //驼峰转换

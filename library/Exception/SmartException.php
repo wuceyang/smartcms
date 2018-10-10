@@ -3,6 +3,7 @@
 	namespace Library\Exception;
     
     use \Response;
+    use \Log;
 
 	class SmartException extends \Exception{
         
@@ -26,7 +27,7 @@
                 'type'    => 'Exception',
             ];
 
-            \Log::debug('Error:' . var_export($params, true));
+            Log::debug($params);
 
            $handle = include APP_ROOT . 'config/handle.php';
 
@@ -37,6 +38,8 @@
                 return call_user_func_array($handle['error'], [$params]);
             }
 
-            $response->withVars($params)->withView('common/exception.html')->display();
+            return $response->withVars($params)
+                   ->withView('common/exception.html')
+                   ->display();
         }
 	}
